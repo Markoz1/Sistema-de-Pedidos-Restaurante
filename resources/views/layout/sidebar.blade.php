@@ -1,14 +1,9 @@
 <aside class="sidebar">
     <div class="sidebar-container">
-        <div class="sidebar-header">
+        <div class="sidebar-header d-flex align-items-center" style="height: 70px;">
             <div class="brand">
-                <div class="logo">
-                    <span class="l l1"></span>
-                    <span class="l l2"></span>
-                    <span class="l l3"></span>
-                    <span class="l l4"></span>
-                    <span class="l l5"></span>
-                </div> Modular Admin </div>
+                Nombre Restaurante
+            </div>
         </div>
         <nav class="menu">
             <ul class="sidebar-menu metismenu" id="sidebar-menu">
@@ -18,15 +13,15 @@
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa fa-th-large"></i> Creacion de Item
+                        <i class="fa fa-th-large"></i> Menú
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
                         <li>
-                            <a href="items-list.html"> Items List </a>
+                            <a href="items-list.html"> Listado </a>
                         </li>
                         <li>
-                            <a href="item-editor.html"> Item Editor </a>
+                            <a href="item-editor.html"> Nuevo Plato </a>
                         </li>
                     </ul>
                 </li>
@@ -34,7 +29,7 @@
         </nav>
     </div>
     <footer class="sidebar-footer">
-        <ul class="sidebar-menu metismenu" id="customize-menu">
+        {{-- <ul class="sidebar-menu metismenu" id="customize-menu">
             <li>
                 <ul>
                     <li class="customize">
@@ -127,6 +122,6 @@
                 <a href="">
                     <i class="fa fa-cog"></i> Customize </a>
             </li>
-        </ul>
+        </ul> --}}
     </footer>
 </aside>
