@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Model\Categoria;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePlatoRequest extends FormRequest
@@ -23,12 +25,14 @@ class StorePlatoRequest extends FormRequest
      */
     public function rules()
     {
+        $categorias = Categoria::pluck('id_categoria')->toArray();
         return [
-            'nombre' => 'required',
-            'precio' => 'required',
+            'nombre' => 'required|min:3|max:80|alpha',
+            'precio' => 'required|numeric|min:0.1|max:9999.00',
             'descripcion' => 'required',
             'foto' => 'nullable|image',
-            'id_categoria' => 'required'
+            'id_categoria' => ['required',Rule::in($categorias),
+            ],
 
         ];
     }
