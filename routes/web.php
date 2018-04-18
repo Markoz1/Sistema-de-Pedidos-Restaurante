@@ -12,3 +12,4 @@
 */
 
 Route::view('/', 'home');
+Route::resource('menu', 'PlatoController');

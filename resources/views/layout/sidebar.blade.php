@@ -7,21 +7,21 @@
         </div>
         <nav class="menu">
             <ul class="sidebar-menu metismenu" id="sidebar-menu">
-                <li class="active">
+                <li class="{{ request()->is('/')? 'active':'' }}">
                     <a href="/">
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
-                <li>
+                <li class="{{ request()->segment(1) == 'menu'? 'active open':'' }}">
                     <a href="">
                         <i class="fa fa-th-large"></i> Menú
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-                        <li>
-                            <a href="items-list.html"> Listado </a>
+                        <li class="{{ request()->routeIs('menu.index')? 'active':'' }}">
+                            <a href="{{ route('menu.index') }}"> Listado </a>
                         </li>
-                        <li>
-                            <a href="item-editor.html"> Nuevo Plato </a>
+                        <li class="{{ request()->routeIs('menu.create')? 'active':'' }}">
+                            <a href="{{ route('menu.create') }}"> Nuevo Plato </a>
                         </li>
                     </ul>
                 </li>
