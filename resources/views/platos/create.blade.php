@@ -30,8 +30,7 @@
                 <div class="form-group row">
                     {!! Form::label('categoria', 'Categoría', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
-                        {!! Form::select('categoria', 
-                        ['1' => 'Categoria 1', '2' => 'Categoria 2', '3' => 'Categoria 3'], null, 
+                        {!! Form::select('categoria',$categorias, null, 
                         ['class' => 'form-control boxed '.($errors->has('categoria')?'is-invalid':''), 
                         'placeholder' => 'Selecciona una Categoria']) !!}
                         <div class="invalid-feedback">{{ $errors->first('categoria') }}</div>

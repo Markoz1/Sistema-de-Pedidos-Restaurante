@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Plato;
+use App\Model\Categoria;
 use Illuminate\Http\Request;
 
 class PlatoController extends Controller
@@ -24,7 +25,9 @@ class PlatoController extends Controller
      */
     public function create()
     {
-        return view('platos.create');
+        $categorias = Categoria::pluck('nombre', 'id_categoria');
+        //dd($categorias);
+        return view('platos.create', compact('categorias'));
     }
 
     /**
