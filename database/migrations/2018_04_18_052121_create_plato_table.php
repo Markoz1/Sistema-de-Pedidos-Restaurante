@@ -18,7 +18,7 @@ class CreatePlatoTable extends Migration
             $table->string('nombre');
             $table->decimal('precio', 6, 2);
             $table->string('descripcion');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

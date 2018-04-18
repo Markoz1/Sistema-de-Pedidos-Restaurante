@@ -28,19 +28,19 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('categoria', 'Categoría', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('id_categoria', 'Categoría', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
-                        {!! Form::select('categoria',$categorias, null, 
-                        ['class' => 'form-control boxed '.($errors->has('categoria')?'is-invalid':''), 
-                        'placeholder' => 'Selecciona una Categoria']) !!}
-                        <div class="invalid-feedback">{{ $errors->first('categoria') }}</div>
+                        {!! Form::select('id_categoria',$categorias, null, 
+                        ['class' => 'form-control boxed '.($errors->has('id_categoria')?'is-invalid':''), 
+                        'placeholder' => (count($categorias) === 0)?'Ninguna categoria añadida':'Selecciona una Categoria']) !!}
+                        <div class="invalid-feedback">{{ $errors->first('id_categoria') }}</div>
                     </div>
                 </div>
                 <div class="form-group row">
                     {!! Form::label('descripcion', 'Descripción', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
                         {!! Form::textarea('descripcion', null, 
-                        ['class' => 'form-control boxed', 'placeholder' => 'Escribe una breve descripción...', 'rows' => '3']) !!}
+                        ['class' => 'form-control boxed '.($errors->has('descripcion')?'is-invalid':''), 'placeholder' => 'Escribe una breve descripción...', 'rows' => '3']) !!}
                         <div class="invalid-feedback">{{ $errors->first('descripcion') }}</div>
                     </div>
                 </div>

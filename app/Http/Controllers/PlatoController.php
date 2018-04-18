@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Plato;
 use App\Model\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePlatoRequest;
 
 class PlatoController extends Controller
 {
@@ -15,7 +16,8 @@ class PlatoController extends Controller
      */
     public function index()
     {
-        return view('platos.index');
+        $platos = Plato::all();
+        return view('platos.index', compact('platos'));
     }
 
     /**
@@ -26,7 +28,6 @@ class PlatoController extends Controller
     public function create()
     {
         $categorias = Categoria::pluck('nombre', 'id_categoria');
-        //dd($categorias);
         return view('platos.create', compact('categorias'));
     }
 
@@ -36,9 +37,15 @@ class PlatoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePlatoRequest $request)
     {
-        dd($request);
+        $plato = new Plato;
+        $plato->fill($request->validated());
+        // dd($request->validated());
+        $plato->save();
+        return redirect()
+            ->route('menu.index')
+            ->with('mensaje', 'Se creo un nuevo Plato');
     }
 
     /**
