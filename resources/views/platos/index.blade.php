@@ -49,7 +49,7 @@
                 <li class="item">
                     <div class="item-row">
                         <div class="item-col fixed item-col-img md">
-                            <div class="item-img rounded" style="background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg)"></div>
+                            <div class="item-img rounded" style="background-image: url({{ asset($plato->foto) }})"></div>
                         </div>
                         <div class="item-col fixed pull-left item-col-title pl-3">
                             <div class="item-heading">Nombre</div>
@@ -83,7 +83,7 @@
                                                                 </a>
                                         </li>
                                         <li>
-                                            <a class="edit" href="item-editor.html">
+                                            <a class="edit" href="#">
                                                                     <i class="fa fa-pencil"></i>
                                                                 </a>
                                         </li>

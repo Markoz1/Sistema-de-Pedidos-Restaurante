@@ -31,8 +31,7 @@ class StorePlatoRequest extends FormRequest
             'precio' => 'required|numeric|min:0.1|max:9999.00',
             'descripcion' => 'required|min:4|max:255',
             'foto' => 'required|image|max:2048',
-            'id_categoria' => ['required',Rule::in($categorias),
-            ],
+            'id_categoria' => ['required',Rule::in($categorias)],
         ];
     }
     public function attributes()

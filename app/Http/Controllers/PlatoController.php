@@ -39,9 +39,11 @@ class PlatoController extends Controller
      */
     public function store(StorePlatoRequest $request)
     {
+        //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
+        $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
         $plato = new Plato;
-        $plato->fill($request->validated());
-        // dd($request->validated());
+        $plato->fill($request->except(['foto']));
+        $plato->foto = $path_foto;//almacenamos ruta de foto en BD
         $plato->save();
         return redirect()
             ->route('menu.index')
