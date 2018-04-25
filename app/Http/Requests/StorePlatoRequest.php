@@ -27,17 +27,25 @@ class StorePlatoRequest extends FormRequest
     {
         $categorias = Categoria::pluck('id_categoria')->toArray();
         return [
-            'nombre' => 'required|min:3|max:80|alpha',
+            'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
             'precio' => 'required|numeric|min:0.1|max:9999.00',
-            'descripcion' => 'required|alpha_num|min:4|max:255',
+            'descripcion' => 'required|min:4|max:255',
             'foto' => 'required|image|max:5120',
             'id_categoria' => ['required',Rule::in($categorias)],
         ];
     }
+    
     public function attributes()
     {
         return [
             'id_categoria' => 'categoria'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.regex' => 'El campo nombre sólo puede contener letras y espacios.',
         ];
     }
 }
