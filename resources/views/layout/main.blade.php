@@ -13,18 +13,17 @@
         <title>Pedidos Restaurant</title>
     </head>
     <body>
-        {{-- <div class="main-wrapper">
+        <div class="main-wrapper">
             <div class="app" id="app">
                 @include('layout.header')
                 @include('layout.sidebar')
                 <div class="sidebar-overlay" id="sidebar-overlay"></div>
                 <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
                 <div class="mobile-menu-handle"></div>
-                                  
+                    @yield('content')               
                 @include('layout.footer')                
             </div>
-        </div> --}}
-        @yield('content')
+        </div>
         <!-- Reference block for JS -->
         <div class="ref" id="ref">
             <div class="color-primary"></div>
