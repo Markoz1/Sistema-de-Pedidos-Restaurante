@@ -11,9 +11,12 @@
                     <a href="/">
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-th-large"></i> Categorias </a>
+                </li>
                 <li class="{{ request()->segment(1) == 'productos'? 'active open':'' }}">
                     <a href="">
-                        <i class="fa fa-th-large"></i> Productos
+                        <i class="fa fa-cutlery"></i> Productos
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
@@ -24,6 +27,18 @@
                             <a href="{{ route('productos.create') }}"> Nuevo Producto </a>
                         </li>
                     </ul>
+                </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-shopping-cart"></i> Pedidos </a>
+                </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-users"></i> Usuarios </a>
+                </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-cog"></i> Configuración </a>
+                </li>
+                <li class="">
+                    <a href="{{asset('menu')}}"><i class=""></i> Menú cliente prueba </a>
                 </li>
             </ul>
         </nav>
