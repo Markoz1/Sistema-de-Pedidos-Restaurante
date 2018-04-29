@@ -5,10 +5,10 @@
             <div class="title-block">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="title"> Menu
-                            <a href="{{ route('menu.create') }}" class="btn btn-primary btn-sm rounded-s"> Nuevo Plato </a>
+                        <h3 class="title"> Productos
+                            <a href="{{ route('productos.create') }}" class="btn btn-primary btn-sm rounded-s"> Nuevo Producto </a>
                         </h3>
-                        <p class="title-description"> Lista de Platos</p>
+                        <p class="title-description"> Lista de Productos</p>
                     </div>
                 </div>
             </div>
@@ -45,24 +45,24 @@
                         <div class="item-col item-col-header fixed item-col-actions-dropdown"> </div>
                     </div>
                 </li>                
-                @foreach ($platos as $plato)               
+                @foreach ($productos as $producto)               
                 <li class="item">
                     <div class="item-row">
                         <div class="item-col fixed item-col-img md">
-                            <div class="item-img rounded" style="background-image: url({{ asset($plato->foto) }})"></div>
+                            <div class="item-img rounded" style="background-image: url({{ asset($producto->foto) }})"></div>
                         </div>
                         <div class="item-col fixed pull-left item-col-title pl-3">
                             <div class="item-heading">Nombre</div>
-                            <div>{{ $plato->nombre }}</div>
+                            <div>{{ $producto->nombre }}</div>
                         </div>
                         <div class="item-col item-col-sales text-center">
                             <div class="item-heading">Precio</div>
-                            <div>{{ $plato->precio }} BOB</div>
+                            <div>{{ $producto->precio }} BOB</div>
                         </div>
                         <div class="item-col item-col-category no-overflow text-center">
                             <div class="item-heading">Categoria</div>
                             <div class="no-overflow">
-                                <a>{{ $plato->categoria->nombre }}</a>
+                                <a>{{ $producto->categoria->nombre }}</a>
                             </div>
                         </div>
                         <div class="item-col fixed item-col-actions-dropdown">

@@ -2,11 +2,11 @@
 @section('content')
     <article class="content item-editor-page">
         <div class="title-block">
-            <h3 class="title"> Nuevo Plato
+            <h3 class="title"> Nuevo Producto
                 <span class="sparkline bar" data-type="bar"></span>
             </h3>
         </div>
-        {!! Form::open(['route' => 'menu.store', 'method' => 'post', 'files' => true]) !!}
+        {!! Form::open(['route' => 'productos.store', 'method' => 'post', 'files' => true]) !!}
         <form name="item">
             <div class="card card-block">
                 <div class="form-group row">
@@ -27,12 +27,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('id_categoria', 'Categoría', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('categoria_id', 'Categoría', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
-                        {!! Form::select('id_categoria',$categorias, null, 
-                        ['class' => 'form-control boxed '.($errors->has('id_categoria')?'is-invalid':''), 
+                        {!! Form::select('categoria_id',$categorias, null, 
+                        ['class' => 'form-control boxed '.($errors->has('categoria_id')?'is-invalid':''), 
                         'placeholder' => (count($categorias) === 0)?'Ninguna categoria añadida':'Selecciona una Categoria']) !!}
-                        <div class="invalid-feedback">{{ $errors->first('id_categoria') }}</div>
+                        <div class="invalid-feedback">{{ $errors->first('categoria_id') }}</div>
                     </div>
                 </div>
                 <div class="form-group row">

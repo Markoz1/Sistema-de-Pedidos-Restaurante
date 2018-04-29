@@ -11,17 +11,17 @@
                     <a href="/">
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
-                <li class="{{ request()->segment(1) == 'menu'? 'active open':'' }}">
+                <li class="{{ request()->segment(1) == 'productos'? 'active open':'' }}">
                     <a href="">
-                        <i class="fa fa-th-large"></i> Menú
+                        <i class="fa fa-th-large"></i> Productos
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-                        <li class="{{ request()->routeIs('menu.index')? 'active':'' }}">
-                            <a href="{{ route('menu.index') }}"> Listado </a>
+                        <li class="{{ request()->routeIs('productos.index')? 'active':'' }}">
+                            <a href="{{ route('productos.index') }}"> Listado </a>
                         </li>
-                        <li class="{{ request()->routeIs('menu.create')? 'active':'' }}">
-                            <a href="{{ route('menu.create') }}"> Nuevo Plato </a>
+                        <li class="{{ request()->routeIs('productos.create')? 'active':'' }}">
+                            <a href="{{ route('productos.create') }}"> Nuevo Producto </a>
                         </li>
                     </ul>
                 </li>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Plato;
+use App\Model\Producto;
 use App\Model\Categoria;
 use Illuminate\Http\Request;
-use App\Http\Requests\StorePlatoRequest;
+use App\Http\Requests\StoreProductoRequest;
 
-class PlatoController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class PlatoController extends Controller
      */
     public function index()
     {
-        $platos = Plato::all();
-        return view('platos.index', compact('platos'));
+        $productos = Producto::all();
+        return view('productos.index', compact('productos'));
     }
 
     /**
@@ -27,8 +27,8 @@ class PlatoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::pluck('nombre', 'id_categoria');
-        return view('platos.create', compact('categorias'));
+        $categorias = Categoria::pluck('nombre', 'categoria_id');
+        return view('productos.create', compact('categorias'));
     }
 
     /**
@@ -37,26 +37,26 @@ class PlatoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePlatoRequest $request)
+    public function store(StoreProductoRequest $request)
     {
         //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
         $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
-        $plato = new Plato;
-        $plato->fill($request->except(['foto']));
-        $plato->foto = $path_foto;//almacenamos ruta de foto en BD
-        $plato->save();
+        $producto = new Producto;
+        $producto->fill($request->except(['foto']));
+        $producto->foto = $path_foto;//almacenamos ruta de foto en BD
+        $producto->save();
         return redirect()
-            ->route('menu.index')
-            ->with('mensaje', 'Se creo un nuevo Plato');
+            ->route('productos.index')
+            ->with('mensaje', 'Se creo un nuevo Producto');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Plato  $plato
+     * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Plato $plato)
+    public function show(Producto $producto)
     {
         //
     }
@@ -64,10 +64,10 @@ class PlatoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Plato  $plato
+     * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Plato $plato)
+    public function edit(Producto $producto)
     {
         //
     }
@@ -76,10 +76,10 @@ class PlatoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Plato  $plato
+     * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plato $plato)
+    public function update(Request $request, Producto $producto)
     {
         //
     }
@@ -87,10 +87,10 @@ class PlatoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Plato  $plato
+     * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plato $plato)
+    public function destroy(Producto $producto)
     {
         //
     }

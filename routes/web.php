@@ -12,4 +12,4 @@
 */
 
 Route::view('/', 'home');
-Route::resource('menu', 'PlatoController');
+Route::resource('productos', 'ProductoController');
