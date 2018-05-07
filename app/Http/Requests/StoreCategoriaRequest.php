@@ -26,7 +26,7 @@ class StoreCategoriaRequest extends FormRequest
     {
         return [
             //'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
-            'nombreCategoria' => 'required|unique:categoria,nombre|min:3|max:30|regex:/^[\pL\s]+$/u',
+            'nombreCategoria' => 'required|unique:categoria,nombre|min:3|max:50|regex:/^[\pL\s]+$/u',
             //unique:categoria.nombre
         ];
     }

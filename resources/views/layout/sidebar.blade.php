@@ -11,11 +11,19 @@
                     <a href="/">
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
-                <li class="">
-                    <a href="{{url('categorias/')}}">
+                <li class="{{ request()->segment(1) == 'categorias'? 'active open':'' }}">
+                    <a href="">
                         <i class="fa fa-cutlery"></i> Categorias
                         <i class="fa arrow"></i> 
                     </a>
+                    <ul class="sidebar-nav">
+                        <li class="{{ request()->routeIs('categorias.index')? 'active':'' }}">
+                            <a href="{{ route('categorias.index') }}"> Listado </a>
+                        </li>
+                        <li class="{{ request()->routeIs('categorias.create')? 'active':'' }}">
+                            <a href="{{ route('categorias.create') }}"> Nueva Categoria </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="{{ request()->segment(1) == 'productos'? 'active open':'' }}">
                     <a href="">

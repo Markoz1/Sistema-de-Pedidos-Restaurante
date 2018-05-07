@@ -41,6 +41,7 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
+                        	<th># Id</th>
                             <th>Nombre de la caategoria</th>
                             <th>Acciones</th>
                         </tr>
@@ -48,6 +49,7 @@
                     <tbody>
                     	@foreach($categorias as $categoria)
                     		<tr>
+                    			<td>{{$categoria->categoria_id}}</td>
 	                            <td>{{$categoria->nombre}}</td>
 	                            <td>{{"boton"}}</td>
                         	</tr>
@@ -56,22 +58,6 @@
                 </table>
             </div>
         </section>
-    </div>
-    <nav class="text-right">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href=""> Prev </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href=""> 1 </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href=""> 2 </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href=""> Next </a>
-            </li>
-        </ul>
-    </nav>
+    </div>x
 </article>
 @endsection

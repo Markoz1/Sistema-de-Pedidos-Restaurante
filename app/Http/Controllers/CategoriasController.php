@@ -42,7 +42,7 @@ class CategoriasController extends Controller
         Categoria::create([
             'nombre' => $data['nombreCategoria'],
         ]);
-        return redirect()->route('categorias.index')->with('La categoria se creo correctamente');
+        return redirect()->route('categorias.index')->with('mensaje','La categoria se creo correctamente');
     }
 
     /**
