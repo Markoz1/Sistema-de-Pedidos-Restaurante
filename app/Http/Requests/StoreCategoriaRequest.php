@@ -25,7 +25,15 @@ class StoreCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            //'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
+            'nombreCategoria' => 'required|unique:categoria,nombre|min:3|max:30|regex:/^[\pL\s]+$/u',
+            //unique:categoria.nombre
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'nombreCategoria.regex' => 'El campo nombre sólo puede contener letras y espacios.',
         ];
     }
 }

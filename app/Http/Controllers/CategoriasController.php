@@ -36,7 +36,7 @@ class CategoriasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategoriaRequest $request)
-    {
+    {   
         $data = request()->all();
 
         Categoria::create([

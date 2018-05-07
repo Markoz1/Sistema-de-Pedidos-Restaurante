@@ -11,11 +11,14 @@
             	{{ csrf_field() }} 
                 <div class="form-group has-error">
                     <label class="control-label">Nombre Categoria</label>
-                    <input type="text" class="form-control" name="nombreCategoria">
-                    
-                    	<span class="has-error">Error message.</span>
-                    
-                    
+                    <input type="text" class="form-control" name="nombreCategoria" value="{{ old('nombreCategoria')}}">
+                    	
+                    	@if( $errors->has('nombreCategoria') )
+		  					<span class="has-error">
+		  						{{ $errors->first('nombreCategoria') }}
+		  					</span>							
+					 	@endif
+                 
                 </div>
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
