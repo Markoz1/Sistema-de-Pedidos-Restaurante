@@ -14,3 +14,12 @@
 Route::view('/', 'home');
 Route::resource('productos', 'ProductoController');
 Route::view('menu', 'menu.index');
+
+
+Route::resource('categorias', 'CategoriasController');
+
+//Route::get('categorias/','CategoriasController@index')			->name('categorias.index');
+
+//Route::get('/categorias/nuevo','CategoriasController@create')			->name('categorias.new');
+
+//Route::post('/categorias/crear','CategoriasController@store');

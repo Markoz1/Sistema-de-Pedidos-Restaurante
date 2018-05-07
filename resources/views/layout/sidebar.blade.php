@@ -12,7 +12,10 @@
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-th-large"></i> Categorias </a>
+                    <a href="{{url('categorias/')}}">
+                        <i class="fa fa-cutlery"></i> Categorias
+                        <i class="fa arrow"></i> 
+                    </a>
                 </li>
                 <li class="{{ request()->segment(1) == 'productos'? 'active open':'' }}">
                     <a href="">
