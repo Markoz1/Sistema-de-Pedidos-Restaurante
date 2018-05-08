@@ -14,9 +14,9 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
+        $productos = Producto::Buscar($request->get("buscar"),$request->get("criterio"))->orderby("nombre","ASC")->paginate(15);
         return view('productos.index', compact('productos'));
     }
 
