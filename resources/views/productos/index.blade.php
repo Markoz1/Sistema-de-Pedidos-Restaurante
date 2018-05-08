@@ -15,12 +15,19 @@
             <div class="items-search">
                 <form class="form-inline">
                     <div class="input-group">
-                        <input type="text" class="form-control boxed rounded-s" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary rounded-s" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                            <select class="form-control boxed col-4" id="ss">
+                                    <option id="1">Por Nombre</option>
+                                    <option id="2">Por Categoria</option>
+                                    <option id="3">Por Estado</option>
+                                    <option id="4">boxed rounded-s</option>
+                            </select>
+                            <input type="text" class="form-control boxed col-7" placeholder="Criterio de Busqueda"> 
+                                <div style="width:2px;"></div>                                            
+                                <div>
+                                    <button class="btn btn-dark" type="button">
+                                        <b>Buscar</b>
+                                    </button>
+                                </div>                            
                     </div>
                 </form>
             </div>
