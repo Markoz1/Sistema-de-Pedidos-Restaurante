@@ -38,7 +38,7 @@
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>
                 </li>
                 <li class="">
-                    <a href="{{asset('menu')}}"><i class=""></i> Menú cliente prueba </a>
+                    <a href="{{route('pedidos.create')}}"><i class=""></i> Menú cliente prueba </a>
                 </li>
             </ul>
         </nav>

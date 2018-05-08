@@ -13,4 +13,4 @@
 
 Route::view('/', 'home');
 Route::resource('productos', 'ProductoController');
-Route::view('menu', 'menu.index');
+Route::resource('pedidos', 'PedidoController');
