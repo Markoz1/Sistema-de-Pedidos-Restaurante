@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoriaRequest extends FormRequest
+class UpdateCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,7 @@ class StoreCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            //'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
             'nombreCategoria' => 'required|unique:categoria,nombre|min:3|max:50|regex:/^[\pL\s]+$/u',
-
         ];
     }
     public function messages()

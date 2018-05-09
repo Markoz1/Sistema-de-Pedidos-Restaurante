@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoriaRequest;
+use App\Http\Requests\UpdateCategoriaRequest;
 use Illuminate\Support\Facades\DB;
 use App\Model\Categoria;
 
@@ -51,9 +52,11 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Categoria $categoria)  //$id
     {
-        //
+        //$categoria = Categoria::find($id);
+
+        return view('categorias.show', compact('categoria'));
     }
 
     /**
@@ -62,9 +65,10 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Categoria $categoria)
+    {   
+        //['categoria' => $categoria]
+        return view('categorias.edit', compact('categoria'));
     }
 
     /**
@@ -74,9 +78,12 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        //
+        $data = request()->all();
+        $categoria->nombre = $data['nombreCategoria'];
+        $categoria->update();
+        return redirect()->route('categorias.index')->with('mensaje','La categoria a sido actualizada correctamente');
     }
 
     /**

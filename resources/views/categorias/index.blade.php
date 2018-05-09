@@ -51,13 +51,17 @@
                     		<tr>
                     			<td>{{$categoria->categoria_id}}</td>
 	                            <td>{{$categoria->nombre}}</td>
-	                            <td>{{"boton"}}</td>
-                        	</tr>
+                                <th>
+                                    <a href="{{ route('categorias.show',[$categoria->categoria_id])}}"> Ver detalles </a>
+                                    <a href="{{ route('categorias.edit',[$categoria->categoria_id]) }}"> Editar </a>
+                                </th>
+                                
+                            </tr>
                     	@endforeach
                     </tbody>
                 </table>
             </div>
         </section>
-    </div>x
+    </div>
 </article>
 @endsection
