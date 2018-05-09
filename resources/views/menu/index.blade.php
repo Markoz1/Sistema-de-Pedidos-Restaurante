@@ -28,29 +28,29 @@
                             <div class="tab-pane fade in active" id="home-pills">
                                 <div class="card-deck mt-4">
                                     {{-- falta poner un efecto hover --}}
-                                    <div class="card border-primary mb-3" class="" data-toggle="modal" data-target="#exampleModal">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                    <div class="card border-primary mb-3" data-toggle="modal" data-target="#myModal">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="card-title">ejemplo para boton-card</h5>
+                                            <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                    <div class="card border-primary mb-3" data-toggle="modal" data-target="#myModal">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
                                     <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
                                     <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
@@ -59,28 +59,28 @@
                                 </div>
                                 <div class="card-deck">
                                     <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
                                     <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
                                     <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
                                     <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
+                                        <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
@@ -89,67 +89,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile-pills">
-                                <div class="card-deck mt-4"> 
-                                    {{-- falta poner un efecto hover --}}
-                                    <div class="card border-primary mb-3"  class="" data-toggle="modal" data-target="#exampleModal">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">ejemplo para boton-card</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-deck">
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                    <div class="card border-primary mb-3">
-                                        <img class="card-img-top" src="http://lorempixel.com/360/180/food/" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Nombre Plato</h5>
-                                            <p class="card-text">34.12 BOB</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                contenido
                             </div>
                             <div class="tab-pane fade" id="messages-pills">
                                 contenido
@@ -167,27 +107,7 @@
             <!-- /.card-block -->
         </section>
         <!-- Button trigger modal -->
-    
-    
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    @include('menu.modal')
+        
     </article>
 @endsection

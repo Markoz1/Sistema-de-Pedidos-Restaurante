@@ -25,7 +25,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //return view('menu.index');
+        return view('menu.index');
         $pedido = new Pedido(['mesa' => 'mesa 1', 'total' => '122.00']);
         $pedido->save();
         $productos = Producto::all();         
