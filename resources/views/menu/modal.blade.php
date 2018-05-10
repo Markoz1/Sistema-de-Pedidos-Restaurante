@@ -41,8 +41,8 @@
         <hr>
           <div class="form-group row">
             <div class="form-group row">
-                {!! Form::label('precio', 'Cantidad', ['class' => 'col-md-3 form-control-label text-xs-right']) !!}
-                <div class="input-group col-md-9">                        
+                {!! Form::label('precio', 'Cantidad', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                <div class="input-group col-sm-10">                        
                     {!! Form::number('precio', null, ['class' => 'form-control boxed '.($errors->has('precio')?'is-invalid':''), 'min' => '0', 'step' => '0.01']) !!}
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="precio">BOB</span>
