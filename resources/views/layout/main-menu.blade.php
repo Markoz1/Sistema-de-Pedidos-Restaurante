@@ -26,9 +26,8 @@
     <script src="{{ asset('js/app.js') }}"></script> --}} {{-- ModularAdmin js --}}
     <script src="{{ asset('modular-admin/js/vendor.js') }}"></script>
     <script src="{{ asset('modular-admin/js/app.js') }}"></script>
-    <script>
-        @yield('script')
-    </script>
+    
+    @yield('script')
 </body>
 
 </html>

@@ -13,4 +13,6 @@
 
 Route::view('/', 'home');
 Route::resource('productos', 'ProductoController');
-Route::view('menu', 'menu.index');
+Route::get('modal-menu', 'MenuController@getModalMenu');
+			// ->name('menu.modal');
+Route::resource('menu', 'MenuController');
