@@ -16,8 +16,11 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-        $productos = Producto::Buscar($request->get("buscar"),$request->get("criterio"))->orderby("nombre","ASC")->paginate(15);
-        return view('productos.index', compact('productos'));
+        //dd($request);
+        $productos = Producto::Buscar($request->get("busqueda"),$request->get("estado"),$request->get("categoria"))->orderby("nombre","ASC")->paginate(15);
+        $anterior   = $request;
+        $categorias = Categoria::All();
+        return view('productos.index')-> with(['productos'=>$productos])-> with(['anterior'=>$anterior])->with(['categorias'=>$categorias]);
     }
 
     /**
