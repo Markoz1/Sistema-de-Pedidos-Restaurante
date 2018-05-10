@@ -22,12 +22,12 @@
             <div class="row">
               <div class="col-md-6">
                 <h5 id="nombre">
-                  nombre
+                  Nombre
                 </h5>
               </div>
               <div class="col-md-6">
                 <h5 id="precio">
-                  precio
+                  Precio
                 </h5>
               </div>
             </div>
