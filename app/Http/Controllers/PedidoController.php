@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Pedido;
 use App\Model\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class PedidoController extends Controller
 {
@@ -15,7 +16,18 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+        $pedidos = Pedido::all();
+        $pivot = array();
+        foreach ($pedidos as $i => $pedido) {
+            $productos = $pedido->productos;
+            foreach ($productos as $j => $producto) {
+                $pivot[$pedido->pedido_id][$j] = ['cantidad' => $producto->pivot->cantidad, 'subtotal' => $producto->pivot->subtotal];
+                
+            }
+            
+        }
+        $datos_pivot = Collection::make($pivot);
+        return view('pedidos.index',compact('pedidos', 'datos_pivot'));
     }
 
     /**
@@ -41,8 +53,21 @@ class PedidoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {       
+        if ($request->ajax()) {
+            $mesa = $request->pedido['mesa'];
+            $total = $request->pedido['total'];
+            $pedido = new Pedido(['mesa' => $mesa, 'total' => $total]);
+            $pedido->save();
+            $productos = $request->pedido['productos']; 
+            foreach ($productos as $producto) {
+                $pedido->productos()->attach($producto['id'], ['pedido_id' => $pedido->pedido_id ,'cantidad' => $producto['cantidad'], 'subtotal' => $producto['subtotal']]);
+            }            
+            return response()->json([
+                "mensaje1" => "Realizando orden…",
+                "mensaje2" => "Orden Completa Gracias."
+            ]);
+        }
     }
 
     /**

@@ -28,14 +28,14 @@
                             <div class="tab-pane fade in active" id="home-pills">
                                 <div class="card-deck mt-4">
                                     {{-- falta poner un efecto hover --}}
-                                    <div class="card border-primary mb-3" data-toggle="modal" data-target="#myModal">
+                                    <div class="card border-primary mb-3" data-toggle="modal" data-target="#modal">
                                         <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>
                                             <p class="card-text">34.12 BOB</p>
                                         </div>
                                     </div>
-                                    <div class="card border-primary mb-3" data-toggle="modal" data-target="#myModal">
+                                    <div class="card border-primary mb-3" data-toggle="modal" data-target="#modal">
                                         <img class="card-img-top" src="http://placeimg.com/300/180/nature" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Nombre Plato</h5>

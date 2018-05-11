@@ -68,12 +68,17 @@
             </table>
         </section>
     </div>
-    <div class="card-footer">
+    {!! Form::open(['route' => 'pedidos.store', 'method' => 'post']) !!}
+    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+    <div class="card-footer">        
         <div class="form-group row my-0 d-flex justify-content-around">
-            <button type="submit" class="btn btn-primary btn-lg" id="ordenar"> Ordenar </button>
+            {{-- <button type="" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar(this)"> Ordenar </button> --}}
+            <a href="#" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar()">Ordenar</a>
         </div>
     </div>
-</div>
+    {!! Form::close() !!}
+    <!-- Button trigger modal -->
+    @include('pedidos.modal-mensaje')    
 @section('script')
     <script src="{{ asset('js/pedido-create.js') }}"></script>
 @endsection

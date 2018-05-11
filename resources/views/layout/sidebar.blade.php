@@ -28,8 +28,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="">
-                    <a href="#"><i class="fa fa-shopping-cart"></i> Pedidos </a>
+                <li class="{{ request()->routeIs('pedidos.index')? 'active':'' }}">
+                    <a href="{{ route('pedidos.index') }}"><i class="fa fa-shopping-cart"></i> Pedidos </a>
                 </li>
                 <li class="">
                     <a href="#"><i class="fa fa-users"></i> Usuarios </a>
