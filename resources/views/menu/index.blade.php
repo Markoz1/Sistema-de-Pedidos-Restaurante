@@ -1,4 +1,4 @@
-extends('layout.main-menu') 
+@extends('layout.main-menu') 
 @section('content')
 <article class="content">
   <section class="section">
@@ -130,32 +130,4 @@ extends('layout.main-menu')
   <!-- Button trigger modal -->
   @include('menu.modal')
 </article>
-@endsection
-
-@section('script')
-<script>
-  // $(function () {
-        //     /**
-        //      * Load Menu Modal
-        //      * @type {any}
-        //      */
-        //     var $modal = $('#modal-menu');
-        //     $('.click-menu').on('click', function (e) {
-        //         e.preventDefault();
-        //         $modal.load($(this).attr("data-url"), function () {
-        //             $modal.modal({show: true});
-        //         });
-        //     });
-        // });
-        // $(function mostrarModal(e) {
-        // 	// body...
-        // })
-
-        function modaldatos(producto) {
-        	$('#nombre').text(producto.nombre);
-        	$('#precio').text(producto.precio);
-        	$('#descripcion').text(producto.descripcion);
-          $('#agregar').val() = producto.producto_id;
-        };
-</script>
 @endsection

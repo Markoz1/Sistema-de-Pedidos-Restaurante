@@ -80,5 +80,6 @@
     <!-- Button trigger modal -->
     @include('pedidos.modal-mensaje')    
 @section('script')
+    <script src="{{ asset('js/menu.js') }}"></script>
     <script src="{{ asset('js/pedido-create.js') }}"></script>
 @endsection
