@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h5 id="precio">
-                                    50
+                                    Precio
                                 </h5>
                             </div>
                         </div>
@@ -45,11 +45,12 @@
                     <div class="form-group row">
                         {!! Form::label('cantidad', 'Cantidad', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                         <div class="input-group col-sm-10">
-                            {!! Form::number('cantidad', null, ['class' => 'form-control boxed', 'min' => '1', 'max' => '10'])
-                            !!}
+                            {!! Form::number('cantidad', null, ['class' => 'form-control boxed '.($errors->has('precio')?'is-invalid':''), 'min' => '0',
+                            'step' => '0.01']) !!}
                             <div class="input-group-prepend">
-                                <span class="input-group-text">BOB</span>
+                                <span class="input-group-text" id="precio">BOB</span>
                             </div>
+                            <div class="invalid-feedback">{{ $errors->first('precio') }}</div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +60,7 @@
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">
           Cerrar
         </button>
-                <button type="button" class="btn btn-primary" value="1" onclick="agregar(this)" id="agregar">Agregar</button>
+                <button type="button" class="btn btn-primary" value="" onclick="agregar(this)" id="agregar">Agregar</button>
             </div>
         </div>
     </div>
