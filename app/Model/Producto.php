@@ -21,7 +21,7 @@ class Producto extends Model
         //dd($criterio);
         if (trim($busqueda) != ""){
             switch($estado){
-                case 2: //no se restringe estado
+                case 0: //no se restringe estado
                 switch ($categoria){
                     case 0:$query->where("nombre","LIKE","%$busqueda%"); //no restringe categoria
                     break;
