@@ -41,11 +41,11 @@
         <hr>
           <div class="form-group row">
             <div class="form-group row">
-                {!! Form::label('precio', 'Cantidad', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                {!! Form::label('cantidad', 'Cantidad', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                 <div class="input-group col-sm-10">                        
-                    {!! Form::number('precio', null, ['class' => 'form-control boxed '.($errors->has('precio')?'is-invalid':''), 'min' => '0', 'step' => '0.01']) !!}
+                    {!! Form::number('cantidad', 1, ['class' => 'form-control boxed '.($errors->has('precio')?'is-invalid':''), 'min' => '1', 'max' => '10']) !!}
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="precio">BOB</span>
+                        <span class="input-group-text" >BOB</span>
                     </div>
                     <div class="invalid-feedback">{{ $errors->first('precio') }}</div>
                 </div>
@@ -57,11 +57,7 @@
         <button class="btn btn-secondary" data-dismiss="modal" type="button">
           Cerrar
         </button>
-        {{--
-        <button class="btn btn-primary" type="button">
-          Save changes
-        </button>
-        --}}
+        <button type="button" class="btn btn-primary" value="" onclick="agregar(this)" id="agregar">Agregar</button>
       </div>
     </div>
   </div>

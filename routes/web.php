@@ -27,3 +27,4 @@ Route::resource('categorias', 'CategoriasController');
 Route::get('modal-menu', 'MenuController@getModalMenu');
 			// ->name('menu.modal');
 Route::resource('menu', 'MenuController');
+Route::resource('pedidos', 'PedidoController');

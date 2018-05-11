@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Pedido;
 use App\Model\Categoria;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,10 +14,12 @@ class Producto extends Model
     public $fillable = [
         'producto_id','nombre', 'precio', 'descripcion', 'foto', 'categoria_id'
     ];
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
+
     public function scopeBuscar($query,$busqueda,$estado,$categoria){
         //dd($criterio);
         if (trim($busqueda) != ""){
@@ -40,4 +43,10 @@ class Producto extends Model
             }
         }       
     }
-}
+    
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class, 'pedido_producto', 'producto_id', 'pedido_id')
+            ->withPivot('cantidad', 'subtotal')
+            ->withTimestamps();
+   }
