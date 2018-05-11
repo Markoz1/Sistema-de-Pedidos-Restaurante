@@ -134,6 +134,7 @@
                 @endforeach
             </ul>
         </div>
+        <!--
         <nav class="text-right">
                 {{ $productos->links() }}
                 <ul class="pagination">
@@ -151,5 +152,6 @@
                         </li>
                     </ul>
         </nav>
+        -->
     </article>
 @endsection
