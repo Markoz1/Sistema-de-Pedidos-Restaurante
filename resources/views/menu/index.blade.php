@@ -28,11 +28,11 @@
                   Postres
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a aria-controls="settings-pills" class="nav-link" data-target="#settings-pills" data-toggle="tab" href="" role="tab">
                   Settings
                 </a>
-              </li>
+              </li> --}}
             </ul>
             <!-- Tab panes -->
             <div class="tab-content mt-4">
@@ -41,203 +41,81 @@
                 Quick View
               </button>
               --}}
-              <div class="tab-pane fade in active" id="home-pills">
+              <div class="tab-pane active" id="home-pills">
                 <div class="card-deck mt-4">
                   {{-- falta poner un efecto hover --}}
                   @foreach($productos as $producto)
-                  <div class="col-md-4">
+                  	@if($producto->categoria_id == 1)
                     {{--
                     <div class="card border-primary mb-3 click-menu" data-toggle="modal" data-url="{{url('modal-menu'). '?p_id=' . $producto->producto_id }}">
                       --}}
-                      <div class="card border-primary mb-3 click-menu" data-target="#modal" data-toggle="modal" onclick="modaldatos({{$producto}})" value="{{$producto->producto_id}}">
-                        <img alt="{{$producto->nombre}}" class="card-img-top" height="180" src="{{ asset($producto->foto) }}" with="360">
-                          <div class="card-body">
-                            <h5 class="card-title">
-                              {{$producto->nombre}}
-                            </h5>
-                            <p class="card-text">
-                              {{$producto->precio}}
-                            </p>
-                          </div>
-                        </img>
+                      <div class="col-md-4">
+                        <div class="card border-primary mb-3 click-menu" data-target="#modal" data-toggle="modal" onclick="modaldatos({{$producto}})" value="{{$producto->producto_id}}">
+                          <img alt="{{$producto->nombre}}" class="card-img-top" height="180" src="{{ asset($producto->foto) }}" with="360">
+                            <div class="card-body">
+                              <h5 class="card-title">
+                                {{$producto->nombre}}
+                              </h5>
+                              <p class="card-text">
+                                {{$producto->precio}}
+                              </p>
+                            </div>
+                          </img>
+                        </div>
                       </div>
-                    </div>
+                      @endif
                     @endforeach
-                                        {{--
-                    <div class="" data-target="#menuModal" data-toggle="modal">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            ejemplo para boton-card
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    --}}
-                  </div>
-                  <div class="card-deck">
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="profile-pills">
                   <div class="card-deck mt-4">
                     {{-- falta poner un efecto hover --}}
-                    <div class="" data-target="#menuModal" data-toggle="modal">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            ejemplo para boton-card
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
+                    @foreach($productos as $producto)
+                    	@if($producto->categoria_id == 3)
+                        <div class="col-md-4">
+                          <div class="card border-primary mb-3 click-menu" data-target="#modal" data-toggle="modal" onclick="modaldatos({{$producto}})" value="{{$producto->producto_id}}">
+                            <img alt="{{$producto->nombre}}" class="card-img-top" height="180" src="{{ asset($producto->foto) }}" with="360">
+                              <div class="card-body">
+                                <h5 class="card-title">
+                                  {{$producto->nombre}}
+                                </h5>
+                                <p class="card-text">
+                                  {{$producto->precio}}
+                                </p>
+                              </div>
+                            </img>
+                          </div>
                         </div>
-                      </img>
+                        @endif
+                      @endforeach
                     </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                  </div>
-                  <div class="card-deck">
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                    <div class="card border-primary mb-3">
-                      <img alt="Card image cap" class="card-img-top" src="http://lorempixel.com/360/180/food/">
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            Nombre Plato
-                          </h5>
-                          <p class="card-text">
-                            34.12 BOB
-                          </p>
-                        </div>
-                      </img>
-                    </div>
-                  </div>
                 </div>
                 <div class="tab-pane fade" id="messages-pills">
-                  contenido
+                  <div class="card-deck mt-4">
+                    {{-- falta poner un efecto hover --}}
+                    @foreach($productos as $producto)
+                    	@if($producto->categoria_id == 2)
+                        <div class="col-md-4">
+                          <div class="card border-primary mb-3 click-menu" data-target="#modal" data-toggle="modal" onclick="modaldatos({{$producto}})" value="{{$producto->producto_id}}">
+                            <img alt="{{$producto->nombre}}" class="card-img-top" height="180" src="{{ asset($producto->foto) }}" with="360">
+                              <div class="card-body">
+                                <h5 class="card-title">
+                                  {{$producto->nombre}}
+                                </h5>
+                                <p class="card-text">
+                                  {{$producto->precio}}
+                                </p>
+                              </div>
+                            </img>
+                          </div>
+                        </div>
+                        @endif
+                      @endforeach
+                    </div>
                 </div>
-                <div class="tab-pane fade" id="settings-pills">
-                  contenido
-                </div>
+                {{-- <div class="tab-pane fade" id="settings-pills">
+                  contenido 4
+                </div> --}}
               </div>
             </div>
             <div class="col-xl-4">
