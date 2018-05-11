@@ -13,7 +13,7 @@
 
 Route::view('/', 'home');
 Route::resource('productos', 'ProductoController');
-Route::view('menu', 'menu.index');
+//Route::view('menu', 'menu.index');
 
 
 Route::resource('categorias', 'CategoriasController');
@@ -23,3 +23,8 @@ Route::resource('categorias', 'CategoriasController');
 //Route::get('/categorias/nuevo','CategoriasController@create')			->name('categorias.new');
 
 //Route::post('/categorias/crear','CategoriasController@store');
+
+Route::get('modal-menu', 'MenuController@getModalMenu');
+			// ->name('menu.modal');
+Route::resource('menu', 'MenuController');
+Route::resource('pedidos', 'PedidoController');

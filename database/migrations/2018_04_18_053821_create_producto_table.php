@@ -15,10 +15,13 @@ class CreateProductoTable extends Migration
     {
         Schema::create('producto', function (Blueprint $table) {
             $table->increments('producto_id');
+            $table->integer('estado_id');
             $table->string('nombre');
             $table->decimal('precio', 6, 2);
             $table->string('descripcion');
             $table->string('foto')->nullable();
+            $table->unsignedInteger('categoria_id');
+            $table->foreign('categoria_id')->references('categoria_id')->on('Categoria');
             $table->timestamps();
         });
     }

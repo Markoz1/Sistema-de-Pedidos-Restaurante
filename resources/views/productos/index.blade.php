@@ -8,20 +8,46 @@
                         <h3 class="title"> Productos
                             <a href="{{ route('productos.create') }}" class="btn btn-primary btn-sm rounded-s"> Nuevo Producto </a>
                         </h3>
-                        <p class="title-description"> Lista de Productos</p>
+                        <p class="title-description"> Lista de Productos</p><br>
                     </div>
                 </div>
             </div>
             <div class="items-search">
-                <form class="form-inline">
-                    <div class="input-group">
-                        <input type="text" class="form-control boxed rounded-s" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary rounded-s" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
+                <form action="{{ route('productos.index') }}" method="get" enctype="multipart/form-data">
+                        <div class="row">
+                                <div class="input-group mb-3 alert alert-dark col-12">
+                                        <input type="text" class="form-control boxed" placeholder="Criterio de Busqueda" name="busqueda" value="{{ $anterior->get("busqueda")}}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-dark" type="submit"><b>Buscar</b></button>
+                                        </div>                                                                
+                                </div>
+                        </div>                        
+                        <div class="row">
+                                <div class="input-group input-group-sm mb-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">Filtros de Busqueda</span>
+                                        </div>
+                                            <select class="form-control boxed" name="estado" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                <option value="0" {{ $anterior->get("estado")==0?"selected":"" }}>Todos</option>
+                                                <option value="1" {{ $anterior->get("estado")==1?"selected":"" }}>Activo</option>
+                                                <option value="2" {{ $anterior->get("estado")==2?"selected":"" }}>Inactivo</option>
+                                            </select>
+                                            <select class="form-control boxed" name="categoria" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                    <option value="0" {{ $anterior->get("categoria")==0?" selected":"" }}>Todos</option>
+                                                    @forelse($categorias as $cat)                                                    
+                                                    @if($anterior->get("categoria") == $cat->categoria_id)
+                                                    <option value={{ $cat->categoria_id}} selected>{{ $cat->nombre }}</option>
+                                                    @else 
+                                                    <option value={{ $cat->categoria_id}}>{{ $cat->nombre }}</option>
+                                                    @endif
+                                                    
+                                                        
+                                                    @empty
+                                                        <p>Ningun item registrado</p>
+                                                    @endforelse                                               
+                                            </select>
+                                </div>  
+                        </div>
                 </form>
             </div>
         </div>
@@ -108,21 +134,24 @@
                 @endforeach
             </ul>
         </div>
+        <!--
         <nav class="text-right">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href=""> Prev </a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href=""> 1 </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href=""> 2 </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href=""> Next </a>
-                </li>
-            </ul>
+                {{ $productos->links() }}
+                <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href=""> Prev </a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href=""> 1 </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href=""> 2 </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href=""> Next </a>
+                        </li>
+                    </ul>
         </nav>
+        -->
     </article>
 @endsection
