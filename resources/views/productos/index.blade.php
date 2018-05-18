@@ -16,7 +16,7 @@
                 <form action="{{ route('productos.index') }}" method="get" enctype="multipart/form-data">
                         <div class="row">
                                 <div class="input-group mb-3 alert alert-dark col-12">
-                                        <input type="text" class="form-control boxed" placeholder="Criterio de Busqueda" name="busqueda" value="{{ $anterior->get("busqueda")}}">
+                                        <input type="text" class="form-control boxed" placeholder="Criterio de Busqueda" name="busqueda" value="{{ $anterior->get("busqueda")}}" autocomplete="off">
                                         <div class="input-group-append">
                                             <button class="btn btn-dark" type="submit"><b>Buscar</b></button>
                                         </div>                                                                
@@ -136,7 +136,10 @@
                 @endforeach
             </ul>
         </div>
+        
+        {!! $productos->appends($_GET)->links('pagination') !!}
         <!--
+            $productos->links('pagination')
         <nav class="text-right">
                 {{ $productos->links() }}
                 <ul class="pagination">
