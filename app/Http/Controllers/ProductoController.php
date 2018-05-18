@@ -44,7 +44,7 @@ class ProductoController extends Controller
     {
         //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
         $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
-        dd($path_foto);
+        //dd($path_foto);
         $producto = new Producto;
         $producto->fill($request->except(['foto']));
         $producto->foto = $path_foto;//almacenamos ruta de foto en BD

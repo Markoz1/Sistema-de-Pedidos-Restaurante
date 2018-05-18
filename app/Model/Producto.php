@@ -12,7 +12,7 @@ class Producto extends Model
     protected $primaryKey = 'producto_id';
 
     public $fillable = [
-        'producto_id','nombre', 'precio', 'descripcion', 'foto', 'categoria_id'
+        'producto_id','estado_id','nombre', 'precio', 'descripcion', 'foto', 'categoria_id'
     ];
 
     public function categoria()

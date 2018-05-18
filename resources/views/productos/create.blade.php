@@ -13,6 +13,7 @@
                     {!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
                         {!! Form::text('nombre', null, ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':'')]) !!}
+                        <input type="hidden" name="estado_id" value="1">
                         <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
                     </div>
                 </div>
