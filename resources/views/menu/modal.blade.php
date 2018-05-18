@@ -15,7 +15,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-            <img alt="" src="">
+            <img id="imagen"alt="" src="" class="img-fluid">
             </img>
           </div>
           <div class="col-md-6">

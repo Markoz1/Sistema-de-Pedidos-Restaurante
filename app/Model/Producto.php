@@ -24,9 +24,9 @@ class Producto extends Model
         //dd($criterio);
         if (trim($busqueda) != ""){
             switch($estado){
-                case 0: //no se restringe estado
+                case 300 and 0: //no se restringe estado
                 switch ($categoria){
-                    case 0:$query->where("nombre","LIKE","%$busqueda%"); //no restringe categoria
+                    case 300 and 0:$query->where("nombre","LIKE","%$busqueda%"); //no restringe categoria
                     break;
                     default:$query->where("nombre","LIKE","%$busqueda%")->where("categoria_id","$categoria");//restringimos categoria                  
                     break;
@@ -34,7 +34,7 @@ class Producto extends Model
                 break;
                 default: 
                 switch ($categoria){
-                    case 0:$query->where("nombre","LIKE","%$busqueda%")->where("estado_id","$estado"); //no restringe categoria solo estado
+                    case 300 and 0:$query->where("nombre","LIKE","%$busqueda%")->where("estado_id","$estado"); //no restringe categoria solo estado
                     break;
                     default:$query->where("nombre","LIKE","%$busqueda%")->where("estado_id","$estado")->where("categoria_id","$categoria"); //retringe categoria y estado                  
                     break;

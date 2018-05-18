@@ -3,5 +3,6 @@ function modaldatos(producto) {
     $('#nombre').text(producto.nombre);
     $('#precio').text(producto.precio);
     $('#descripcion').text(producto.descripcion);
-    $('#agregar').attr('value', producto.producto_id)
+    $('#agregar').attr('value', producto.producto_id);
+    $('#imagen').attr('src', producto.producto_id);
 };

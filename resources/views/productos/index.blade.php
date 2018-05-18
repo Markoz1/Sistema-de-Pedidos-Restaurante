@@ -28,12 +28,14 @@
                                             <span class="input-group-text" id="inputGroup-sizing-sm">Filtros de Busqueda</span>
                                         </div>
                                             <select class="form-control boxed" name="estado" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                <option value="0" {{ $anterior->get("estado")==0?"selected":"" }}>Todos</option>
+                                                <option value="" disabled selected>Seleccione Estado</option>
+                                                <option value="300" {{ $anterior->get("estado")==300?"selected":"" }}>Todos</option>
                                                 <option value="1" {{ $anterior->get("estado")==1?"selected":"" }}>Activo</option>
                                                 <option value="2" {{ $anterior->get("estado")==2?"selected":"" }}>Inactivo</option>
                                             </select>
                                             <select class="form-control boxed" name="categoria" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                    <option value="0" {{ $anterior->get("categoria")==0?" selected":"" }}>Todos</option>
+                                                    <option value="" disabled selected>Seleccione Categoria</option>
+                                                    <option value="300" {{ $anterior->get("categoria")==300?" selected":"" }}>Todos</option>
                                                     @forelse($categorias as $cat)                                                    
                                                     @if($anterior->get("categoria") == $cat->categoria_id)
                                                     <option value={{ $cat->categoria_id}} selected>{{ $cat->nombre }}</option>
