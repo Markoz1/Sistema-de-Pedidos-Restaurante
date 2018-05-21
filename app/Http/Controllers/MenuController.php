@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Producto;
+use App\Model\Categoria;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -15,7 +16,8 @@ class MenuController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        return view('menu.index', compact('productos'));
+        $categorias = Categoria::all();
+        return view('menu.index', compact('productos'), compact('categorias'));
     }
 
     public function getModalMenu()
