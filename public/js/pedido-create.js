@@ -1,96 +1,126 @@
 var productosAgregados = 0;
 var total = 0.00;
 var pedido = { "mesa": "mesa 1", "total": 0 };
+var pedido_lleno = false;
+var array_productos = [{ "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
+                       { "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
+                       { "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
+                       { "id": "", "nombre": "", "cantidad": "", "subtotal": "" }];
 $(document).ready(function () {
-    
-    // $('#pedido').hide();
-    // $('button#agregar').click(function (e) {        
-    //     e.preventDefault();
-    //     var padre = $($(this).parents().get(3));
-    //     var id = padre.attr('id');
         
-    //     console.log(id);
-    // });
-    // $('#ordenar').click(function (e) { 
-    //     e.preventDefault();
-    // });
-    
 });
-function agregar(boton) {
+function agregar(producto) {
     $('#modal').modal('hide');
-    var producto_id = boton.value;
-    var numProducto = productosAgregados+1;
-    var nombre = $('#nombre').text();
-    var cantidad = $('#cantidad').val();
-    var subtotal = parseFloat($('#precio').text() * cantidad).toFixed(2);
-    var datos = [nombre,cantidad,subtotal];
-    var $nuevo_producto = $('#producto' + numProducto);
-    $nuevo_producto.attr('value', producto_id);
-    var $datos_nuevo_producto = $nuevo_producto.children('td');
-    $datos_nuevo_producto.each(function (index, element) {
-        if(index < $datos_nuevo_producto.length-1){
-            $(element).text(datos[index]);
-            //console.log($(element).text()+' -> '+datos[index])
-        }
-        else{
-            $(element).show();
-        }
-    });    
-    productosAgregados++;
-    total = (parseFloat(total) + parseFloat(subtotal)).toFixed(2);
-    $('#total').text(total);
-    if(productosAgregados==4){        
-        $(boton).prop('disabled', true);
-    }
-};
-function eliminar(producto){
-    $datos_nuevo_producto = $(producto).children('td');
-    $datos_nuevo_producto.each(function (index, element) {
-        if (index < $datos_nuevo_producto.length - 1 && $(element).text() != "") {
-            if (index == 2) {
-                var subtotal = $(element).text();
-                total = (parseFloat(total) - parseFloat(subtotal)).toFixed(2);
-                $('#total').text(total);
-            }
-            $(element).text("");            
-        }
-        else {
-            $(element).hide();
+    agregar_a_array_productos(producto);
+    actualizar_vista_pedido_actual();
+    actualizar_total();
+    verificar_pedido_lleno();
+    console.log(array_productos);
+}
+function eliminar(index) {
+    eliminar_de_array_productos(index);
+    actualizar_vista_pedido_actual();
+    actualizar_total();
+    verificar_pedido_lleno();
+    console.log(array_productos);
+}
+function ordenar_pedido() {
+    agregar_array_productos_a_pedido();
+    enviar_con_ajax();
+}
+// funciones adicionales
+function agregar_a_array_productos(producto) {
+    $.each(array_productos, function (indexInArray, valueOfElement) {//recorriendo array_productos
+        if (valueOfElement.id == "") {//si hay espacio en array_productos, agrego un producto
+            valueOfElement.id = producto.producto_id;
+            valueOfElement.nombre = producto.nombre;
+            valueOfElement.cantidad = $('#cantidad').val();
+            valueOfElement.subtotal = parseFloat(producto.precio * valueOfElement.cantidad).toFixed(2);
+            return false;
         }
     });
-    productosAgregados--; 
-    $('#agregar').prop('disabled', false);
 }
-function ordenar() {
-    var indice_productos = 0;
-    var nuevos_productos = []; 
-    var $datos_productos = $('#pedido').children('tr');
-    $datos_productos.each(function (index, element) {
-        if (index < $datos_productos.length - 1 && $(element).children('td#subtotal').text() != "") {
-            var nuevo_producto = {};
-            var datos_producto = $(element).children('td');
-            datos_producto.each(function (index, dato_producto) {
+function eliminar_de_array_productos(index) {
+    array_productos[index].id = "";
+    array_productos[index].nombre = "";
+    array_productos[index].cantidad = "";
+    array_productos[index].subtotal = "";
+}
+function actualizar_vista_pedido_actual() {
+    var $nuevo_producto;
+    $.each(array_productos, function (indexInArray, producto) {//recorriendo array_productos, donde producto es un elemento de array_productos
+        $nuevo_producto = $('#producto' + indexInArray);
+        $nuevo_producto.attr('value', indexInArray);
+        var $datos_nuevo_producto = $nuevo_producto.children('td');
+        if (producto.id != "") {// si existe un producto en array_productos
+            $datos_nuevo_producto.each(function (index, element) {// llenando un producto en pedido actual
                 if(index == 0){
-                    nuevo_producto.id = $(dato_producto).parent().attr('value');
+                    $(element).text(producto.nombre);
                 }
                 if (index == 1) {
-                    nuevo_producto.cantidad = $(dato_producto).text();
+                    $(element).text(producto.cantidad);
                 }
                 if (index == 2) {
-                    nuevo_producto.subtotal = $(dato_producto).text();
-                }               
+                    $(element).text(producto.subtotal);
+                }
+                if (index == 3) {
+                    $(element).show();
+                }
             });
-            nuevos_productos[indice_productos] = nuevo_producto;
-            indice_productos++;           
         }
-        else {
-            if (index == 4){
-                pedido.total = $(element).children('td#total').text();
-            }
+        else{
+            $datos_nuevo_producto.each(function (index, element) {
+                if (index < $datos_nuevo_producto.length - 1) {
+                    $(element).text("");
+                }
+                else {
+                    $(element).hide();
+                }
+            });    
         }
     });
-    pedido.productos = nuevos_productos;
-    console.log(pedido); 
+}
+function actualizar_total() {
+    var total_temp = 0.0;
+    $.each(array_productos, function (indexInArray, producto) {
+        if (producto.id != "") {
+            total_temp = (parseFloat(total_temp) + parseFloat(producto.subtotal)).toFixed(2);
+        }
+        
+    });
+    total = total_temp;
+    $('td#total').text(total);
+}
+function verificar_pedido_lleno() {    
+    $.each(array_productos, function (indexInArray, valueOfElement) {
+        if (valueOfElement.id == "") {
+            $('button#agregar').prop('disabled', false);
+            pedido_lleno = false;
+            return false;
+        }
+        else{
+            $('button#agregar').prop('disabled', true);
+            pedido_lleno = true;
+        }
+    });
+}
+function agregar_array_productos_a_pedido() {
+    if(pedido_lleno){
+        pedido.productos = array_productos;
+    }
+    else{
+        var indice_productos = 0;
+        pedido.productos = [];
+        $.each(array_productos, function (indexInArray, producto) {
+            if (producto.id != "") {
+                pedido.productos[indice_productos] = producto;
+                indice_productos++;
+            }
+        });
+    }
+    pedido.total = total;
+}
+function enviar_con_ajax() {
     var ruta = $('form').attr('action');
 
     $.ajax({
@@ -112,14 +142,10 @@ function ordenar() {
         }
     });
 }
-function eliminarProductos() { 
-    // eliminar('#producto1');
-    // eliminar('#producto2');
-    // eliminar('#producto3');
-    // eliminar('#producto4');
+function eliminarProductos() {
     location.reload();
- }
-function cerraModal() {     
+}
+function cerraModal() {
     $('#modal-mensaje').modal('hide');
     eliminarProductos();
-  }
+}
