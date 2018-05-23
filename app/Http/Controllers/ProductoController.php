@@ -14,10 +14,13 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
+        //dd($request);
+        $productos = Producto::Buscar($request->get("busqueda"),$request->get("estado"),$request->get("categoria"))->orderby("nombre","ASC")->paginate(100);
+        $anterior   = $request;
+        $categorias = Categoria::All();
+        return view('productos.index')-> with(['productos'=>$productos])-> with(['anterior'=>$anterior])->with(['categorias'=>$categorias]);
     }
 
     /**
@@ -41,6 +44,7 @@ class ProductoController extends Controller
     {
         //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
         $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
+        dd($path_foto);
         $producto = new Producto;
         $producto->fill($request->except(['foto']));
         $producto->foto = $path_foto;//almacenamos ruta de foto en BD

@@ -23,13 +23,13 @@
             <div class="color-secondary"></div>
         </div>
     </div>
-    {{--
-    <script src="{{ asset('js/app.js') }}"></script> --}} {{-- ModularAdmin js --}}
+
+    {{-- <script src="{{ asset('js/app.js') }}"></script>  --}}
+    {{-- ModularAdmin js --}}
     <script src="{{ asset('modular-admin/js/vendor.js') }}"></script>
     <script src="{{ asset('modular-admin/js/app.js') }}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.1/holder.min.js"></script>
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.1/holder.min.js"></script> --}}
     @yield('script')
 </body>
 

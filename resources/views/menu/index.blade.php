@@ -1,4 +1,4 @@
-@extends('layout.main-menu')
+@extends('layout.main-menu') 
 @section('content')
 <article class="content">
   <section class="section">
@@ -52,24 +52,7 @@
             </div>
             </div>
             <div class="col-xl-4">
-              <div class="card card-primary">
-                <div class="card-header">
-                  <div class="header-block">
-                    <p class="title">
-                      Mesa #
-                    </p>
-                  </div>
-                </div>
-                <div class="card-block">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices
-                                        accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  Card Footer
-                </div>
-              </div>
+              @include('pedidos.create')
             </div>
           </div>
         </div>
@@ -80,31 +63,4 @@
   <!-- Button trigger modal -->
   @include('menu.modal')
 </article>
-@endsection
-
-@section('script')
-<script>
-  // $(function () {
-        //     /**
-        //      * Load Menu Modal
-        //      * @type {any}
-        //      */
-        //     var $modal = $('#modal-menu');
-        //     $('.click-menu').on('click', function (e) {
-        //         e.preventDefault();
-        //         $modal.load($(this).attr("data-url"), function () {
-        //             $modal.modal({show: true});
-        //         });
-        //     });
-        // });
-        // $(function mostrarModal(e) {
-        // 	// body...
-        // })
-
-        function modaldatos(producto) {
-        	$('#nombre').text(producto.nombre);
-        	$('#precio').text(producto.precio);
-        	$('#descripcion').text(producto.descripcion);
-        };
-</script>
 @endsection

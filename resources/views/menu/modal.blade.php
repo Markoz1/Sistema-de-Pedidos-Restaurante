@@ -21,9 +21,9 @@
           <div class="col-md-6">
             <div class="row">
               <div class="col-md-6">
-                <h5 id="nombre">
+                <h4 id="nombre">
                   Nombre
-                </h5>
+                </h4>
               </div>
               <div class="col-md-6">
                 <h5 id="precio">
@@ -32,24 +32,24 @@
               </div>
             </div>
             <div class="row mt-3">
-              <p id="descripcion">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, quidem. Dicta alias inventore, voluptate suscipit ex cumque quasi incidunt tempora ratione harum possimus dolores, minima modi. Repellat cupiditate eveniet amet.
-              </p>
+              <div class="col-md-12">
+                <p id="descripcion">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, quidem. Dicta alias inventore, voluptate suscipit ex cumque
+                  quasi incidunt tempora ratione harum possimus dolores, minima modi. Repellat cupiditate eveniet amet.
+                </p>
+              </div>
             </div>
           </div>
         </div>
         <hr>
           <div class="form-group row">
-            <div class="form-group row">
-                {!! Form::label('precio', 'Cantidad', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
-                <div class="input-group col-sm-10">                        
-                    {!! Form::number('precio', null, ['class' => 'form-control boxed '.($errors->has('precio')?'is-invalid':''), 'min' => '0', 'step' => '0.01']) !!}
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="precio">BOB</span>
-                    </div>
-                    <div class="invalid-feedback">{{ $errors->first('precio') }}</div>
-                </div>
-            </div>
+              {!! Form::label('cantidad', 'Cantidad', ['class' => 'col-sm-2 offset-md-3 form-control-label text-xs-right']) !!}
+              <div class="input-group col-sm-4">                        
+                  {!! Form::number('cantidad', 1, ['class' => 'form-control boxed', 'min' => '1', 'max' => '10']) !!}
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" >Unidades</span>
+                  </div>
+              </div>
           </div>
         </hr>
       </div>
@@ -57,11 +57,7 @@
         <button class="btn btn-secondary" data-dismiss="modal" type="button">
           Cerrar
         </button>
-        {{--
-        <button class="btn btn-primary" type="button">
-          Save changes
-        </button>
-        --}}
+        <button type="button" class="btn btn-primary" value="" onclick="agregar(this)" id="agregar">Agregar</button>
       </div>
     </div>
   </div>
