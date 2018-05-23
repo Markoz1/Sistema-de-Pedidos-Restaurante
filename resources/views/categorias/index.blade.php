@@ -13,18 +13,6 @@
                 </div>
             </div>
         </div>
-        <div class="items-search">
-            <form class="form-inline">
-                <div class="input-group">
-                    <input type="text" class="form-control boxed rounded-s" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-secondary rounded-s" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </div>
     </div>
     @if(session('mensaje'))
 	    <div class="alert alert-dismissible alert-success">

@@ -8,7 +8,7 @@
         <span>Nombre categoria:<span><p>{{$categoria->nombre}}</p>
     </div>
     <a type="button" class="btn btn-primary" href="{{ route('categorias.index') }}">Regresar</a>
-  
+    
     
 </article>
 @endsection
