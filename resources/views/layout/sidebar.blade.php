@@ -20,9 +20,6 @@
                         <li class="{{ request()->routeIs('categorias.index')? 'active':'' }}">
                             <a href="{{ route('categorias.index') }}"> Listado </a>
                         </li>
-                        <li class="{{ request()->routeIs('categorias.create')? 'active':'' }}">
-                            <a href="{{ route('categorias.create') }}"> Nueva Categoria </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="{{ request()->segment(1) == 'productos'? 'active open':'' }}">
