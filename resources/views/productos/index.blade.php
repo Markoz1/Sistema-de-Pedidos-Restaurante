@@ -13,44 +13,61 @@
                 </div>
             </div>
             <div class="items-search">
-                <form action="{{ route('productos.index') }}" method="get" enctype="multipart/form-data">
-                        <div class="row">
-                                <div class="input-group mb-3 alert alert-dark col-12">
-                                        <input type="text" class="form-control boxed" placeholder="Criterio de Busqueda" name="busqueda" value="{{ $anterior->get("busqueda")}}" autocomplete="off">
-                                        <div class="input-group-append">
+                    <form action="{{ route('productos.index') }}" method="get" enctype="multipart/form-data">
+                        <table class="table-borderless">
+                                <thead>
+                                  <tr>
+                                   <th>
+                                            <input type="text" class="form-control boxed" placeholder="Criterio de Busqueda" name="busqueda" value="{{ $anterior->get("busqueda")}}" autocomplete="off">
+                                    </th>
+                                    <th>
                                             <button class="btn btn-dark" type="submit"><b>Buscar</b></button>
-                                        </div>                                                                
-                                </div>
-                        </div>                        
-                        <div class="row">
-                                <div class="input-group input-group-sm mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">Filtros de Busqueda</span>
-                                        </div>
-                                            <select class="form-control boxed" name="estado" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                <option value="" disabled selected>Seleccione Estado</option>
-                                                <option value="300" {{ $anterior->get("estado")==300?"selected":"" }}>Todos</option>
-                                                <option value="1" {{ $anterior->get("estado")==1?"selected":"" }}>Activo</option>
-                                                <option value="2" {{ $anterior->get("estado")==2?"selected":"" }}>Inactivo</option>
-                                            </select>
-                                            <select class="form-control boxed" name="categoria" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                                    <option value="" disabled selected>Seleccione Categoria</option>
-                                                    <option value="300" {{ $anterior->get("categoria")==300?" selected":"" }}>Todos</option>
-                                                    @forelse($categorias as $cat)                                                    
-                                                    @if($anterior->get("categoria") == $cat->categoria_id)
-                                                    <option value={{ $cat->categoria_id}} selected>{{ $cat->nombre }}</option>
-                                                    @else 
-                                                    <option value={{ $cat->categoria_id}}>{{ $cat->nombre }}</option>
-                                                    @endif
-                                                    
-                                                        
-                                                    @empty
-                                                        <p>Ningun item registrado</p>
-                                                    @endforelse                                               
-                                            </select>
-                                </div>  
-                        </div>
-                </form>
+                                    </th>                                          
+                                  </tr>
+                                </thead>
+                        </table>
+                        <br>
+                        <a class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Criterios de Busqueda
+                        </a>
+                        <div class="collapse show dropdown-menu" id="collapseExample">
+                                    <table class="table table-secondary">
+                                            <thead>
+                                              <tr>
+                                                <th><span style="text-align:center;" class="input-group-text" id="inputGroup-sizing-sm">Estado :</span></th>
+                                                <th>
+                                                        <select class="form-control boxed" name="estado" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                                <option value="" disabled selected>Seleccione Estado</option>
+                                                                <option value="300" {{ $anterior->get("estado")==300?"selected":"" }}>Todos</option>
+                                                                <option value="1" {{ $anterior->get("estado")==1?"selected":"" }}>Activo</option>
+                                                                <option value="2" {{ $anterior->get("estado")==2?"selected":"" }}>Inactivo</option>
+                                                        </select>                                            
+                                                </th>                                           
+                                              </tr>
+                                            </thead>
+                                            <thead>
+                                                <tr>
+                                                 <th><span  style="text-align:center;" class="input-group-text" id="inputGroup-sizing-sm">Categoria :</span></th>
+                                                 <th>
+                                                        <select class="form-control boxed" name="categoria" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                                <option value="" disabled selected>Seleccione Categoria</option>
+                                                                <option value="300" {{ $anterior->get("categoria")==300?" selected":"" }}>Todos</option>
+                                                                @forelse($categorias as $cat)                                                    
+                                                                @if($anterior->get("categoria") == $cat->categoria_id)
+                                                                <option value={{ $cat->categoria_id}} selected>{{ $cat->nombre }}</option>
+                                                                @else 
+                                                                <option value={{ $cat->categoria_id}}>{{ $cat->nombre }}</option>
+                                                                @endif
+                                                                @empty
+                                                                    <p>Ningun item registrado</p>
+                                                                @endforelse                                               
+                                                        </select>                                                 
+                                                 </th>
+                                                </tr>
+                                            </thead>
+                                    </table>
+                            </div>
+                    </form>               
             </div>
         </div>
         @if(session('mensaje'))
