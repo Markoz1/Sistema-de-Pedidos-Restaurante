@@ -30,7 +30,7 @@
                         <a class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Criterios de Busqueda
                         </a>
-                        <div class="collapse show dropdown-menu" id="collapseExample">
+                        <div class="collapse dropdown-menu" id="collapseExample">
                                     <table class="table table-secondary">
                                             <thead>
                                               <tr>
