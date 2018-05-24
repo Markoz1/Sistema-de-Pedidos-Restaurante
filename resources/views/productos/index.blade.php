@@ -25,9 +25,9 @@
                                     </th>                                          
                                   </tr>
                                 </thead>
-                        </table>
-                        <br>
-                        <a class="btn btn-secondary" data-toggle="collapse" data-target="#collapseExample" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        </table> <br>
+                        
+                        <a  data-toggle="collapse" data-target="#collapseExample" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Criterios de Busqueda
                         </a>
                         <div class="collapse dropdown-menu" id="collapseExample">
