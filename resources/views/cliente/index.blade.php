@@ -6,7 +6,7 @@
         <div class="title-block">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="title"> Categorias
+                    <h3 class="title"> Clientes
                         <a href="{{ route('clientes.create') }}" class="btn btn-primary btn-sm rounded-s"> Nuevo Cliente </a>
                     </h3>
                     <p class="title-description"> Lista de Clientes</p>
@@ -32,20 +32,16 @@
 	        {{ session('mensaje') }}
 	    </div>
     @endif
-    <div class="card-block">
-        <div class="card-title-block">
-            <h3 class="title"> Lista de categorias </h3>
-        </div>
-        <section class="example">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
+    <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
                         <tr>
                         	<th>N°</th>
                             <th>Nombre o Razon Social</th>
                             <th>Nit</th>
                             <th>Telefono</th>
                             <th>Direccion</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,8 +61,6 @@
                     	@endforeach
                     </tbody>
                 </table>
-            </div>
-        </section>
-    </div>
+            </div>     
 </article>
 @endsection
