@@ -18,6 +18,13 @@
                         </span>							
                     @endif 
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Seleccione el estado de la categoria</label>
+                    <select class="form-control boxed" id="estado" name="estado" >
+                        <option value="1">Categoria activada</option>
+                        <option value="0">Categoria inactiva</option>
+                    </select>
+                </div>
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary">Actualizar</button>

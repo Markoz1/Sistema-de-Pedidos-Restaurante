@@ -39,9 +39,9 @@ class CategoriasController extends Controller
     public function store(StoreCategoriaRequest $request)
     {   
         $data = request()->all();
-
         Categoria::create([
             'nombre' => $data['nombreCategoria'],
+            'estado' => true
         ]);
         return redirect()->route('categorias.index')->with('mensaje','La categoria se creo correctamente');
     }
@@ -81,7 +81,13 @@ class CategoriasController extends Controller
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
         $data = request()->all();
+        //dd($data);
         $categoria->nombre = $data['nombreCategoria'];
+        if($data['estado'] == 1){
+            $categoria->estado = true;
+        }else{
+            $categoria->estado = false;
+        }
         $categoria->update();
         return redirect()->route('categorias.index')->with('mensaje','La categoria a sido actualizada correctamente');
     }

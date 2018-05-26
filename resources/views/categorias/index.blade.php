@@ -79,7 +79,12 @@
                         </div>
                         <div class="item-col item-col-sales">
                             <div class="item-heading">Estado</div>
-                            <div class="no-overflow"> {{ '1' }}</div>
+                            @if ($categoria->estado == 1)
+                                <div class="no-overflow"> {{ "activo" }}</div>
+                            @else
+                                <div class="no-overflow"> {{ "inactivo" }}</div>
+                            @endif
+                        
                         </div>
                         <div class="item-col item-col-date">
                             <div class="item-heading">Acciones</div>
