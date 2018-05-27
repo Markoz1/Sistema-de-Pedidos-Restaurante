@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'home');
+Route::view('/', 'inicio');
 Route::resource('productos', 'ProductoController');
 //Route::view('menu', 'menu.index');
 
@@ -28,3 +28,8 @@ Route::get('modal-menu', 'MenuController@getModalMenu');
 			// ->name('menu.modal');
 Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::view('login', 'autenticacion.login');
