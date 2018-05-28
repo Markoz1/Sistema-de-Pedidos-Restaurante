@@ -92,7 +92,6 @@ function ordenar() {
     pedido.productos = nuevos_productos;
     console.log(pedido); 
     var ruta = $('form').attr('action');
-
     $.ajax({
         type: "POST",
         url: ruta,

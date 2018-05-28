@@ -11,7 +11,7 @@ class Pedido extends Model
     protected $primaryKey = 'pedido_id';
 
     public $fillable = [
-        'mesa', 'total'
+        'mesa', 'total','estado_pedido'
     ];
 
     public function productos()

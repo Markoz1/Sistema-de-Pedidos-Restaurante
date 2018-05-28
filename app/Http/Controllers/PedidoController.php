@@ -57,7 +57,8 @@ class PedidoController extends Controller
         if ($request->ajax()) {
             $mesa = $request->pedido['mesa'];
             $total = $request->pedido['total'];
-            $pedido = new Pedido(['mesa' => $mesa, 'total' => $total]);
+            $estado_pedido = true;
+            $pedido = new Pedido(['mesa' => $mesa, 'total' => $total,'estado_pedido' => $estado_pedido]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {

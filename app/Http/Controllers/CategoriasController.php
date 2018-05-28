@@ -81,7 +81,6 @@ class CategoriasController extends Controller
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
         $data = request()->all();
-        //dd($data);
         $categoria->nombre = $data['nombreCategoria'];
         if($data['estado'] == 1){
             $categoria->estado = true;
@@ -100,6 +99,6 @@ class CategoriasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //cambiar estado a oculto para siempre
     }
 }
