@@ -28,4 +28,6 @@ Route::get('modal-menu', 'MenuController@getModalMenu');
 			// ->name('menu.modal');
 Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
+
 Route::view('mesas', 'mesas.index');
+Route::get('/users', 'UserController@index');
