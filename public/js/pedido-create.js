@@ -15,18 +15,18 @@ function agregar(producto) {
     actualizar_vista_pedido_actual();
     actualizar_total();
     verificar_pedido_lleno();
-    console.log(array_productos);
 }
 function eliminar(index) {
     eliminar_de_array_productos(index);
     actualizar_vista_pedido_actual();
     actualizar_total();
     verificar_pedido_lleno();
-    console.log(array_productos);
 }
 function ordenar_pedido() {
-    agregar_array_productos_a_pedido();
-    enviar_con_ajax();
+    if (!array_productos_is_empty()){
+        agregar_array_productos_a_pedido();
+        enviar_con_ajax();
+    }
 }
 // funciones adicionales
 function agregar_a_array_productos(producto) {
@@ -103,6 +103,17 @@ function verificar_pedido_lleno() {
             pedido_lleno = true;
         }
     });
+}
+function array_productos_is_empty() {
+    var termino = false;
+    var res = true;
+    $.each(array_productos, function (indexInArray, producto) {
+        if (producto.id != "" && !termino) {
+            termino = true;
+            res = false;
+        }
+    });
+    return res;
 }
 function agregar_array_productos_a_pedido() {
     if(pedido_lleno){
