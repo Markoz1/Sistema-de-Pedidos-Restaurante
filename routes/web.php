@@ -29,7 +29,10 @@ Route::get('modal-menu', 'MenuController@getModalMenu');
 Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
 
+Route::get('/users', 'UserController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::view('login', 'autenticacion.login');
+
+Route::get('/users', 'UserController@index');
