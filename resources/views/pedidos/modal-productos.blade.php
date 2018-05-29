@@ -11,16 +11,16 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>#Id</th>
                             <th>Nombre</th>
-                            <th>Precio (Bs)</th>
                             <th>Cantidad</th>
+                            <th>Entregado</th>
                         </tr>
                     </thead>
                     <tbody id="datos">
                     </tbody>
                 </table>
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="terminarPedido" onclick="cambiarEstadoPedido({{ $pedido->pedido_id }})">Terminar pedido</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

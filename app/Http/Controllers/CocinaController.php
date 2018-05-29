@@ -14,8 +14,8 @@ class CocinaController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::all()->where('estado'-> true);
-        
+        $pedidos = Pedido::all();
+        $pedidos = $pedidos->where('estado_pedido',true);
         return view('vistaCocina.index',['pedidos' => $pedidos]);
     }
 
@@ -47,8 +47,15 @@ class CocinaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        if ($request->ajax()) {
+            $mesa = $request->pedido['id'];
+            $pedido = Pedido::find($id);
+            dd($id);   
+            return response()->json([
+                "mensaje1" => $pedido,
+            ]);
+        }
     }
 
     /**
@@ -83,5 +90,8 @@ class CocinaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getValor(Pedido $pedido){
+        return compact('pedido');    
     }
 }

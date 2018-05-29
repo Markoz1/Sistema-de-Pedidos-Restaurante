@@ -10,26 +10,30 @@
         </div>
         <section class="section">
             <div class="row">
-                @foreach()
-                    <div class="col-xl-2">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <div class="header-block">
-                                    <p class="title"> {{' nombre pedido '}} </p>
+                @foreach($pedidos as $pedido)
+
+                        <div class="col-xl-3 abrir-modal" data-toggle="modal" data-target="#modal-media" onclick="abrirModal({{ $pedido->pedido_id }})">
+                            <div class="card card-danger">
+                                <div class="card-header">
+                                    <div class="header-block">
+                                        <p class="title text-light"> {{'Atender '.$pedido->mesa }} </p>
+                                    </div>
+                                </div>
+                                <div class="card-block" name="{{ route('vistaCocina.index') }}" id=ruta>
+                                    <h4>
+                                        <p class="text-center texto1">Sin asignar</p>
+                                    </h4>
+                                    
                                 </div>
                             </div>
-                            <div class="card-block">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-                            <div class="card-footer"> Card Footer </div>
                         </div>
-                    </div>
                 @endforeach
             </div>
             <!-- /.row -->
         </section>
+        @include('vistaCocina.modal-productos')
     </div>
 </article>
 </section>
-
+<script src="{{ asset('js/listado-pedido.js') }}"></script>
 @endsection

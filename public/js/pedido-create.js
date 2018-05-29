@@ -16,6 +16,7 @@ $(document).ready(function () {
     // });
     
 });
+
 function agregar(boton) {
     $('#modal').modal('hide');
     var producto_id = boton.value;
@@ -92,6 +93,7 @@ function ordenar() {
     pedido.productos = nuevos_productos;
     console.log(pedido); 
     var ruta = $('form').attr('action');
+    console.log(ruta);
     $.ajax({
         type: "POST",
         url: ruta,

@@ -38,20 +38,22 @@
                                     <tr>
                                         <th>#Id</th>
                                         <th>Mesa</th>
-                                        <th>Total (Bs)</th>
+                                        <th>Estado pedido</th>
                                         <th>(Cant.) Productos</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($pedidos as $pedido)
-                                        <tr>
-                                            <th scope="row">{{ $pedido->pedido_id }}</th>
-                                            <td>{{ $pedido->mesa }}</td>
-                                            <td>{{ $pedido->total }}</td>
-                                            <td>
-                                                <a href="#" onclick="mostrarProductos({{$pedido->productos}}, {{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
-                                            </td>
-                                        </tr>
+                                        @if ($pedido->estado_pedido == true)
+                                            <tr>
+                                                <th scope="row">{{ $pedido->pedido_id }}</th>
+                                                <td>{{ $pedido->mesa }}</td>
+                                                <td>{{ $pedido->estado_pedido }}</td>
+                                                <td>
+                                                    <a href="#" onclick="mostrarProductos({{$pedido->productos}}, {{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach                                    
                                 </tbody>
                             </table>
@@ -65,16 +67,5 @@
 </article>
 @endsection
 @section('script')
-    <script>
-        function mostrarProductos(productos, datos_pivot) {            
-            var tabla_datos = $('#datos');
-            $(productos).each(function (index, dato_producto) {
-                tabla_datos.append("<tr><td>"+dato_producto.producto_id+"</td>"+"<td>"+dato_producto.nombre+"</td>"+"<td>"+dato_producto.precio+"</td>"+"<td>"+datos_pivot[index].cantidad+"</td>"+"</tr>");       
-            });
-            $('#modal-productos').modal('show');            
-        }
-        $('#modal-productos').on('hidden.bs.modal', function (e) {
-            $('#datos').children('tr').remove();
-        })
-    </script>
+    <script src="{{ asset('js/listado-pedido.js') }}"></script>
 @endsection

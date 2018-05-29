@@ -22,3 +22,5 @@ Route::get('modal-menu', 'MenuController@getModalMenu');
 Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
 Route::resource('vistaCocina','CocinaController');
+Route::get('modal-cocina','CocinaController@getValor')
+		->name('cocinaGetValor');

@@ -20,6 +20,7 @@ class PedidoController extends Controller
         $pivot = array();
         foreach ($pedidos as $i => $pedido) {
             $productos = $pedido->productos;
+            
             foreach ($productos as $j => $producto) {
                 $pivot[$pedido->pedido_id][$j] = ['cantidad' => $producto->pivot->cantidad, 'subtotal' => $producto->pivot->subtotal];
                 
@@ -27,6 +28,7 @@ class PedidoController extends Controller
             
         }
         $datos_pivot = Collection::make($pivot);
+        //dd($datos_pivot);
         return view('pedidos.index',compact('pedidos', 'datos_pivot'));
     }
 
