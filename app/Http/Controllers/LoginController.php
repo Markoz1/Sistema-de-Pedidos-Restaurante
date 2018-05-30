@@ -22,5 +22,10 @@ class LoginController extends Controller
         return back()
             ->withErrors(['username' => trans('auth.failed')])
             ->withInput(request(['username']));
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return view('autenticacion.login');//cambiar por vista inicio
     }   
 }

@@ -32,6 +32,6 @@ Route::resource('pedidos', 'PedidoController');
 Route::get('/users', 'UserController@index');
 // Auth::routes();
 Route::get('login', 'LoginController@ShowLoginForm');
-Route::post('login','LoginController@Login')->name('login');
-
+Route::post('login','LoginController@login')->name('login');
+Route::get('logout', 'LoginController@logout')->name('logout');
 Route::get('/users', 'UserController@index');
