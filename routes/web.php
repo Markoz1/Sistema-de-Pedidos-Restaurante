@@ -30,9 +30,10 @@ Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
 
 Route::get('/users', 'UserController@index');
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::view('login', 'autenticacion.login');
+Route::get('login', 'LoginController@ShowLoginForm');
+Route::post('login','LoginController@Login')->name('login');
 
 Route::get('/users', 'UserController@index');

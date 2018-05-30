@@ -15,16 +15,16 @@
                 </header>
                 <div class="auth-content">
                     <h4 class="text-center pb-4">Iniciar sesión</h4>
-                    {!! Form::open() !!}
-                        <div class="form-group">
+                    {!! Form::open(['route' => 'login']) !!}
+                        <div class="form-group {{($errors->has('username')?'has-error':'')}}">
                             {!! Form::label('username', 'Nombre de usuario', ['class' => 'form-control-label']) !!}
-                            {!! Form::text('username', null, ['class' => 'form-control underlined '.($errors->has('username')?'is-invalid':'')]) !!}
-                            <div class="invalid-feedback">{{ $errors->first('username') }}</div>
+                            {!! Form::text('username', null, ['class' => 'form-control underlined']) !!}
+                            <span class="has-error">{{ $errors->first('username') }}</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{($errors->has('password')?'has-error':'')}}">
                             {!! Form::label('password', 'Contraseña', ['class' => 'form-control-label']) !!}
-                            {!! Form::password('password', ['class' => 'form-control underlined '.($errors->has('username')?'is-invalid':'')]) !!}
-                            <div class="invalid-feedback">{{ $errors->first('password') }}</div>
+                            {!! Form::password('password', ['class' => 'form-control underlined']) !!}
+                            <span class="has-error">{{ $errors->first('password') }}</span>
                         </div>
                         <div class="form-group pt-4">
                             <button type="submit" class="btn btn-block btn-primary">Ingresar</button>
