@@ -9,7 +9,9 @@
                     <div class="card-block">
                         <div class="card-title-block">
                         </div>
-                        formulario nueva mesa
+                        {!! Form::open() !!}
+                            @include('mesas.form')
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
