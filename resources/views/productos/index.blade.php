@@ -94,13 +94,18 @@
                         </div>
                         <div class="item-col item-col-header item-col-category text-center">
                             <div class="no-overflow">
-                                <span>Categoria</span>
+                                <span>Estado</span>
                             </div>
                         </div>
+                        <div class="item-col item-col-header item-col-category text-center">
+                                <div class="no-overflow">
+                                    <span>Categoria</span>
+                                </div>
+                            </div>
                         <div class="item-col item-col-header fixed item-col-actions-dropdown"> </div>
                     </div>
                 </li>                
-                @foreach ($productos as $producto)               
+                @forelse ($productos as $producto)               
                 <li class="item">
                     <div class="item-row">
                         <div class="item-col fixed item-col-img md">
@@ -114,6 +119,23 @@
                             <div class="item-heading">Precio</div>
                             <div>{{ $producto->precio }} BOB</div>
                         </div>
+                        <div class="item-col item-col-category no-overflow text-center">
+                                <div class="item-heading">Estado</div>
+                                <div class="no-overflow">
+                                    @php 
+                                    if ($producto->estado_id == 1){
+                                        $color="blue";
+                                        $valor="Activo";
+                                    }else{
+                                        dd($producto->estado_id);
+                                        $color="red";
+                                        $valor="Inactivo";
+                                    }
+                                    //dd($producto->estado_id);
+                                    @endphp
+                                    <font color={{$color}}>{{ $valor }}</font>
+                                </div>
+                            </div>
                         <div class="item-col item-col-category no-overflow text-center">
                             <div class="item-heading">Categoria</div>
                             <div class="no-overflow">
@@ -148,7 +170,11 @@
                         </div>
                     </div>
                 </li>
-                @endforeach
+                @empty
+                <br>
+                    <p align="center"><b>No Existen Resultados Coincidentes</b></p>
+                <br>
+                @endforelse
             </ul>
         </div>
         
