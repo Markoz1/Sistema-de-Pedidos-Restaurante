@@ -32,5 +32,21 @@ class clienteController extends Controller
      
         return redirect()->route('clientes.index')->with('mensaje','Nuevo Cliente Registrado');
     }
-
+    public function edit(Cliente $cliente)
+    {   
+        //['categoria' => $categoria]
+        return view('cliente.edit', compact('cliente'));
+    }
+    public function update(Cliente $cliente)
+    {
+        $data = request()-> validate([
+            'nombre' =>'required|min:3|max:50',
+            'nit'=>'required|numeric|unique:Cliente,nit,'.$cliente->cliente_id . ",cliente_id",
+            'telefono'=>'required|numeric',
+            'direccion'=>'required|min:3|max:80',
+     ]);
+        $data = request()->all();
+        $cliente->Update($data);
+        return redirect()->route('clientes.index')->with('mensaje','La Lista de Clientes ha sido Actualizada');
+    }
 }
