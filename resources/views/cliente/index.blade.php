@@ -36,7 +36,7 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                        	<th>N°</th>
+                        	<th>#</th>
                             <th>Nombre o Razon Social</th>
                             <th>Nit</th>
                             <th>Telefono</th>
@@ -48,7 +48,7 @@
                         @php $i=1; @endphp
                     	@foreach($clientes as $cliente)
                     		<tr>
-                                <td>{{$i}}</td>
+                                <td>{{$cliente->cliente_id}}</td>
                     			<td>{{$cliente->nombre}}</td>
                                 <td>{{$cliente->nit}}</td>
                                 <td>{{$cliente->telefono}}</td>
@@ -62,6 +62,6 @@
                     </tbody>
                 </table>
             </div>
-          
+    {!! $clientes->appends($_GET)->links('pagination') !!}          
 </article>
 @endsection
