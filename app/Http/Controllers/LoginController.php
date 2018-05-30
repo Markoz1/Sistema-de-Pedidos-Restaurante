@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('invitado', ['only' => ['ShowLoginForm','login']]);
+        $this->middleware('autenticado', ['only' => ['logout']]);
+    }
     public function ShowLoginForm()
     {
         return view('autenticacion.login');
@@ -26,6 +36,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return view('autenticacion.login');//cambiar por vista inicio
+        return redirect()->route('inicio');
     }   
 }

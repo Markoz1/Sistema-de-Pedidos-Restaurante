@@ -1,5 +1,5 @@
-@extends('layout.main-temporal')
-@section('content')
+@extends('layout.main')
+@section('content-no-auth')
     <div class="auth">
         <div class="auth-container">
             <div class="card">

@@ -23,4 +23,24 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function esAdministrador()
+    {
+        return $this->role->nombre === 'Administrador';
+    }
+    public function esCocinero()
+    {
+        return $this->role->nombre === 'Cocinero';
+    }
+    public function esMesero()
+    {
+        return $this->role->nombre === 'Mesero';
+    }
+    public function esCajero()
+    {
+        return $this->role->nombre === 'Cajero';
+    }
+    public function esMesa()
+    {
+        return $this->role->nombre === 'Mesa';
+    }
 }

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/inicio', 'HomeController@index')->name('inicio');
+Route::get('/', 'HomeController@index')->name('inicio');
 Route::resource('productos', 'ProductoController');
 //Route::view('menu', 'menu.index');
 
