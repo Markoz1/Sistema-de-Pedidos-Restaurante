@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         $remember = true;
         if(Auth::attempt($request->validated(),$remember)){
-                return 'Login Usuario: '.Auth::user()->nombre; 
+            return redirect()->route('inicio');
         }
         return back()
             ->withErrors(['username' => trans('auth.failed')])

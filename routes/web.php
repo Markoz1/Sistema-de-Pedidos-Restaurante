@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'inicio');
+Route::get('/inicio', 'HomeController@index')->name('inicio');
 Route::resource('productos', 'ProductoController');
 //Route::view('menu', 'menu.index');
 
@@ -31,8 +31,6 @@ Route::resource('pedidos', 'PedidoController');
 
 Route::get('/users', 'UserController@index');
 // Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('login', 'LoginController@ShowLoginForm');
 Route::post('login','LoginController@Login')->name('login');
 
