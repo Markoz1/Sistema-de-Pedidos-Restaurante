@@ -15,7 +15,7 @@ class AddEstadoToCategoria extends Migration
     {
         
         Schema::table('categoria', function (Blueprint $table) {
-            $table->boolean('estado')->after('nombre');
+            $table->integer('estado')->after('nombre');
         });
     }
 

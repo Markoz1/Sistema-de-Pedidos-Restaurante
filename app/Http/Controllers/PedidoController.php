@@ -60,7 +60,7 @@ class PedidoController extends Controller
         if ($request->ajax()) {
             $mesa = $request->pedido['mesa'];
             $total = $request->pedido['total'];
-            $estado_pedido = true;
+            $estado_pedido = -1;
             $pedido = new Pedido(['mesa' => $mesa, 'total' => $total,'estado_pedido' => $estado_pedido]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
@@ -106,7 +106,12 @@ class PedidoController extends Controller
     public function update(Request $request, Pedido $pedido)
     {
         if($request->ajax()){
-            DB::update('update pedido set estado_pedido = false where pedido_id ='.$pedido->pedido_id);
+            if($pedido->estado_pedido == -1){
+                DB::update('update pedido set estado_pedido = 0 where pedido_id ='.$pedido->pedido_id);
+            }else{
+                DB::update('update pedido set estado_pedido = 1 where pedido_id ='.$pedido->pedido_id);
+            }
+
             return response()->json([
                 "mensaje1" => 'update pedido set estado_pedido = false where pedido_id ='.$pedido->pedido_id,
                 "mensaje2" => $pedido->pedido_id

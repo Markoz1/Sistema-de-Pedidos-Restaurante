@@ -11,8 +11,8 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
                             <th>Cantidad</th>
+                            <th>Nombre</th>
                         </tr>
                     </thead>
                     <tbody id="datos">
