@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal_informacion" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,7 +15,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-            <img alt="" src="">
+            <img alt="" src="" id="foto" value="">
             </img>
           </div>
           <div class="col-md-6">

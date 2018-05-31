@@ -60,9 +60,12 @@ class ProductoController extends Controller
      * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto)
+    public function show($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return response()->json(
+            $producto->toArray()
+        );
     }
 
     /**
