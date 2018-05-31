@@ -10,7 +10,7 @@ $(document).ready(function () {
         
 });
 function agregar(producto) {
-    $('#modal').modal('hide');
+    $('#modal_informacion').modal('hide');
     agregar_a_array_productos(producto);
     actualizar_vista_pedido_actual();
     actualizar_total();
