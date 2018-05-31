@@ -1,4 +1,5 @@
 function modaldatos(producto) {
+    //console.log('presionandos');
     $('#nombre').text(producto.nombre);
     $('#precio').text(producto.precio);
     $('#descripcion').text(producto.descripcion);
@@ -23,5 +24,7 @@ function mostrar_informacion_producto(ruta_producto) {
         },
         "json"
     );
-
 };
+$('button#agregar').one('click', function () {
+    agregar(producto);
+});

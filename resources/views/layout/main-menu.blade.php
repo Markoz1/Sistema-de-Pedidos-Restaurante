@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="{{ asset('modular-admin/css/vendor.css') }}"> {{-- Theme --}}
     <link rel="stylesheet" href="{{ asset('modular-admin/css/app-orange.css') }}">
     <link rel="stylesheet" href="{{ asset('modular-admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>Pedidos Restaurant</title>
 </head>
 
 <body>
-    @include('layout.header-menu')
-    @yield('content')
+    <div class="app-menu">
+        @include('layout.header-menu') 
+        @yield('content')
+    </div>
     <!-- Reference block for JS -->
     <div class="ref" id="ref">
         <div class="color-primary"></div>
