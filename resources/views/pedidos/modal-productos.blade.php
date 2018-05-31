@@ -13,14 +13,18 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Cantidad</th>
-                            <th>Entregado</th>
                         </tr>
                     </thead>
                     <tbody id="datos">
                     </tbody>
                 </table>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="terminarPedido" onclick="cambiarEstadoPedido({{ $pedido->pedido_id }})">Terminar pedido</button>
+            <div class="modal-footer"> 
+                <form method="POST" role="form" id="formulario" action="{{ url("pedidos/") }}">
+                    <input type="hidden" name="_method" id="met" value="PUT">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">        
+                    <button type="button" class="btn btn-primary" id="terminarPedido" onclick="cambiarEstadoPedido()">Terminar pedido</button>
+                </form>
+                
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

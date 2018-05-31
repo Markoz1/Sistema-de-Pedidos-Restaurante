@@ -45,12 +45,12 @@
                                 <tbody>
                                     @foreach ($pedidos as $pedido)
                                         @if ($pedido->estado_pedido == true)
-                                            <tr>
-                                                <th scope="row">{{ $pedido->pedido_id }}</th>
+                                            <tr id="fila{{ $pedido->pedido_id }}">
+                                                <th scope="row" id="pedido{{ $pedido->pedido_id }}"></th>
                                                 <td>{{ $pedido->mesa }}</td>
-                                                <td>{{ $pedido->estado_pedido }}</td>
+                                                <td><button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})">Sin Atender</button></td>
                                                 <td>
-                                                    <a href="#" onclick="mostrarProductos({{$pedido->productos}}, {{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
+                                                    <a href="#" onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
                                                 </td>
                                             </tr>
                                         @endif

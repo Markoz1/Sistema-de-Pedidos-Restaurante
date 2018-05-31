@@ -6,6 +6,7 @@ use App\Model\Pedido;
 use App\Model\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -102,9 +103,15 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pedido $pedido)
     {
-        //
+        if($request->ajax()){
+            DB::update('update pedido set estado_pedido = false where pedido_id ='.$pedido->pedido_id);
+            return response()->json([
+                "mensaje1" => 'update pedido set estado_pedido = false where pedido_id ='.$pedido->pedido_id,
+                "mensaje2" => $pedido->pedido_id
+            ]);
+        }
     }
 
     /**
