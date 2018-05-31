@@ -32,7 +32,7 @@
                     <div class="card-block">
                         <div class="card-title-block">
                         </div>
-                        <section class="example">
+                        <section class="example" id="example">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>

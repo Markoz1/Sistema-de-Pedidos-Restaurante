@@ -22,7 +22,7 @@
                 <form method="POST" role="form" id="formulario" action="{{ url("pedidos/") }}">
                     <input type="hidden" name="_method" id="met" value="PUT">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">        
-                    <button type="button" class="btn btn-primary" id="terminarPedido" onclick="cambiarEstadoPedido()">Terminar pedido</button>
+                    <button type="button" class="btn btn-primary" id="terminarPedido" onclick="cambiarEstadoPedido()" data-dismiss="modal">Terminar pedido</button>
                 </form>
                 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

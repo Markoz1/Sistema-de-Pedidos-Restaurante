@@ -27,7 +27,7 @@ function mostrarProductos(id,productos,datos_pivot) {
     $(productos).each(function (index, dato_producto) {
         $('#terminarPedido').attr('onclick',"cambiarEstadoPedido("+id+")");
         var checkbox = "<div><label><input class='checkbox' type='checkbox' id=check"+i+"><span></span></label></div>"
-        tabla_datos.append("<tr><td>"+dato_producto.nombre+"</td>"+"<td>"+datos_pivot[index].cantidad+"</td>"+"<td>"+checkbox+"</td>"+"</tr>");
+        tabla_datos.append("<tr><td>"+dato_producto.nombre+"</td>"+"<td>"+datos_pivot[index].cantidad+"</td></tr>");
         i = i+1;       
     });
     console.log(productos);
@@ -54,6 +54,7 @@ function cambiarEstadoPedido(id){
             console.log(response.mensaje1);
             console.log(response.mensaje2);
         }});
+    $('#example').load(' #example');
     
 }
 $('#modal-productos').on('hidden.bs.modal', function (e) {
