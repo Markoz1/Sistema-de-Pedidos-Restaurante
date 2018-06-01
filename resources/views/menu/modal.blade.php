@@ -15,7 +15,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-            <img class="img-fluid" alt="" src="" id="foto" inicio="http://127.0.0.1:8000">
+            <img class="img-fluid" alt="" src="" id="foto" inicio="{{ route('inicio') }}">
             </img>
           </div>
           <div class="col-md-6">
