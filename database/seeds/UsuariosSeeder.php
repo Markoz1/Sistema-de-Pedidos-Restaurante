@@ -28,8 +28,22 @@ class UsuariosSeeder extends Seeder
             'role_id' => '2'
         ]);
         User::create([
-            'nombre' => 'mesa 1',
-            'username' => 'mesa1',
+            'nombre' => 'Mesa 1',
+            'username' => 'Mesa1',
+            'password' => bcrypt('123456'),
+            'estado' => '1',
+            'role_id' => '5'
+        ]);
+        User::create([
+            'nombre' => 'Mesa 2',
+            'username' => 'Mesa2',
+            'password' => bcrypt('123456'),
+            'estado' => '1',
+            'role_id' => '5'
+        ]);
+        User::create([
+            'nombre' => 'Mesa 3',
+            'username' => 'Mesa3',
             'password' => bcrypt('123456'),
             'estado' => '1',
             'role_id' => '5'

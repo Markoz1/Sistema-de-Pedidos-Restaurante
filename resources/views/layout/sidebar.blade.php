@@ -48,9 +48,6 @@
                 <li class="">
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>
                 </li>
-                <li class="">
-                    <a href="{{route('menu.index')}}"><i class=""></i> Menú cliente prueba </a>
-                </li>
             </ul>
         </nav>
     </div>

@@ -15,7 +15,6 @@ class CreatePedidoTable extends Migration
     {
         Schema::create('pedido', function (Blueprint $table) {
             $table->increments('pedido_id');
-            $table->string('mesa');
             $table->decimal('total', 8, 2);
             $table->timestamps();
         });

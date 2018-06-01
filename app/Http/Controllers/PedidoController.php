@@ -37,13 +37,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('menu.index');
-        $pedido = new Pedido(['mesa' => 'mesa 1', 'total' => '122.00']);
-        $pedido->save();
-        $productos = Producto::all();         
-        foreach ($productos as $producto) {
-            $pedido->productos()->attach($producto->producto_id, ['pedido_id' => $pedido->pedido_id ,'cantidad' => '1', 'subtotal' => $producto->precio]);
-        }
+        
     }
 
     /**
@@ -55,9 +49,9 @@ class PedidoController extends Controller
     public function store(Request $request)
     {       
         if ($request->ajax()) {
-            $mesa = $request->pedido['mesa'];
+            $mesa_id = $request->pedido['mesa_id'];
             $total = $request->pedido['total'];
-            $pedido = new Pedido(['mesa' => $mesa, 'total' => $total]);
+            $pedido = new Pedido(['total' => $total, 'users_id' => $mesa_id]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\User;
 use App\Model\Producto;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,7 @@ class Pedido extends Model
     protected $primaryKey = 'pedido_id';
 
     public $fillable = [
-        'mesa', 'total'
+        'total', 'users_id'
     ];
 
     public function productos()
@@ -19,5 +20,9 @@ class Pedido extends Model
         return $this->belongsToMany(Producto::class, 'pedido_producto', 'pedido_id', 'producto_id')
             ->withPivot('cantidad', 'subtotal')
             ->withTimestamps();
+    }
+    public function mesa()
+    {
+        return $this->belongsTo(User::class,'users_id');
     }
 }

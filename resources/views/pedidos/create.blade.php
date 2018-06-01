@@ -1,7 +1,7 @@
 <div class="card card-primary">
     <div class="card-header d-flex justify-content-center">
         <div class="header-block">
-            <p class="title"> Mesa # </p>
+            <p class="title" id="mesa" value="{{ Auth::user()->id }}"> {{ Auth::user()->nombre }} </p>
         </div>
     </div>
     <div class="card-block">

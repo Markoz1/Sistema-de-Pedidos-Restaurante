@@ -27,6 +27,9 @@ class LoginController extends Controller
     {
         $remember = true;
         if(Auth::attempt($request->validated(),$remember)){
+            if(Auth::user()->esMesa()){
+                return redirect()->route('menu');
+            }
             return redirect()->route('inicio');
         }
         return back()
