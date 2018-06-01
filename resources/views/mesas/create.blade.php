@@ -9,7 +9,7 @@
                     <div class="card-block">
                         <div class="card-title-block">
                         </div>
-                        {!! Form::open() !!}
+                        {!! Form::open(['route' => 'mesas.store']) !!}
                             @include('mesas.form')
                         {!! Form::close() !!}
                     </div>

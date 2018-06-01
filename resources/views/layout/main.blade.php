@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('modular-admin/css/vendor.css') }}">
         {{-- Theme --}}
         <link rel="stylesheet" href="{{ asset('modular-admin/css/app-orange.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style-main.css') }}">
         <title>Pedidos Restaurant</title>
     </head>
     <body>

@@ -16,15 +16,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-block">
-                        <div class="card-title-block">
+                        @if(session('mensaje'))
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button> {{ session('mensaje') }}
                         </div>
+                        @endif
                         <section class="example">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>#Id</th>
                                         <th>Nombre</th>
-                                        <th>Nombre de usuario</th>
+                                        <th class="text-center">Nombre de usuario</th>
+                                        <th class="text-center">Estado</th>                                                                               
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -33,7 +37,14 @@
                                     <tr>
                                         <th scope="row">{{ $mesa->id }}</th>
                                         <td>{{ $mesa->nombre }}</td>
-                                        <td>{{ $mesa->username }}</td>
+                                        <td class="text-center">{{ $mesa->username }}</td>                                        
+                                        <td class="text-center">
+                                            @if ($mesa->estado)
+                                                <span class="badge badge-success">Activo</span>
+                                            @else
+                                                <span class="badge badge-danger">Inactivo</span>
+                                            @endif
+                                        </td>                                        
                                         <td class="text-center">
                                             <div class="item-actions-block">
                                                 <a class="edit" href="{{ route('mesas.edit', ['id' => $mesa->id]) }}" onclick="editar_mesa()">
@@ -52,16 +63,25 @@
             </div>
         </div>
     </section>
-    
 </article>
 @endsection
 @section('script')
+    @if($errors->has('numero'))
     <script>
+        $('#create_mesa').collapse('show');
+    </script>        
+    @endif
+    <script>
+        $(document).ready(function(){
+        });
         function crear_mesa() {
             $('#create_mesa').collapse('toggle');
-        }
+            $('#edit_mesa').collapse('hide');
+        };
         function editar_mesa() {
-            $('#edit_mesa').collapse('toggle');
-        }
+            $('#edit_mesa').collapse('toggle');//talvez show
+            $('#create_mesa').collapse('hide');
+        };
+        
     </script>
 @endsection

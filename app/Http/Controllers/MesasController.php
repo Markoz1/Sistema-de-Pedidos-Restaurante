@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Role;
 use App\Model\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMesaRequest;
 
 class MesasController extends Controller
 {
@@ -36,9 +37,20 @@ class MesasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMesaRequest $request)
     {
-        //
+        $mesa = new User;
+        $nombre = $request->nombre." ".$request->numero;
+        $username = $request->nombre.$request->numero;
+        $mesa->nombre = $nombre;
+        $mesa->estado = $request->estado;
+        $mesa->username = $username;
+        $mesa->password = bcrypt($username);
+        $mesa->role_id = 5;
+        $mesa->save();
+        return redirect()
+            ->route('mesas.index')
+            ->with('mensaje', 'Se creo una nueva Mesa');
     }
 
     /**
