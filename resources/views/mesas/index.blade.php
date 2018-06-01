@@ -25,55 +25,34 @@
                                         <th>#Id</th>
                                         <th>Nombre</th>
                                         <th>Nombre de usuario</th>
-                                        <th>Contraseña</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach ($mesas as $mesa)
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>mesa 1</td>
-                                        <td>mesa 1</td>
-                                        <td>123456</td>
-                                        <td>
-                                            <div class="item-list">
-                                                <div class="item-row item-col fixed item-col-actions-dropdown">
-                                                    <div class="item-actions-dropdown">
-                                                        <a class="item-actions-toggle-btn">
-                                                            <span class="inactive">
-                                                                <i class="fa fa-cog"></i>
-                                                            </span>
-                                                            <span class="active">
-                                                                <i class="fa fa-chevron-circle-right"></i>
-                                                            </span>
-                                                        </a>
-                                                        <div class="item-actions-block">
-                                                            <ul class="item-actions-list">
-                                                                <li>
-                                                                    <a class="remove" href="#" data-toggle="modal" data-target="#confirm-modal">
-                                                                        <i class="fa fa-trash-o "></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="edit" href="#" onclick="editar_mesa()">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <th scope="row">{{ $mesa->id }}</th>
+                                        <td>{{ $mesa->nombre }}</td>
+                                        <td>{{ $mesa->username }}</td>
+                                        <td class="text-center">
+                                            <div class="item-actions-block">
+                                                <a class="edit" href="{{ route('mesas.edit', ['id' => $mesa->id]) }}" onclick="editar_mesa()">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
                                             </div>
                                         </td>
-                                    </tr>                                   
+                                    </tr> 
+                                @endforeach                                                                      
                                 </tbody>
-                            </table>
+                            </table>                            
                         </section>
-                    </div>
+                        {!! $mesas->appends($_GET)->links('pagination') !!}
+                    </div>                    
                 </div>
             </div>
         </div>
     </section>
+    
 </article>
 @endsection
 @section('script')

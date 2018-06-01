@@ -32,4 +32,4 @@ Route::get('/users', 'UserController@index');
 Route::get('login', 'LoginController@ShowLoginForm');
 Route::post('login','LoginController@login')->name('login');
 Route::get('logout', 'LoginController@logout')->name('logout');
-Route::view('mesas', 'mesas.index');
+Route::resource('mesas', 'MesasController');
