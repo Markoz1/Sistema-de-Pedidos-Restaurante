@@ -46,6 +46,9 @@
                     <a href="#"><i class="fa fa-users"></i> Usuarios </a>
                 </li>
                 <li class="">
+                    <a href="/mesas"><i class="fa fa-th-large"></i> Mesas </a>
+                </li>
+                <li class="">
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>
                 </li>
             </ul>
