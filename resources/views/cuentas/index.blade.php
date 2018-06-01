@@ -21,26 +21,19 @@
                                     <thead>
                                         <tr>
                                             <th>Mesa</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>Precio Total</th>
+                                            <th>Detalle</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">mesa 1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">mesa 1</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">mesa 1</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                        </tr>
+                                        @foreach ($cuentas as $cuenta)
+                                            <tr>
+                                                <th scope="row">{{$cuenta->mesa}}</th>
+                                                <td>{{$cuenta->precio_total}}</td>
+                                                <td>Boton detalle</td>
+                                            </tr>    
+                                        @endforeach
+                                        
                                     </tbody>
                                 </table>
                             </section>
