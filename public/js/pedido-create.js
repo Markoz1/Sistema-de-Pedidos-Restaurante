@@ -63,7 +63,7 @@ function eliminar(producto){
     $('#agregar').prop('disabled', false);
 }
 function ordenar(numero_mesa) {
-    crearCuenta(numero_mesa);
+    buscarCuentaActiva(numero_mesa);
     var indice_productos = 0;
     var nuevos_productos = []; 
     var $datos_productos = $('#pedido').children('tr');
@@ -112,7 +112,7 @@ function ordenar(numero_mesa) {
         }
     });
 }
-function crearCuenta(mesa){//no uso el parametro todavia
+function buscarCuentaActiva(mesa){//no uso el parametro todavia
     var ruta = $('#ruta').val();
     console.log(mesa);
     $.ajax({
@@ -121,7 +121,7 @@ function crearCuenta(mesa){//no uso el parametro todavia
         data: { 'mesa': mesa, "_token": $('#token').val() },
         dataType: "json",
         success: function (response) {
-            console.log(response.mensaje1);
+            console.log(response);
         }
     });
     //optener mesas

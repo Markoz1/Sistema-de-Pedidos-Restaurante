@@ -36,17 +36,22 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     { 
-        $data=request()->all();
-        
         if ($request->ajax()) {
-            Cuenta::create([
-                'mesa' => $request->mesa,
-                'precio_total' => 0.00,
-                'estado_cuenta' => true
-            ]);     
-            return response()->json([
-                "mensaje1" => "Cuenta creada"
-            ]);
+            $cuenta = $this->existeCuentaActiva($request->mesa);
+            if($cuenta == false){
+                Cuenta::create([
+                    'mesa' => $request->mesa,
+                    'precio_total' => 0.00,
+                    'estado_cuenta' => true
+                ]);
+                $cuentaNueva = $this->existeCuentaActiva($request->mesa);
+                $res = ["mensaje1" => "Cuenta recien creada","cuenta_id" => $cuentaNueva];
+            }else{
+                $res = ["mensaje1" => "Cuenta creada","cuenta_id" => $cuenta];
+            }
+                 
+
+            return response()->json($res);
         }
 
     }
@@ -96,8 +101,15 @@ class CuentaController extends Controller
         //
     }
 
-    public function existeCuentaActiva(){
-        $data=Cuenta::all();
-        return $data;
+    public function existeCuentaActiva($mesa){
+        $res=false;
+        $datas=Cuenta::all();
+        foreach($datas as $data){
+            if($data->estado_cuenta==true && $data->mesa==$mesa){
+                $res = $data->id;
+                break;
+            }
+        }
+        return $res;
     }
 }
