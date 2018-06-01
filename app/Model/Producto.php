@@ -12,7 +12,7 @@ class Producto extends Model
     protected $primaryKey = 'producto_id';
 
     public $fillable = [
-        'producto_id','nombre', 'precio', 'descripcion', 'foto', 'categoria_id'
+        'producto_id','estado_id','nombre', 'precio', 'descripcion', 'foto', 'categoria_id'
     ];
 
     public function categoria()
@@ -41,6 +41,26 @@ class Producto extends Model
                 }  
                 break;                
             }
+        }elseif ($busqueda == ""){
+           switch($estado){
+                case 0: //no se restringe estado
+                switch ($categoria){
+                    case 0: //no restringe categoria
+                    break;
+                    default:$query->where("categoria_id","$categoria");//restringimos categoria                  
+                    break;
+                }                
+                break;
+                default: 
+                switch ($categoria){
+                    case 0:$query->where("estado_id","$estado"); //no restringe categoria solo estado
+                    break;
+                    default:$query->where("estado_id","$estado")->where("categoria_id","$categoria"); //retringe categoria y estado                  
+                    break;
+                }  
+                break;                
+            }
+
         }       
     }
     
