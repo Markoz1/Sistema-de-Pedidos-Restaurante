@@ -10,16 +10,20 @@ class RuleExists implements Rule
     public $nombre;
     public $tabla;
     public $columna;
+    public $id;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($nombre,$tabla,$columna)
+    
+    public function __construct($nombre,$tabla,$columna,$id)
     {
         $this->nombre = $nombre;
         $this->tabla = $tabla;
-        $this->columna = $columna;
+        $this->columna = $columna;        
+        $this->id = $id;
+        
     }
 
     /**
@@ -32,7 +36,12 @@ class RuleExists implements Rule
     public function passes($attribute, $value)
     {
         $nombre_mesa = $this->nombre." ".$value;
-        $cant_mesas = User::where('nombre',$nombre_mesa)->count();
+        if(is_null($this->id)){
+            $cant_mesas = User::where('nombre',$nombre_mesa)->count();
+        }
+        else{
+            $cant_mesas = User::where('id', '<>', $this->id)->where('nombre',$nombre_mesa)->count();
+        }        
         if($cant_mesas > 0){
             return false;
         }

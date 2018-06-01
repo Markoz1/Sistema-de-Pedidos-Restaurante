@@ -3,7 +3,9 @@
 <article class="content">
     <div class="title-block">
         <h3 class="title"> Mesas 
-            <a href="#nueva_mesa" class="btn btn-primary btn-sm rounded-s" onclick="crear_mesa()"> Nueva Mesa </a>
+            @if (!isset($mesa_edit))
+            <a href="#" class="btn btn-primary btn-sm rounded-s" onclick="crear_mesa()" id="nueva_mesa"> Nueva Mesa </a>
+            @endif
         </h3>
     </div>
     @include('mesas.create')
@@ -71,17 +73,17 @@
         $('#create_mesa').collapse('show');
     </script>        
     @endif
+    @isset($mesa_edit)
+        <script>
+            $('#edit_mesa').collapse('show');             
+            $('#cerrar').click(function() {
+                window.location.replace('{{route('mesas.index')}}');
+            });
+        </script>
+    @endisset
     <script>
-        $(document).ready(function(){
-        });
         function crear_mesa() {
             $('#create_mesa').collapse('toggle');
-            $('#edit_mesa').collapse('hide');
-        };
-        function editar_mesa() {
-            $('#edit_mesa').collapse('toggle');//talvez show
-            $('#create_mesa').collapse('hide');
-        };
-        
+        };        
     </script>
 @endsection

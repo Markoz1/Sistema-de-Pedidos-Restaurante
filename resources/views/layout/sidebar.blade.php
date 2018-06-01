@@ -45,7 +45,7 @@
                 <li class="">
                     <a href="#"><i class="fa fa-users"></i> Usuarios </a>
                 </li>
-                <li class="{{ request()->routeIs('mesas.index')? 'active':'' }}">
+                <li class="{{ request()->segment(1) == 'mesas'? 'active open':'' }}">
                     <a href="{{ route('mesas.index') }}"><i class="fa fa-th-large"></i> Mesas </a>
                 </li>
                 <li class="">
