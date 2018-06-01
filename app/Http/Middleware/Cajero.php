@@ -19,7 +19,12 @@ class Cajero
             return $next($request);
         }            
         else {
-            abort(403);
+            if(auth()->user()->esAdministrador() || auth()->user()->esCocinero()){
+               return $next($request);                     
+            }
+            else{
+                abort(403);
+            }
         }
     }
 }

@@ -19,7 +19,12 @@ class Cocinero
             return $next($request);
         }            
         else {
-            abort(403);
+            if(auth()->user()->esAdministrador() || auth()->user()->esCajero()){
+               return $next($request);                     
+            }
+            else{
+                abort(403);
+            }
         }
     }
 }

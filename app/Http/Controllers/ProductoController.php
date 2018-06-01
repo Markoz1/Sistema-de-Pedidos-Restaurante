@@ -9,6 +9,16 @@ use App\Http\Requests\StoreProductoRequest;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('cocinero', ['only' => ['index','show']]);
+        $this->middleware('cajero', ['only' => ['index','show']]);
+        $this->middleware('mesa', ['only' => ['show']]);
+        $this->middleware('administrador', ['except' => ['index','show']]);     
+        
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,7 +54,6 @@ class ProductoController extends Controller
     {
         //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
         $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
-        dd($path_foto);
         $producto = new Producto;
         $producto->fill($request->except(['foto']));
         $producto->foto = $path_foto;//almacenamos ruta de foto en BD

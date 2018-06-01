@@ -8,6 +8,11 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('administrador');
+    }
     /**
      * Display a listing of the resource.
      *
