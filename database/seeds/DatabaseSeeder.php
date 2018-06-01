@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         DB::table('Categoria')->truncate();
         DB::table('producto')->truncate();
         DB::table('users')->truncate();
+        DB::table('cliente')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
         
         $this->call(CategoriaSeeder::class);
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UsuariosSeeder::class);
         $this->call(MesasSeeder::class);
+        $this->call(ClienteSeeder::class);
     }
 }

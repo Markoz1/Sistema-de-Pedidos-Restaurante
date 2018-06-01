@@ -26,10 +26,10 @@ Route::resource('categorias', 'CategoriasController');
 
 Route::get('menu', 'HomeController@menu')->name('menu');
 Route::resource('pedidos', 'PedidoController');
-
 Route::get('/users', 'UserController@index');
 // Auth::routes();
 Route::get('login', 'LoginController@ShowLoginForm');
 Route::post('login','LoginController@login')->name('login');
 Route::get('logout', 'LoginController@logout')->name('logout');
 Route::resource('mesas', 'MesasController');
+Route::resource('clientes', 'clienteController');
