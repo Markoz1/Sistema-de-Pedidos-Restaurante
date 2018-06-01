@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'home');
+Route::get('/', 'HomeController@index')->name('inicio');
 Route::resource('productos', 'ProductoController');
 //Route::view('menu', 'menu.index');
 
@@ -28,3 +28,10 @@ Route::get('modal-menu', 'MenuController@getModalMenu');
 			// ->name('menu.modal');
 Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
+
+Route::get('/users', 'UserController@index');
+// Auth::routes();
+Route::get('login', 'LoginController@ShowLoginForm');
+Route::post('login','LoginController@login')->name('login');
+Route::get('logout', 'LoginController@logout')->name('logout');
+Route::get('/users', 'UserController@index');

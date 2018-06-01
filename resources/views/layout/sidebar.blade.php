@@ -7,8 +7,8 @@
         </div>
         <nav class="menu">
             <ul class="sidebar-menu metismenu" id="sidebar-menu">
-                <li class="{{ request()->is('/')? 'active':'' }}">
-                    <a href="/">
+                <li class="{{ request()->routeIs('inicio')? 'active':'' }}">
+                    <a href="{{ route('inicio') }}">
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
                 <li class="{{ request()->segment(1) == 'categorias'? 'active open':'' }}">
