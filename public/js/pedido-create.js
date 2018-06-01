@@ -9,9 +9,9 @@ var array_productos = [{ "id": "", "nombre": "", "cantidad": "", "subtotal": "" 
 $(document).ready(function () {
         
 });
-function agregar(producto) {
+function agregar(producto_id) {
     $('#modal_informacion').modal('hide');
-    agregar_a_array_productos(producto);
+    agregar_a_array_productos(producto_id);
     actualizar_vista_pedido_actual();
     actualizar_total();
     verificar_pedido_lleno();
@@ -29,13 +29,13 @@ function ordenar_pedido() {
     }
 }
 // funciones adicionales
-function agregar_a_array_productos(producto) {
+function agregar_a_array_productos(producto_id) {
     $.each(array_productos, function (indexInArray, valueOfElement) {//recorriendo array_productos
         if (valueOfElement.id == "") {//si hay espacio en array_productos, agrego un producto
-            valueOfElement.id = producto.producto_id;
-            valueOfElement.nombre = producto.nombre;
+            valueOfElement.id = producto_id;
+            valueOfElement.nombre = $('#nombre').text();;
             valueOfElement.cantidad = $('#cantidad').val();
-            valueOfElement.subtotal = parseFloat(producto.precio * valueOfElement.cantidad).toFixed(2);
+            valueOfElement.subtotal = parseFloat($('#precio').text()* valueOfElement.cantidad).toFixed(2);
             return false;
         }
     });

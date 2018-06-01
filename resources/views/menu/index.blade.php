@@ -70,7 +70,7 @@
                                       <div class="card-body d-flex align-items-center">
                                         <div>
                                           <h5 class="card-title">{{$producto->nombre}}</h5>
-                                          <p class="card-text"><B>{{$producto->precio}}</B></p>
+                                          <p class="card-text"><B>{{$producto->precio}} (Bs.)</B></p>
                                         </div>
                                       </div>
                                     </div>
@@ -93,7 +93,7 @@
                                       <div class="card-body d-flex align-items-center">
                                         <div>
                                           <h5 class="card-title">{{$producto->nombre}}</h5>
-                                          <p class="card-text"><B>{{$producto->precio}}</B></p>
+                                          <p class="card-text"><B>{{$producto->precio}} (Bs.)</B></p>
                                         </div>
                                       </div>
                                     </div>

@@ -15,10 +15,11 @@ function mostrar_informacion_producto(ruta_producto) {
             $('#precio').text(producto.precio);
             $('#descripcion').text(producto.descripcion)
             $('#foto').attr('src', ruta_inicio+'/'+producto.foto);
-            $('button#agregar').one('click', function () {
-                agregar(producto);
-            });
+            $('button#agregar').val(producto.producto_id);
         },
         "json"
     );
 };
+$('#modal_informacion').on('show.bs.modal	', function (e) {
+    $('#cantidad').val('1');
+});
