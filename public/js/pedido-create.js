@@ -62,7 +62,8 @@ function eliminar(producto){
     productosAgregados--; 
     $('#agregar').prop('disabled', false);
 }
-function ordenar() {
+function ordenar(numero_mesa) {
+    crearCuenta(numero_mesa);
     var indice_productos = 0;
     var nuevos_productos = []; 
     var $datos_productos = $('#pedido').children('tr');
@@ -91,9 +92,7 @@ function ordenar() {
         }
     });
     pedido.productos = nuevos_productos;
-    console.log(pedido); 
     var ruta = $('form').attr('action');
-    console.log(ruta);
     $.ajax({
         type: "POST",
         url: ruta,
@@ -112,6 +111,28 @@ function ordenar() {
             $('#cerrar').delay(2100).show(0);
         }
     });
+}
+function crearCuenta(mesa){//no uso el parametro todavia
+    var ruta = $('#ruta').val();
+    console.log(mesa);
+    $.ajax({
+        type: "POST",
+        url: ruta,
+        data: { 'mesa': mesa, "_token": $('#token').val() },
+        dataType: "json",
+        success: function (response) {
+            console.log(response.mensaje1);
+        }
+    });
+    //optener mesas
+    //buscar mesa con el valor del parametro
+    //preguntar si esta activa
+    //  SI=no creamos cuenta
+    //      creamos los pedidos con los valores y damos la llave de la cuenta
+    //  NO=creamos una cuenta nueva
+    //      creamos el pedido
+    //      calculamos el precio total de los pedidos
+    //      enviamos por ajax
 }
 function eliminarProductos() { 
     // eliminar('#producto1');

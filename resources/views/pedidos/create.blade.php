@@ -1,7 +1,7 @@
 <div class="card card-primary">
     <div class="card-header d-flex justify-content-center">
         <div class="header-block">
-            <p class="title"> Mesa # </p>
+            <p class="title" id="numero_mesa"> mesa 1 </p>
         </div>
     </div>
     <div class="card-block">
@@ -70,10 +70,11 @@
     </div>
     {!! Form::open(['route' => 'pedidos.store', 'method' => 'post']) !!}
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+    <input type="hidden" name="_mesa_ruta" id="ruta" value="{{ url('cuentas') }}">
     <div class="card-footer">        
         <div class="form-group row my-0 d-flex justify-content-around">
             {{-- <button type="" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar(this)"> Ordenar </button> --}}
-            <a href="#" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar()">Ordenar</a>
+            <a href="#" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar('mesa 1')" >Ordenar</a><!-- tendria que entrar la mesa a cual pertenece -->
         </div>
     </div>
     {!! Form::close() !!}
