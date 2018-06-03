@@ -12,12 +12,10 @@ class ProductoController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
-        $this->middleware('cocinero', ['only' => ['index','show']]);
-        $this->middleware('cajero', ['only' => ['index','show']]);
+        $this->middleware('cocinero', ['only' => ['index']]);
+        $this->middleware('cajero', ['only' => ['index']]);
         $this->middleware('mesa', ['only' => ['show']]);
-        $this->middleware('administrador', ['except' => ['index','show']]);     
-        
-        
+        $this->middleware('administrador', ['except' => ['index','show']]);        
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +24,6 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request);
         $productos = Producto::Buscar($request->get("busqueda"),$request->get("estado"),$request->get("categoria"))->orderby("nombre","ASC")->paginate(5);
         $anterior   = $request;
         $categorias = Categoria::All();

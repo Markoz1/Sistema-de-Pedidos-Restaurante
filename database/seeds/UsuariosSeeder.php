@@ -27,5 +27,12 @@ class UsuariosSeeder extends Seeder
             'estado' => '1',
             'role_id' => '2'
         ]);
+        User::create([
+            'nombre' => 'nombre cajero',
+            'username' => 'cajero',
+            'password' => bcrypt('123456'),
+            'estado' => '1',
+            'role_id' => '4'
+        ]);
     }
 }

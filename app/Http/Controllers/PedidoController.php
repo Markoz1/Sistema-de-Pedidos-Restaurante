@@ -11,9 +11,9 @@ class PedidoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('autenticado');       
-        $this->middleware('mesa', ['only' => ['store']]);        
-        $this->middleware('cocinero', ['except' => ['store']]);
+        $this->middleware('autenticado');
+        $this->middleware('cocinero', ['except' => ['store']]);       
+        $this->middleware('mesa', ['only' => ['store']]);         
     }
     /**
      * Display a listing of the resource.

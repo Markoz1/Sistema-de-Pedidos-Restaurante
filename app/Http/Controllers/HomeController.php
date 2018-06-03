@@ -16,6 +16,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
+        $this->middleware('cocinero', ['only' => ['index']]);
+        $this->middleware('cajero', ['only' => ['index']]);
+        $this->middleware('mesa', ['only' => ['menu']]);
     }
 
     /**
@@ -27,10 +30,9 @@ class HomeController extends Controller
     {
         return view('inicio');
     }
-    public function Menu()
+    public function menu()
     {
-        $productos = Producto::all();
         $categorias = Categoria::all();
-        return view('menu.index', compact('productos'), compact('categorias'));
+        return view('menu.index', compact('categorias'));
     }
 }

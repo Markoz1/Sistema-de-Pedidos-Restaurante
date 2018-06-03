@@ -19,12 +19,7 @@ class Mesa
             return $next($request);
         }            
         else {
-            if(auth()->user()->esAdministrador() || auth()->user()->esCajero() || auth()->user()->esCocinero()){
-               return $next($request);                     
-            }
-            else{
-                abort(403);
-            }
+            abort(403);
         }
     }
 }
