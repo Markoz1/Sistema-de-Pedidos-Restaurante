@@ -45,9 +45,9 @@ class CuentaController extends Controller
                     'estado_cuenta' => true
                 ]);
                 $cuentaNueva = $this->existeCuentaActiva($request->mesa);
-                $res = ["mensaje1" => "Cuenta recien creada","cuenta_id" => $cuentaNueva];
+                $res = ["cuenta" => $cuentaNueva];
             }else{
-                $res = ["mensaje1" => "Cuenta creada","cuenta_id" => $cuenta];
+                $res = ["cuenta" => $cuenta];
             }
                  
 
@@ -106,7 +106,7 @@ class CuentaController extends Controller
         $datas=Cuenta::all();
         foreach($datas as $data){
             if($data->estado_cuenta==true && $data->mesa==$mesa){
-                $res = $data->id;
+                $res = $data;
                 break;
             }
         }

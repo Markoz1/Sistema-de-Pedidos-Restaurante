@@ -63,7 +63,6 @@ function eliminar(producto){
     $('#agregar').prop('disabled', false);
 }
 function ordenar(numero_mesa) {
-    buscarCuentaActiva(numero_mesa);
     var indice_productos = 0;
     var nuevos_productos = []; 
     var $datos_productos = $('#pedido').children('tr');
@@ -92,6 +91,8 @@ function ordenar(numero_mesa) {
         }
     });
     pedido.productos = nuevos_productos;
+    console.log();
+    buscarCuentaActiva(numero_mesa);
     var ruta = $('form').attr('action');
     $.ajax({
         type: "POST",
@@ -111,28 +112,36 @@ function ordenar(numero_mesa) {
             $('#cerrar').delay(2100).show(0);
         }
     });
+    
+
 }
 function buscarCuentaActiva(mesa){//no uso el parametro todavia
     var ruta = $('#ruta').val();
-    console.log(mesa);
     $.ajax({
         type: "POST",
         url: ruta,
         data: { 'mesa': mesa, "_token": $('#token').val() },
         dataType: "json",
         success: function (response) {
-            console.log(response);
+            cuentaRes = response['cuenta'];
+            actualizarValoresDeCuenta(cuentaRes,50);
         }
     });
-    //optener mesas
-    //buscar mesa con el valor del parametro
-    //preguntar si esta activa
-    //  SI=no creamos cuenta
-    //      creamos los pedidos con los valores y damos la llave de la cuenta
-    //  NO=creamos una cuenta nueva
-    //      creamos el pedido
-    //      calculamos el precio total de los pedidos
-    //      enviamos por ajax
+}
+function actualizarValoresDeCuenta(cuenta, totalMotoPedido){
+    //crear peticion ajax
+    $.ajax({
+        type: "POST",
+        url: ruta,
+        data: { "_token": $('#token').val(),"_method":$('#met').val() },
+        dataType: "json",
+        success: function (response) {
+            console.log(response.mensaje1);
+            console.log(response.mensaje2);
+        }});
+    //enviar toda la cuenta por ajax
+    //crear el put
+    //crear el token 
 }
 function eliminarProductos() { 
     // eliminar('#producto1');
