@@ -42,8 +42,19 @@
                 <li class="{{ request()->routeIs('pedidos.index')? 'active':'' }}">
                     <a href="{{ route('pedidos.index') }}"><i class="fa fa-shopping-cart"></i> Pedidos </a>
                 </li>
-                <li class="">
-                    <a href="#"><i class="fa fa-users"></i> Usuarios </a>
+                <li class="{{ request()->segment(1) == 'users'? 'active open':'' }}">
+                    <a href="">
+                        <i class="fa fa-users"></i> Usuarios
+                        <i class="fa arrow"></i>
+                    </a>
+                    <ul class="sidebar-nav">
+                        <li class="{{ request()->routeIs('users.index')? 'active':'' }}">
+                            <a href="{{ route('users.index') }}"> Listado </a>
+                        </li>
+                        <li class="{{ request()->routeIs('users.create')? 'active':'' }}">
+                            <a href="{{ route('users.create') }}"> Nuevo Usuario </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="">
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('modular-admin/css/vendor.css') }}">
         {{-- Theme --}}
         <link rel="stylesheet" href="{{ asset('modular-admin/css/app-orange.css') }}">
+        <link rel="stylesheet" href="{{ asset('modular-admin/css/dataTables.bootstrap4.min.css') }}">
         <title>Pedidos Restaurant</title>
     </head>
     <body>
@@ -36,6 +37,7 @@
         {{-- ModularAdmin js --}}
         <script src="{{ asset('modular-admin/js/vendor.js') }}"></script>
         <script src="{{ asset('modular-admin/js/app.js') }}"></script>
+        <script src="{{ asset('modular-admin/js/dataTables.bootstrap4.min.js') }}"></script>
             @yield('script')
     </body>
 </html>

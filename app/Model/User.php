@@ -11,7 +11,7 @@ class User extends Model
     protected $primaryKey = 'id';
 
     public $fillable = [
-        'nombre', 'phone', 'direccion', 'username', 'ci', 'foto', 'password', 'estado', 'role_id'
+        'id', 'nombre', 'phone', 'direccion', 'username', 'ci', 'foto', 'password', 'estado', 'role_id'
     ];
 
     public function role()

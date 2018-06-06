@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Model\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -14,8 +14,10 @@ class UserSeeder extends Seeder
     {
         factory(User::class)->create([
             'nombre' => 'John Doe',
+            'estado' => 1,
             'phone' => 43239109,
             'password' => bcrypt('laravel'),
+            'role_id' => rand(1,3),
             // 'foto' => $faker->imageUrl($width = 200, $height = 200),
             // 'direccion' => 'Oquendo #1233',
         ]);
