@@ -28,4 +28,9 @@ class Pedido extends Model
             ->withTimestamps();
     
     }
+    public function productosSeed($semilla){
+        return $this->belongsToMany(Producto::class, 'pedido_producto', $semilla->pedidp_id, $semilla->producto_id)
+            ->withPivot($semilla->cantidad, $semilla->subtotal)
+            ->withTimestamps();
+    }
 }

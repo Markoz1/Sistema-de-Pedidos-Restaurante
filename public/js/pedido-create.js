@@ -141,7 +141,6 @@ function crearPedido(pedido){
             $('#mensaje1').delay(1800).hide(0);
             $('#mensaje2').delay(2100).show(0);
             $('#cerrar').delay(2100).show(0);
-            console.log('ya se creo');
             buscarCuentaActiva(response.pedido_id,response.monto_total);
         },
         error: function(e){
