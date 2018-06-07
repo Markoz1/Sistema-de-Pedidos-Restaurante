@@ -11,13 +11,17 @@ class Cuenta extends Model
     protected $primaryKey = 'cuenta_id';
 
     public $fillable = [
-        'mesa','precio_total', 'estado_cuenta'
+        'cuenta_id','estado_pago','total', 'pedido_id','cliente_id'
     ];
+    /*
     public function pedidos()
     {
         return $this->belongsToMany(Pedido::class,'cuenta_pedido','cuenta_id', 'pedido_id')
             ->withPivot('total_pedido')
             ->withTimestamps();
 
+    }*/
+    public function pedido(){
+        return $this->belongsTo(Pedido::class,'pedido_id');
     }
 }

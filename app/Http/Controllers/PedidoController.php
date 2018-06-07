@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Pedido;
 use App\Model\Producto;
+use App\Model\Cuenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,7 @@ class PedidoController extends Controller
     public function store(Request $request)
     {       
         if ($request->ajax()) {
+            //$cuenta_id=$request->pedido['cuenta_id'];
             $mesa = $request->pedido['mesa'];
             $total = $request->pedido['total'];
             $estado_pedido = -1;
@@ -66,11 +68,15 @@ class PedidoController extends Controller
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {
                 $pedido->productos()->attach($producto['id'], ['pedido_id' => $pedido->pedido_id ,'cantidad' => $producto['cantidad'], 'subtotal' => $producto['subtotal']]);
-            }            
+            }
+            //$pedido->cuentas()->attach($cuenta_id,['pedido_id' => $pedido->pedido_id,'total_pedido' => $total]);     
             return response()->json([
                 "mensaje1" => "Realizando orden…",
-                "mensaje2" => "Orden Completa Gracias."
+                "mensaje2" => "Orden Completa Gracias.",
+                "pedido_id" => $pedido->pedido_id,
+                "monto_total" => $pedido->total
             ]);
+            
         }
     }
 
@@ -104,17 +110,20 @@ class PedidoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pedido $pedido)
-    {
+    {   
+        $a=$pedido->cuentas();
         if($request->ajax()){
             if($pedido->estado_pedido == -1){
                 DB::update('update pedido set estado_pedido = 0 where pedido_id ='.$pedido->pedido_id);
+                //DB::update('update cuenta set precio_total=precio_total+'.$pedido->total.' where cuenta.mesa =='.$pedido->mesa);
             }else{
                 DB::update('update pedido set estado_pedido = 1 where pedido_id ='.$pedido->pedido_id);
             }
+            //se tiene que agregar el valor a la cuenta actual por que se entrego el pedido
 
             return response()->json([
-                "mensaje1" => 'update pedido set estado_pedido = false where pedido_id ='.$pedido->pedido_id,
-                "mensaje2" => $pedido->pedido_id
+                'pedido' => $pedido,
+                'cuentas' => $a        
             ]);
         }
     }
@@ -128,5 +137,26 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function existePedido($mesa){
+        $pedidos = Pedido::all()->where('mesa',$mesa);
+        $cuentas = Cuenta::all();
+        $res=['existe' => false];
+        $encontrado = false;
+        
+        foreach($pedidos as $pedido){
+            if($encontrado==false){
+                foreach($cuentas as $cuenta){
+                    if($pedido->pedido_id == $cuenta->pedido_id && $cuenta->estado_pago==false){
+                        $encontrado=true;
+                        $res =['existe'=>true, 'pedido_id' => $pedido->pedido_id];
+                        break;
+                    }
+                }
+            }else{
+                break;
+            }   
+        }
+        return response()->json($res);
     }
 }

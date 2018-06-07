@@ -91,8 +91,39 @@ function ordenar(numero_mesa) {
         }
     });
     pedido.productos = nuevos_productos;
-    console.log();
-    buscarCuentaActiva(numero_mesa);
+    realizarPedido(pedido);
+    /**
+     * exite pedido()
+     *  SI: update pedido(mesa) aumentar productos
+     *  NO: Create pedido
+     */
+    //crearPedido(pedido);
+    //buscarCuentaActiva();
+    
+}
+
+function realizarPedido(pedido){
+    mesa = $('#numero_mesa').text();
+    ruta = $('#_pedido_existe').val();
+    $.ajax({
+        type:"GET",
+        url:ruta, 
+        dataType: "json",
+        success: function (response) {//ya esta comprobado que llegan los datos
+            console.log(response); ////////////esta fallando aqui en detectar 
+            if(response.exito==true){
+                //falta actualizar los productos nuevos actualizamos
+                console.log(response);
+                console.log('ya existe el pedido');
+            }else{
+                console.log('creamos el pedido');
+                crearPedido(pedido);
+            }
+        }
+    });
+}
+
+function crearPedido(pedido){
     var ruta = $('form').attr('action');
     $.ajax({
         type: "POST",
@@ -110,24 +141,37 @@ function ordenar(numero_mesa) {
             $('#mensaje1').delay(1800).hide(0);
             $('#mensaje2').delay(2100).show(0);
             $('#cerrar').delay(2100).show(0);
+            console.log('ya se creo');
+            buscarCuentaActiva(response.pedido_id,response.monto_total);
+        },
+        error: function(e){
+            console.log('falla no pudo entrar');
         }
     });
-    
-
 }
-function buscarCuentaActiva(mesa){//no uso el parametro todavia
+
+
+function buscarCuentaActiva(id,monto_total){//busca una cuenta si esta pagada o no
+    console.log(id);
+    console.log(monto_total);
     var ruta = $('#ruta').val();
     $.ajax({
         type: "POST",
         url: ruta,
-        data: { 'mesa': mesa, "_token": $('#token').val() },
+        data: { 'pedido_id': id, 'monto_total':monto_total, "_token": $('#token').val() },
         dataType: "json",
         success: function (response) {
-            cuentaRes = response['cuenta'];
-            actualizarValoresDeCuenta(cuentaRes,50);
+            //pedido.cuenta_id = response['cuenta_id'];
+            console.log('hhshshhshshshsh');
+            console.log(pedido);
+            
+            //crearPedido(pedido);
+            
+            //actualizarValoresDeCuenta(cuentaRes,50);
         }
     });
 }
+/*
 function actualizarValoresDeCuenta(cuenta, totalMotoPedido){
     //crear peticion ajax
     $.ajax({
@@ -143,6 +187,7 @@ function actualizarValoresDeCuenta(cuenta, totalMotoPedido){
     //crear el put
     //crear el token 
 }
+*/
 function eliminarProductos() { 
     // eliminar('#producto1');
     // eliminar('#producto2');

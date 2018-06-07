@@ -22,3 +22,5 @@ Route::get('modal-menu', 'MenuController@getModalMenu');
 Route::resource('menu', 'MenuController');
 Route::resource('pedidos', 'PedidoController');
 Route::resource('cuentas','CuentaController');
+Route::get('/pedidos/{pedido}','PedidoController@existePedido')
+		->name('pedidos.existe');

@@ -12,7 +12,7 @@ class Pedido extends Model
     protected $primaryKey = 'pedido_id';
 
     public $fillable = [
-        'mesa', 'total','estado_pedido'
+        'pedido_id','mesa', 'total','estado_pedido'
     ];
 
     public function productos()
@@ -26,5 +26,6 @@ class Pedido extends Model
         return $this->belongsToMany(Cuenta::class, 'cuenta_pedido', 'pedido_id', 'cuenta_id')
             ->withPivot('total_pedido')
             ->withTimestamps();
+    
     }
 }

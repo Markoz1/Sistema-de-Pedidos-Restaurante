@@ -71,6 +71,7 @@
     {!! Form::open(['route' => 'pedidos.store', 'method' => 'post']) !!}
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <input type="hidden" name="_mesa_ruta" id="ruta" value="{{ url('cuentas') }}">
+    <input type="hidden" name="_pedido_existe" id="_pedido_existe" value="{{ route('pedidos.existe',['mesa' => 'mesa 1']) }}">
     <div class="card-footer">        
         <div class="form-group row my-0 d-flex justify-content-around">
             {{-- <button type="" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar(this)"> Ordenar </button> --}}

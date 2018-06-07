@@ -46,7 +46,7 @@ function cambiarEstadoAtencion(id_pedido){
         data: { "_token": $('#token1').val(),"_method":$('#met1').val() },
         dataType: "json",
         success: function (response) {
-            console.log('laksd.jfljn;amlskdfhlansk.');
+            console.log(response);
         }});
     $('#example').load(' #example');
 
@@ -57,15 +57,20 @@ function cambiarEstadoPedido(id){
     $.ajax({
         type: "POST",
         url: ruta,
-        data: { "_token": $('#token').val(),"_method":$('#met').val() },
+        data: {"_token": $('#token').val(),"_method":$('#met').val() },
         dataType: "json",
         success: function (response) {
-            console.log(response.mensaje1);
-            console.log(response.mensaje2);
+            console.log(response);
+            //editar el valor de la cuenta sumandole el valor de los pedidos realizados
+            //sumarCuentaPago();
         }});
     $('#example').load(' #example');
     
 }
+function sumarCuentaPago(){
+    
+}
+
 $('#modal-productos').on('hidden.bs.modal', function (e) {
     $('#datos').children('tr').remove();
 });
