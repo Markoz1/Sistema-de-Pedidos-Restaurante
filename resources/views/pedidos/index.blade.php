@@ -45,7 +45,6 @@
                                 <tbody>
                                     
                                     @foreach ($pedidos as $pedido)
-                                     <p>{{ $pedido }}</p>
                                         @if ($pedido->estado_pedido == -1)
                                            <tr id="fila{{ $pedido->pedido_id }}">
                                                 <th scope="row" id="pedido{{ $pedido->pedido_id }}"></th>
