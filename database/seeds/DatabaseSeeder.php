@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); // Desactivamos la revisión de claves foráneas
-        DB::table('Categoria')->truncate();
+        DB::table('categoria')->truncate();
         DB::table('producto')->truncate();
         DB::table('users')->truncate();
         DB::table('cliente')->truncate();

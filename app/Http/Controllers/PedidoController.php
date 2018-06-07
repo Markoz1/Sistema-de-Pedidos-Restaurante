@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Model\Pedido;
 use App\Model\Producto;
+use App\Model\Cuenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -26,6 +28,7 @@ class PedidoController extends Controller
         $pivot = array();
         foreach ($pedidos as $i => $pedido) {
             $productos = $pedido->productos;
+            
             foreach ($productos as $j => $producto) {
                 $pivot[$pedido->pedido_id][$j] = ['cantidad' => $producto->pivot->cantidad, 'subtotal' => $producto->pivot->subtotal];
                 
@@ -33,6 +36,7 @@ class PedidoController extends Controller
             
         }
         $datos_pivot = Collection::make($pivot);
+        //dd($datos_pivot);
         return view('pedidos.index',compact('pedidos', 'datos_pivot'));
     }
 
@@ -57,16 +61,17 @@ class PedidoController extends Controller
         if ($request->ajax()) {
             $mesa_id = $request->pedido['mesa_id'];
             $total = $request->pedido['total'];
-            $pedido = new Pedido(['total' => $total, 'users_id' => $mesa_id]);
+            $estado_pedido = -1;//pedido sin atener
+            $pedido = new Pedido(['users_id' => $mesa_id, 'total' => $total,'estado_pedido' => $estado_pedido]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {
                 $pedido->productos()->attach($producto['id'], ['pedido_id' => $pedido->pedido_id ,'cantidad' => $producto['cantidad'], 'subtotal' => $producto['subtotal']]);
-            }            
+            }    
             return response()->json([
                 "mensaje1" => "Realizando orden…",
-                "mensaje2" => "Orden Completa Gracias."
-            ]);
+                "mensaje2" => "Orden Completa Gracias.",
+            ]);            
         }
     }
 
@@ -99,9 +104,23 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Pedido $pedido)
+    {   
+        $a=$pedido->cuentas();
+        if($request->ajax()){
+            if($pedido->estado_pedido == -1){
+                DB::update('update pedido set estado_pedido = 0 where pedido_id ='.$pedido->pedido_id);
+                //DB::update('update cuenta set precio_total=precio_total+'.$pedido->total.' where cuenta.mesa =='.$pedido->mesa);
+            }else{
+                DB::update('update pedido set estado_pedido = 1 where pedido_id ='.$pedido->pedido_id);
+            }
+            //se tiene que agregar el valor a la cuenta actual por que se entrego el pedido
+
+            return response()->json([
+                'pedido' => $pedido,
+                'cuentas' => $a        
+            ]);
+        }
     }
 
     /**
@@ -113,5 +132,26 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function existePedido($mesa){
+        $pedidos = Pedido::all()->where('mesa',$mesa);
+        $cuentas = Cuenta::all();
+        $res=['existe' => false];
+        $encontrado = false;
+        
+        foreach($pedidos as $pedido){
+            if($encontrado==false){
+                foreach($cuentas as $cuenta){
+                    if($pedido->pedido_id == $cuenta->pedido_id && $cuenta->estado_pago==false){
+                        $encontrado=true;
+                        $res =['existe'=>true, 'pedido_id' => $pedido->pedido_id];
+                        break;
+                    }
+                }
+            }else{
+                break;
+            }   
+        }
+        return response()->json($res);
     }
 }

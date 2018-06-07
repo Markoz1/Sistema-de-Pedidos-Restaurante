@@ -13,13 +13,20 @@ class CategoriaSeeder extends Seeder
     public function run()
     {
         Categoria::create([
-            'nombre' => 'Plato Principal'
+            'nombre' => 'Plato Principal',
+            'estado' => true
         ]);
         Categoria::create([
-            'nombre' => 'Postre'
+            'nombre' => 'Postre',
+            'estado' => true
         ]);
         Categoria::create([
-            'nombre' => 'Bebida'
+            'nombre' => 'Bebida',
+            'estado' => true
+        ]);
+        Categoria::create([
+            'nombre' => 'Combos',
+            'estado' => false
         ]);
     }
 }

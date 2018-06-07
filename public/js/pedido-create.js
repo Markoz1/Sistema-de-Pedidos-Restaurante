@@ -3,11 +3,11 @@ var total = 0.00;
 var pedido = { "mesa_id": 0, "total": 0 };
 var pedido_lleno = false;
 var array_productos = [{ "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
-                       { "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
-                       { "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
-                       { "id": "", "nombre": "", "cantidad": "", "subtotal": "" }];
+{ "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
+{ "id": "", "nombre": "", "cantidad": "", "subtotal": "" },
+{ "id": "", "nombre": "", "cantidad": "", "subtotal": "" }];
 $(document).ready(function () {
-    pedido.mesa_id = $('#mesa').attr('value');            
+    pedido.mesa_id = $('#mesa').attr('value');
 });
 function agregar(producto_id) {
     $('#modal_informacion').modal('hide');
@@ -23,7 +23,7 @@ function eliminar(index) {
     verificar_pedido_lleno();
 };
 function ordenar_pedido() {
-    if (!array_productos_is_empty()){
+    if (!array_productos_is_empty()) {
         agregar_array_productos_a_pedido();
         enviar_con_ajax();
     }
@@ -35,7 +35,7 @@ function agregar_a_array_productos(producto_id) {
             valueOfElement.id = producto_id;
             valueOfElement.nombre = $('#nombre').text();;
             valueOfElement.cantidad = $('#cantidad').val();
-            valueOfElement.subtotal = parseFloat($('#precio').text()* valueOfElement.cantidad).toFixed(2);
+            valueOfElement.subtotal = parseFloat($('#precio').text() * valueOfElement.cantidad).toFixed(2);
             return false;
         }
     });
@@ -54,7 +54,7 @@ function actualizar_vista_pedido_actual() {
         var $datos_nuevo_producto = $nuevo_producto.children('td');
         if (producto.id != "") {// si existe un producto en array_productos
             $datos_nuevo_producto.each(function (index, element) {// llenando un producto en pedido actual
-                if(index == 0){
+                if (index == 0) {
                     $(element).text(producto.nombre);
                 }
                 if (index == 1) {
@@ -68,7 +68,7 @@ function actualizar_vista_pedido_actual() {
                 }
             });
         }
-        else{
+        else {
             $datos_nuevo_producto.each(function (index, element) {
                 if (index < $datos_nuevo_producto.length - 1) {
                     $(element).text("");
@@ -76,7 +76,7 @@ function actualizar_vista_pedido_actual() {
                 else {
                     $(element).hide();
                 }
-            });    
+            });
         }
     });
 };
@@ -86,19 +86,19 @@ function actualizar_total() {
         if (producto.id != "") {
             total_temp = (parseFloat(total_temp) + parseFloat(producto.subtotal)).toFixed(2);
         }
-        
+
     });
     total = total_temp;
     $('td#total').text(total);
 };
-function verificar_pedido_lleno() {    
+function verificar_pedido_lleno() {
     $.each(array_productos, function (indexInArray, valueOfElement) {
         if (valueOfElement.id == "") {
             $('button#agregar').prop('disabled', false);
             pedido_lleno = false;
             return false;
         }
-        else{
+        else {
             $('button#agregar').prop('disabled', true);
             pedido_lleno = true;
         }
@@ -116,10 +116,10 @@ function array_productos_is_empty() {
     return res;
 };
 function agregar_array_productos_a_pedido() {
-    if(pedido_lleno){
+    if (pedido_lleno) {
         pedido.productos = array_productos;
     }
-    else{
+    else {
         var indice_productos = 0;
         pedido.productos = [];
         $.each(array_productos, function (indexInArray, producto) {

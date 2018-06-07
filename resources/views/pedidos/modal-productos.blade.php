@@ -11,16 +11,20 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>#Id</th>
-                            <th>Nombre</th>
-                            <th>Precio (Bs)</th>
                             <th>Cantidad</th>
+                            <th>Nombre</th>
                         </tr>
                     </thead>
                     <tbody id="datos">
                     </tbody>
                 </table>
-            <div class="modal-footer">
+            <div class="modal-footer"> 
+                <form method="POST" role="form" id="formulario" action="{{ url("pedidos/") }}">
+                    <input type="hidden" name="_method" id="met" value="PUT">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">        
+                    <button type="button" class="btn btn-primary" id="terminarPedido" onclick="cambiarEstadoPedido()" data-dismiss="modal">Terminar pedido</button>
+                </form>
+                
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
