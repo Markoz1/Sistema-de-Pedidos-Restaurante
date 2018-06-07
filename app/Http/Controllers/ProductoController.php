@@ -9,6 +9,14 @@ use App\Http\Requests\StoreProductoRequest;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('cocinero', ['only' => ['index']]);
+        $this->middleware('cajero', ['only' => ['index']]);
+        $this->middleware('mesa', ['only' => ['show']]);
+        $this->middleware('administrador', ['except' => ['index','show']]);        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +24,7 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request);
-        $productos = Producto::Buscar($request->get("busqueda"),$request->get("estado"),$request->get("categoria"))->orderby("nombre","ASC")->paginate(100);
+        $productos = Producto::Buscar($request->get("busqueda"),$request->get("estado"),$request->get("categoria"))->orderby("nombre","ASC")->paginate(5);
         $anterior   = $request;
         $categorias = Categoria::All();
         return view('productos.index')-> with(['productos'=>$productos])-> with(['anterior'=>$anterior])->with(['categorias'=>$categorias]);
@@ -44,7 +51,6 @@ class ProductoController extends Controller
     {
         //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
         $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
-        dd($path_foto);
         $producto = new Producto;
         $producto->fill($request->except(['foto']));
         $producto->foto = $path_foto;//almacenamos ruta de foto en BD
@@ -60,9 +66,12 @@ class ProductoController extends Controller
      * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto)
+    public function show($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return response()->json(
+            $producto->toArray()
+        );
     }
 
     /**

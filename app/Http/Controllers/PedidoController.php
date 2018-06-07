@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('cocinero', ['except' => ['store']]);       
+        $this->middleware('mesa', ['only' => ['store']]);         
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,13 +47,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('menu.index');
-        $pedido = new Pedido(['mesa' => 'mesa 1', 'total' => '122.00']);
-        $pedido->save();
-        $productos = Producto::all();         
-        foreach ($productos as $producto) {
-            $pedido->productos()->attach($producto->producto_id, ['pedido_id' => $pedido->pedido_id ,'cantidad' => '1', 'subtotal' => $producto->precio]);
-        }
+        
     }
 
     /**
@@ -59,24 +59,19 @@ class PedidoController extends Controller
     public function store(Request $request)
     {       
         if ($request->ajax()) {
-            //$cuenta_id=$request->pedido['cuenta_id'];
-            $mesa = $request->pedido['mesa'];
+            $mesa_id = $request->pedido['mesa_id'];
             $total = $request->pedido['total'];
-            $estado_pedido = -1;
-            $pedido = new Pedido(['mesa' => $mesa, 'total' => $total,'estado_pedido' => $estado_pedido]);
+            $estado_pedido = -1;//pedido sin atener
+            $pedido = new Pedido(['users_id' => $mesa_id, 'total' => $total,'estado_pedido' => $estado_pedido]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {
                 $pedido->productos()->attach($producto['id'], ['pedido_id' => $pedido->pedido_id ,'cantidad' => $producto['cantidad'], 'subtotal' => $producto['subtotal']]);
-            }
-            //$pedido->cuentas()->attach($cuenta_id,['pedido_id' => $pedido->pedido_id,'total_pedido' => $total]);     
+            }    
             return response()->json([
                 "mensaje1" => "Realizando orden…",
                 "mensaje2" => "Orden Completa Gracias.",
-                "pedido_id" => $pedido->pedido_id,
-                "monto_total" => $pedido->total
-            ]);
-            
+            ]);            
         }
     }
 

@@ -14,7 +14,7 @@ class AddEstadoPedidoToPedido extends Migration
     public function up()
     {
         Schema::table('pedido', function (Blueprint $table) {
-            $table->boolean('estado_pedido')->after('mesa');
+            $table->boolean('estado_pedido')->after('total');
         });
     }
 

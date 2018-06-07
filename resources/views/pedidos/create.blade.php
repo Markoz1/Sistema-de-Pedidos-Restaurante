@@ -1,7 +1,7 @@
 <div class="card card-primary">
     <div class="card-header d-flex justify-content-center">
         <div class="header-block">
-            <p class="title" id="numero_mesa"> mesa 1 </p>
+            <p class="title" id="mesa" value="{{ Auth::user()->id }}"> {{ Auth::user()->nombre }} </p>
         </div>
     </div>
     <div class="card-block">
@@ -19,12 +19,22 @@
                     </tr>
                 </thead>
                 <tbody id="pedido">
+                    <tr height="85" id="producto0">
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle text-center" id="subtotal"></td>
+                        <td class="align-middle" style="display:none;">
+                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(0)">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
                     <tr height="85" id="producto1">
                         <td class="align-middle"></td>
                         <td class="align-middle"></td>
                         <td class="align-middle text-center" id="subtotal"></td>
                         <td class="align-middle" style="display:none;">
-                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(producto1)">
+                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(1)">
                                 <i class="fa fa-trash-o"></i>
                             </a>
                         </td>
@@ -34,9 +44,9 @@
                         <td class="align-middle"></td>
                         <td class="align-middle text-center" id="subtotal"></td>
                         <td class="align-middle" style="display:none;">
-                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(producto2)">
-                                <i class="fa fa-trash-o"></i>
-                            </a>
+                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(2)">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
                         </td>
                     </tr>
                     <tr height="85" id="producto3">
@@ -44,17 +54,7 @@
                         <td class="align-middle"></td>
                         <td class="align-middle text-center" id="subtotal"></td>
                         <td class="align-middle" style="display:none;">
-                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(producto3)">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                        </td>
-                    </tr>
-                    <tr height="85" id="producto4">
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle text-center" id="subtotal"></td>
-                        <td class="align-middle" style="display:none;">
-                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(producto4)">
+                            <a class="btn btn-oval btn-danger-outline btn-lg border-0" href="#" role="button" onclick="eliminar(3)">
                                                     <i class="fa fa-trash-o"></i>
                                                 </a>
                         </td>
@@ -74,8 +74,7 @@
     <input type="hidden" name="_pedido_existe" id="_pedido_existe" value="{{ route('pedidos.existe',['mesa' => 'mesa 1']) }}">
     <div class="card-footer">        
         <div class="form-group row my-0 d-flex justify-content-around">
-            {{-- <button type="" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar(this)"> Ordenar </button> --}}
-            <a href="#" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar('mesa 1')" >Ordenar</a><!-- tendria que entrar la mesa a cual pertenece -->
+            <a href="#" class="btn btn-primary btn-lg" id="ordenar" onclick="ordenar_pedido()">Ordenar</a>
         </div>
     </div>
     {!! Form::close() !!}

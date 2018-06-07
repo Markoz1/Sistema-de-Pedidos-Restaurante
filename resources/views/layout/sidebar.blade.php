@@ -7,8 +7,8 @@
         </div>
         <nav class="menu">
             <ul class="sidebar-menu metismenu" id="sidebar-menu">
-                <li class="{{ request()->is('/')? 'active':'' }}">
-                    <a href="/">
+                <li class="{{ request()->routeIs('inicio')? 'active':'' }}">
+                    <a href="{{ route('inicio') }}">
                         <i class="fa fa-home"></i> Inicio </a>
                 </li>
                 <li class="{{ request()->segment(1) == 'categorias'? 'active open':'' }}">
@@ -47,18 +47,31 @@
                         </li>
                     </ul>
                 </li>
-                    
+                <li class="{{ request()->segment(1) == 'clientes'? 'active open':'' }}">
+                    <a href="">
+                        <i class="fa fa-users"></i> Clientes
+                        <i class="fa arrow"></i>
+                    </a>
+                    <ul class="sidebar-nav">
+                        <li class="{{ request()->routeIs('clientes.index')? 'active':'' }}">
+                            <a href="{{ route('clientes.index') }}"> Listado </a>
+                        </li>
+                        <li class="{{ request()->routeIs('clientes.create')? 'active':'' }}">
+                            <a href="{{ route('clientes.create') }}"> Nuevo Cliente </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="{{ request()->routeIs('pedidos.index')? 'active':'' }}">
                     <a href="{{ route('pedidos.index') }}"><i class="fa fa-shopping-cart"></i> Pedidos </a>
                 </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-users"></i> Usuarios </a>
+                    <a href="#"><i class="fa fa-user"></i> Usuarios </a>
+                </li>
+                <li class="{{ request()->segment(1) == 'mesas'? 'active open':'' }}">
+                    <a href="{{ route('mesas.index') }}"><i class="fa fa-th-large"></i> Mesas </a>
                 </li>
                 <li class="">
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>
-                </li>
-                <li class="">
-                    <a href="{{route('menu.index')}}"><i class=""></i> Menú cliente prueba </a>
                 </li>
             </ul>
         </nav>

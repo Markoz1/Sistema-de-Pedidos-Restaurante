@@ -55,7 +55,7 @@
                                                         <button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})">Sin Atender</button></td>
                                                     </form>
                                                 <td id="botonProductos">
-                                                    <a href="#" o1nclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
+                                                    <a href="#" onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
                                                 </td>
                                             </tr>
                                         @else
