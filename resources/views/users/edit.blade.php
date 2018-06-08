@@ -2,14 +2,15 @@
 @section('content')
     <article class="content item-editor-page">
             <div class="title-block">
-                    <h3 class="title"> Modificar Usuario
-                        <span class="sparkline bar" data-type="bar"></span>
-                    </h3>
-                </div>
-        <form method="POST" role="form" action="{{ url("users/{$user->id}") }}" >
-            {{ method_field('PUT') }}
-            {{ csrf_field() }} 
-        <form name="item">
+                <h3 class="title"> Modificar Usuario
+                    <span class="sparkline bar" data-type="bar"></span>
+                </h3>
+            </div>
+        {{-- <form method="POST" role="form" action="{{ url("users/{$user->id}") }}" > --}}
+        {!! Form::Model($user, ['route' => ['users.update', $user->id],'method' => 'put', 'files' => true]) !!}
+            {{-- {{ method_field('PATCH') }} --}}
+            {{-- {{ csrf_field() }}  --}}
+        {{-- <form name="item"> --}}
             <div class="card card-block">
                 <div class="form-group row">
                     {!! Form::label('nombre', 'Nombre completo', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
@@ -50,13 +51,13 @@
                         <div class="invalid-feedback">{{ $errors->first('ci') }}</div>
                     </div>
                 </div>
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     {!! Form::label('foto', 'Foto', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
                         {!! Form::file('foto', ['class' => 'form-control boxed '.($errors->has('foto')?'is-invalid':''), 'accept' => 'image/*']) !!}
                         <div class="invalid-feedback">{{ $errors->first('foto') }}</div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group row">
                     {!! Form::label('role', 'Rol', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('direccion')->nullable();
             $table->string('username');
             $table->integer('ci')->nullable();
-            $table->string('foto')->nullable();
+            $table->string('foto')->nullable()->default('/uploads/avatars/default.jpg');
             $table->string('password');
             $table->boolean('estado');
             $table->rememberToken();

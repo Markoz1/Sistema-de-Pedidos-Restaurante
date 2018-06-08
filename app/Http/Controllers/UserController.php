@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Model\Role;
 use App\Model\User;
+use Illuminate\Support\Facades\Auth;
+use Image;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('autenticado');
-        $this->middleware('administrador');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('autenticado');
+    //     $this->middleware('administrador');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -49,9 +52,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+        // $user = User::find($id);
         $roles = Role::get();
 
         return view('users.edit', compact('user', 'roles'));
@@ -75,39 +78,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        // $user = User::find($id);
+       // $user = User::find($id);
         $data = request()->all();
         $user->nombre = $data['nombre'];
         $user->phone = $data['phone'];
         $user->direccion = $data['direccion'];
         $user->username = $data['username'];
         $user->ci = $data['ci'];
-        // $user->foto = $data['foto'];
-        // $user->foto = 'storage/fotos/'.$data['foto'];
+        if($request->hasFile('foto')){
+    		$foto = $request->file('foto');
+    		$filename = time() . '.' . $foto->getClientOriginalExtension();
+    		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+
+    		$user = Auth::user();
+    		$user->foto = '/uploads/avatars/' . $filename;
+    		// $user->save();
+    	}
         $user->estado = $data['estado'];
         $user->role_id = $data['role'];
-
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            // $path = $request->foto->hashName();
-            $request->foto->store('storage/app/fotos');
-            $path = 'storage/'.$request->foto->store('fotos', 'public');;
-            $user->foto = $path;
-            // $user->save();    
-        }
-        // $request->foto->storeAs('public/fotos/');
-        // $path = $request->foto->hashName();
-        // $user->foto = $path;
-        // $image->save();
-        // $user->role_id = $data['role'];
         // $user->update();
+        
         $user->save();
-
-        // $user->roles()->sync($request->get('roles'));
-
-        return redirect()->route('users.index', $user->id)
+        return redirect()->route('users.index', array('users' => Auth::user()) )
             ->with('mensaje', 'Usuario actualizado con éxito');
     }
 
@@ -117,18 +111,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
         $data = request()->all();
-        //$path_foto = Storage::disk('public')->putFile('fotos', $request->foto);
-        // $path_foto = 'storage/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
         $estado = 0;
-        // dd($path_foto);
 
-        $path_foto = 'storage/app/public/'.$request->foto->store('fotos', 'public');//almacenando foto en directorio Public
-        $user = new User;
-        $user->fill($request->except(['foto']));
-        $user->foto = $path_foto;//almacenamos ruta de foto en BD
+        if($request->hasFile('foto')){
+    		$foto = $request->file('foto');
+    		$filename = time() . '.' . $foto->getClientOriginalExtension();
+    		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+
+    		$user = Auth::user();
+    		$user->foto = $filename;
+    		// $user->save();
+    	}
         // dd($path_foto);
         // User::create([
             $user->nombre =$data['nombre'];

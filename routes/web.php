@@ -16,7 +16,6 @@ Route::resource('productos', 'ProductoController');
 Route::resource('categorias', 'CategoriasController');
 Route::get('menu', 'HomeController@menu')->name('menu');
 Route::resource('pedidos', 'PedidoController');
-Route::get('/users', 'UserController@index');
 // Auth::routes();
 Route::get('login', 'LoginController@ShowLoginForm');
 Route::post('login','LoginController@login')->name('login');
@@ -27,3 +26,5 @@ Route::resource('cuentas','CuentaController');
 Route::get('/pedidos/{pedido}','PedidoController@existePedido')
 		->name('pedidos.existe');
 Route::resource('users', 'UserController');
+// Route::post('users/{id}', 'UserController@update');
+
