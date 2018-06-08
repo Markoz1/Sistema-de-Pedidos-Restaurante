@@ -27,7 +27,7 @@
                             <span class="has-error">{{ $errors->first('password') }}</span>
                         </div>
                         <div class="form-group pt-4">
-                            <button type="submit" class="btn btn-block btn-primary">Ingresar</button>
+                            <button type="submit" class="btn btn-block btn-primary" name="ingresar">Ingresar</button>
                         </div>
                     {!! Form::close() !!}
                 </div>
