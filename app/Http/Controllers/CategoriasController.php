@@ -12,8 +12,7 @@ class CategoriasController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
-        $this->middleware('cocinero', ['only' => ['index','show']]);
-        $this->middleware('cajero', ['only' => ['index','show']]);
+        $this->middleware('autorizado', ['only' => ['index','show']]);
         $this->middleware('administrador', ['except' => ['index','show']]);
     }
     /**

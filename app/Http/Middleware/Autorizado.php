@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Cajero
+class Autorizado
 {
     /**
      * Handle an incoming request.
@@ -15,16 +15,11 @@ class Cajero
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->esCajero()){
+        if(auth()->user()->esAdministrador() || auth()->user()->esCajero() || auth()->user()->esCocinero()){
             return $next($request);
         }            
         else {
-            if(auth()->user()->esAdministrador()){
-               return $next($request);                     
-            }
-            else{
-                abort(403);
-            }
+            abort(403);
         }
     }
 }

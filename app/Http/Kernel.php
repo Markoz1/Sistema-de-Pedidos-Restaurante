@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
 
         'invitado' => \App\Http\Middleware\Invitado::class,
         'autenticado' => \App\Http\Middleware\Autenticado::class,
+        'autorizado' => \App\Http\Middleware\Autorizado::class,
         'administrador' => \App\Http\Middleware\Administrador::class,
         'cocinero' => \App\Http\Middleware\Cocinero::class,
         'mesero' => \App\Http\Middleware\Mesero::class,
