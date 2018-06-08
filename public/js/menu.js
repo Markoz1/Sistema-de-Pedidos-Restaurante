@@ -21,5 +21,19 @@ function mostrar_informacion_producto(ruta_producto) {
     );
 };
 $('#modal_informacion').on('show.bs.modal	', function (e) {
-    $('#cantidad').val('1');
+    $('.input-menu-cantidad').val('1');
 });
+function reducir_cantidad(){
+    var cantidad = $('.input-menu-cantidad').val();
+    if(cantidad > 1){
+        cantidad--;
+        $('.input-menu-cantidad').val(cantidad);
+    }    
+};
+function aumentar_cantidad() {
+    var cantidad = $('.input-menu-cantidad').val();
+    if (cantidad < 10 ) {
+        cantidad++;
+        $('.input-menu-cantidad').val(cantidad);
+    } 
+};
