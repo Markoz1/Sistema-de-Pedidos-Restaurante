@@ -39,17 +39,6 @@
                 <li class="{{ request()->routeIs('pedidos.index')? 'active':'' }}">
                     <a href="{{ route('pedidos.index') }}"><i class="fa fa-shopping-cart"></i> Pedidos </a>
                 </li>
-                <li class="{{ request()->segment(1) == 'cuentas'? 'active open':'' }}">
-                    <a href="">
-                                        <i class="fa fa-cutlery"></i> Cuentas
-                                        <i class="fa arrow"></i> 
-                                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{ request()->routeIs('cuentas.index')? 'active':'' }}">
-                            <a href="{{ route('cuentas.index') }}"> Listado </a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="{{ request()->segment(1) == 'clientes'? 'active open':'' }}">
                     <a href="">
                                         <i class="fa fa-users"></i> Clientes
