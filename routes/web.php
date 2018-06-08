@@ -26,3 +26,4 @@ Route::resource('clientes', 'clienteController');
 Route::resource('cuentas','CuentaController');
 Route::get('/pedidos/{pedido}','PedidoController@existePedido')
 		->name('pedidos.existe');
+Route::resource('users', 'UserController');
