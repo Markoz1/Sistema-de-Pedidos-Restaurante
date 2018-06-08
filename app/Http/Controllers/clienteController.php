@@ -5,6 +5,11 @@ use Illuminate\Http\Request;
 
 class clienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('cajero');  
+    }
     public function index()
     {
            $clientes = Cliente::paginate(5);

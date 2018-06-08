@@ -21,8 +21,12 @@
                     </div>
                 </div> --}}
                 <br>
-                <a class="btn btn-primary" href="{{ route('inicio') }}">
-                        <i class="fa fa-angle-left"></i> Volver a Inicio </a>
+                @if (Auth::user()->esMesa())
+                    <a class="btn btn-primary" href="{{ route('menu') }}">
+                @else
+                    <a class="btn btn-primary" href="{{ route('inicio') }}">
+                @endif                    
+                    <i class="fa fa-angle-left"></i> Volver a Inicio </a>
             </div>
         </div>
     </article>

@@ -12,8 +12,7 @@ class ProductoController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
-        $this->middleware('cocinero', ['only' => ['index']]);
-        $this->middleware('cajero', ['only' => ['index']]);
+        $this->middleware('autorizado', ['only' => ['index']]);
         $this->middleware('mesa', ['only' => ['show']]);
         $this->middleware('administrador', ['except' => ['index','show']]);        
     }

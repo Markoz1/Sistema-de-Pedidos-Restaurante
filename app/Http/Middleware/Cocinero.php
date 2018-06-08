@@ -19,7 +19,7 @@ class Cocinero
             return $next($request);
         }            
         else {
-            if(auth()->user()->esAdministrador() || auth()->user()->esCajero()){
+            if(auth()->user()->esAdministrador()){
                return $next($request);                     
             }
             else{
