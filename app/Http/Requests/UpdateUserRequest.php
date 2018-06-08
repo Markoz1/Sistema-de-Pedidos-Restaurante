@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Model\Role;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -23,6 +25,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $roles = Role::pluck('id')->toArray();
         return [
             'nombre' => 'required|min:3|max:50|regex:/^[\pL\s]+$/u',            
             'phone' => 'nullable|digits:8',            
@@ -31,8 +34,7 @@ class UpdateUserRequest extends FormRequest
             'ci' => 'required|numeric|digits_between:7,8',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
             'estado' => 'required',
-            'role_id' => 'required',
-            // 'role_id' => ['required',Rule::in($users)],
+            'role_id' => ['required',Rule::in($roles)],
         ];
     }
     public function messages()

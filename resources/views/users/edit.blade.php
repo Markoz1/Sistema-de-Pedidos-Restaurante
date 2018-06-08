@@ -59,32 +59,24 @@
                     </div>
                 </div> --}}
                 <div class="form-group row">
-                    {!! Form::label('role', 'Rol', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('role_id', 'Roles', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
-                        {{-- {!! Form::number('estado', "$user->ci", ['class' => 'form-control boxed '.($errors->has('estado')?'is-invalid':'')]) !!} --}}
-                        {{-- {{ $selected = $user->estado->lists('id') }} --}}
-                        {{-- {!! Form::select('estado', array(0 => 'activo', 1 => 'inactivo'), $selected, ['class' => 'form-control'] ) !!} --}}
-                        <select name="role">
-                            @foreach ($roles as $role)
-                                <option value="{{$role->id}}" {{ (in_array($user->role->id, [$role->id])) ? ' selected="selected"' : '' }}>{{$role->nombre}}</option>
-                            @endforeach
-                        </select>
-                        {{-- {!! Form::select('estado', array(0 => 'activo', 1 => 'inactivo')) !!} --}}
-                        <div class="invalid-feedback">{{ $errors->first('role') }}</div>
+                        {!! Form::select('role_id',$roles, null, ['class' => 'form-control boxed '.($errors->has('role_id')?'is-invalid':''),
+                        'placeholder' => (count($roles) === 0)?'Ninguna categoria añadida':'Selecciona una Categoria']) !!}
+                        <div class="invalid-feedback">{{ $errors->first('role_id') }}</div>
                     </div>
-                </div>
+                </div>  
                 <div class="form-group row">
-                    {!! Form::label('estado', 'Estado', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
-                    <div class="col-sm-10">
-                        {{-- {!! Form::number('estado', "$user->ci", ['class' => 'form-control boxed '.($errors->has('estado')?'is-invalid':'')]) !!} --}}
-                        {{-- {{ $selected = $user->estado->lists('id') }} --}}
-                        {{-- {!! Form::select('estado', array(0 => 'activo', 1 => 'inactivo'), $selected, ['class' => 'form-control'] ) !!} --}}
-                        <select name="estado">
-                            <option value="0" {{ (in_array($user->estado, [0])) ? ' selected="selected"' : '' }}>Inactivo</option>
-                            <option value="1" {{ (in_array($user->estado, [1])) ? ' selected="selected"' : '' }}>Activo</option>
-                        </select>
-                        {{-- {!! Form::select('estado', array(0 => 'activo', 1 => 'inactivo')) !!} --}}
-                        <div class="invalid-feedback">{{ $errors->first('estado') }}</div>
+                    {!! Form::label('estado', 'Estado', ['class' => 'col-md-2 form-control-label text-xs-right']) !!}
+                    <div class="col-md-10">
+                        <label>
+                            {!! Form::radio('estado',1, true,['class' => 'radio squared']) !!}
+                            <span>Activo</span>
+                        </label>
+                        <label>
+                            {!! Form::radio('estado',0, false,['class' => 'radio squared']) !!}
+                            <span>Inactivo</span>
+                        </label>
                     </div>
                 </div>
                 <div class="form-group row mt-4">

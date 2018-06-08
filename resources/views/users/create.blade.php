@@ -56,32 +56,26 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('role', 'Rol', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('role_id', 'Roles', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
-                        {{-- {!! Form::number('estado', "ci", ['class' => 'form-control boxed '.($errors->has('estado')?'is-invalid':'')]) !!} --}}
-                        {{-- {{ $selected = $user->estado->lists('id') }} --}}
-                        {{-- {!! Form::select('estado', array(0 => 'activo', 1 => 'inactivo'), $selected, ['class' => 'form-control'] ) !!} --}}
-                        <select name="role">
-                            <option value="" selected="selected">Selecciona un rol</option>
-                            @foreach ($roles as $role)
-                                <option value="{{$role->id}}">{{$role->nombre}}</option>
-                            @endforeach
-                        </select>
-                        {{-- {!! Form::select('estado', array(0 => 'activo', 1 => 'inactivo')) !!} --}}
-                        <div class="invalid-feedback">{{ $errors->first('role') }}</div>
+                        {!! Form::select('role_id',$roles, null, ['class' => 'form-control boxed '.($errors->has('role_id')?'is-invalid':''),
+                        'placeholder' => (count($roles) === 0)?'Ninguna categoria añadida':'Selecciona una Categoria']) !!}
+                        <div class="invalid-feedback">{{ $errors->first('role_id') }}</div>
+                    </div>
+                </div>                
+                <div class="form-group row">
+                    {!! Form::label('estado', 'Estado', ['class' => 'col-md-2 form-control-label text-xs-right']) !!}
+                    <div class="col-md-10">
+                        <label>
+                            {!! Form::radio('estado',1, true,['class' => 'radio squared']) !!}
+                            <span>Activo</span>
+                        </label>
+                        <label>
+                            {!! Form::radio('estado',0, false,['class' => 'radio squared']) !!}
+                            <span>Inactivo</span>
+                        </label>
                     </div>
                 </div>
-                {{-- <div class="form-group row">
-                    {!! Form::label('estado', 'Estado', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
-                    <div class="col-sm-10">
-                        <select name="estado">
-                            <option value="" selected="selected">Selecciona un estado</option>
-                            <option value="0">Inactivo</option>
-                            <option value="1">Activo</option>
-                        </select>
-                        <div class="invalid-feedback">{{ $errors->first('estado') }}</div>
-                    </div>
-                </div> --}}
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary"> Crear </button>

@@ -55,7 +55,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         // $user = User::find($id);
-        $roles = Role::get();
+        $roles = Role::pluck('nombre', 'id');
 
         return view('users.edit', compact('user', 'roles'));
     }
@@ -67,7 +67,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::get();
+        // $roles = Role::get();
+        $roles = Role::pluck('nombre', 'id');
         return view('users.create',compact('roles'));
     }
 
@@ -80,7 +81,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-       // $user = User::find($id);
         $data = request()->all();
         $user->nombre = $data['nombre'];
         $user->phone = $data['phone'];
@@ -92,12 +92,11 @@ class UserController extends Controller
     		$filename = time() . '.' . $foto->getClientOriginalExtension();
     		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
 
-    		$user = Auth::user();
+    		$user = Auth::user()->nombre;
     		$user->foto = '/uploads/avatars/' . $filename;
-    		// $user->save();
     	}
         $user->estado = $data['estado'];
-        $user->role_id = $data['role'];
+        $user->role_id = $data['role_id'];
         // $user->update();
         
         $user->save();
@@ -111,22 +110,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         $data = request()->all();
-        $estado = 0;
-
-        if($request->hasFile('foto')){
-    		$foto = $request->file('foto');
-    		$filename = time() . '.' . $foto->getClientOriginalExtension();
-    		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
-
-    		$user = Auth::user();
-    		$user->foto = $filename;
-    		// $user->save();
-    	}
-        // dd($path_foto);
-        // User::create([
+        // $estado = 0;
+        $user = new User;
             $user->nombre =$data['nombre'];
    			$user->phone=$data['phone'];
    			$user->direccion=$data['direccion'];
@@ -134,8 +122,15 @@ class UserController extends Controller
             $user->ci=$data['ci'];
             // $user->foto=$path_foto;
             $user->password=$data['ci'];
-            $user->estado=$estado;
-            $user->role_id=$data['role'];
+            $user->estado=$data['estado'];
+            $user->role_id=$data['role_id'];
+            if($request->hasFile('foto')){
+            
+    		$foto = $request->file('foto');
+    		$filename = time() . '.' . $foto->getClientOriginalExtension();
+    		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+    		$user->foto = $filename;
+    	}
         // ]); 
         $user->save();
 
