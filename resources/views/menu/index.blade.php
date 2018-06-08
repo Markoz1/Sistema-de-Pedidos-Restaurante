@@ -13,9 +13,11 @@
             <ul class="nav nav-pills mt-4">
               @foreach($categorias as $categoria)
                 <li class="nav-item">
-                  <a aria-controls="{{$categoria->nombre}}-pills" class="nav-link {{ $loop->first ? 'active' : '' }}" data-target="#{{$categoria->nombre}}-pills" data-toggle="tab" href="" role="tab">
+                  @if ($categoria->estado)
+                    <a aria-controls="{{$categoria->nombre}}-pills" class="nav-link {{ $loop->first ? 'active' : '' }}" data-target="#{{$categoria->nombre}}-pills" data-toggle="tab" href="" role="tab">
                     {{$categoria->nombre}}
                   </a>
+                  @endif                  
                 </li>
               @endforeach
             </ul>

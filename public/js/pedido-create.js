@@ -34,7 +34,7 @@ function agregar_a_array_productos(producto_id) {
         if (valueOfElement.id == "") {//si hay espacio en array_productos, agrego un producto
             valueOfElement.id = producto_id;
             valueOfElement.nombre = $('#nombre').text();;
-            valueOfElement.cantidad = $('#cantidad').val();
+            valueOfElement.cantidad = $('.input-menu-cantidad').val();
             valueOfElement.subtotal = parseFloat($('#precio').text() * valueOfElement.cantidad).toFixed(2);
             return false;
         }

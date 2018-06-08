@@ -20,11 +20,13 @@
           </div>
           <div class="col-md-6">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col">
                 <h4 id="nombre">
                 </h4>
               </div>
-              <div class="col-md-6">
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-end">
                 <h5>
                   <B id="precio"></B>
                   <B>(Bs.)</B>
@@ -40,14 +42,25 @@
           </div>
         </div>
         <hr>
-          <div class="form-group row mb-0">
-              {!! Form::label('cantidad', 'Cantidad', ['class' => 'col-sm-2 offset-md-3 form-control-label text-xs-right d-flex align-items-center']) !!}
-              <div class="input-group col-sm-4">                        
-                  {!! Form::number('cantidad', 1, ['class' => 'form-control boxed text-center', 'min' => '1', 'max' => '10']) !!}
-                  <div class="input-group-prepend">
-                      <span class="input-group-text" >Unidades</span>
+        <h5>Cantidad</h5>
+          <div class="form-group row mb-0 d-flex justify-content-center">
+              <div class="input-group col-sm-4">
+                <div class="row">
+                  <div class="col-md-4">
+                    <a class="btn btn-primary btn-menu-cantidad d-flex align-items-center justify-content-center" href="#" onclick="reducir_cantidad()">
+                        <i class="fa fa-minus"></i>
+                    </a>
                   </div>
-              </div>
+                  <div class="col-md-4">
+                    {!! Form::number('cantidad', 1, ['class' => 'form-control boxed text-center input-menu-cantidad px-1', 'min' => '1', 'max' => '10']) !!}
+                  </div>
+                  <div class="col-md-4">
+                    <a class="btn btn-primary btn-menu-cantidad d-flex align-items-center justify-content-center" href="#" onclick="aumentar_cantidad()">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>              
           </div>
         </hr>
       </div>
