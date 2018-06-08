@@ -80,9 +80,14 @@
                         <div class="item-col item-col-sales">
                             <div class="item-heading">Estado</div>
                             @if ($categoria->estado == 1)
-                                <div class="no-overflow"> {{ "activo" }}</div>
+                                <div class="no-overflow">
+                                    <span class="badge badge-success">{{ "Activo" }}</span>
+                                </div>
                             @else
-                                <div class="no-overflow"> {{ "inactivo" }}</div>
+                                <div class="no-overflow">
+                                    <span class="badge badge-danger">{{ "Inactivo" }}</span>
+                                </div>
+                                
                             @endif
                         
                         </div>
