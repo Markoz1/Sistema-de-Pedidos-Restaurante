@@ -41,11 +41,11 @@
                                                     <form method="POST" role="form" id="formulario1" action="{{ url("pedidos/") }}">
                                                         <input type="hidden" name="_method" id="met1" value="PUT">
                                                         <input type="hidden" name="_token" id="token1" value="{{ csrf_token() }}">        
-                                                        <button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning badge badge-success" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})">Sin Atender</button></td>
+                                                        <button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning badge badge-success" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})" dusk="botonAtender">Sin Atender</button></td>
                                                     </form>
                                                 </td>
                                                 <td id="botonProductos">
-                                                    <a href="#" onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
+                                                    <a href="#" class="btn btn-secondary disabled" onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
                                                 </td>
                                             </tr>
                                         @else
@@ -55,7 +55,7 @@
                                                     <td>{{ $pedido->mesa->nombre }}</td>
                                                     <td><button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning badge badge-success" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})" disabled="true">Preparando</button></td>
                                                     <td>
-                                                        <a href="#" onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
+                                                        <a href="#" class="btn btn-secondary"  onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
                                                     </td>
                                                 </tr>
                                             @endif
