@@ -40,7 +40,7 @@ class AutenticacionTest extends DuskTestCase
         $this->browse(function ($browser) use ($user) {
             $browser->visit('/login')
                     ->type('username', $user->username)
-                    ->type('password', 'secret')
+                    ->type('password', 'Mesa1')
                     ->press('ingresar')
                     ->assertPathIs('/menu');
         });
