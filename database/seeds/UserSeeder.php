@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'phone' => 43239109,
             'password' => bcrypt('123456'),
             'foto' => '/uploads/avatars/default.jpg',
-            'role_id' => rand(1,5),
+            'role_id' => rand(1,4),
             // 'foto' => $faker->imageUrl($width = 200, $height = 200),
             // 'direccion' => 'Oquendo #1233',
         ]);

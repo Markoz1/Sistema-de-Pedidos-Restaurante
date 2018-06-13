@@ -23,7 +23,7 @@ $factory->define(App\Model\User::class, function (Faker $faker) {
         // 'ci' => $faker->unique()->randomNumber,
         'ci' => $faker->unique()->numberBetween($min = 11111111, $max = 99999999),
         'estado' => $faker->randomElement([0,1]),
-        'role_id' => rand(1,5),
+        'role_id' => rand(1,4),
         'password' => bcrypt('123456'), // secret
         'remember_token' => str_random(10),
     ];

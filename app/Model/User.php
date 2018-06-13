@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->role->nombre === 'Mesa';
     }
+    public function numero(){
+        if($this->esMesa()){
+            return substr($this->nombre, 5);
+        }
+    }
 }

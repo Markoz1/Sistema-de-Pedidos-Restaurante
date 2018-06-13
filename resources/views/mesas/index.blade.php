@@ -4,7 +4,7 @@
     <div class="title-block">
         <h3 class="title"> Mesas 
             @if (!isset($mesa_edit))
-            <a href="#" class="btn btn-primary btn-sm rounded-s" onclick="crear_mesa()" id="nueva_mesa"> Nueva Mesa </a>
+            <a href="#" class="btn btn-primary btn-sm rounded-s" onclick="crear_mesa()" id="nueva_mesa" name="nueva_mesa"> Nueva Mesa </a>
             @endif
         </h3>
     </div>
@@ -49,7 +49,7 @@
                                         </td>                                        
                                         <td class="text-center">
                                             <div class="item-actions-block">
-                                                <a class="edit" href="{{ route('mesas.edit', ['id' => $mesa->id]) }}" onclick="editar_mesa()">
+                                                <a class="edit" href="{{ route('mesas.edit', ['id' => $mesa->id]) }}" id="edit{{$mesa->id}}" onclick="editar_mesa()">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
                                             </div>
