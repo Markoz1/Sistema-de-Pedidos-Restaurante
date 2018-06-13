@@ -30,12 +30,14 @@ abstract class DuskTestCase extends BaseTestCase
     protected function driver()
     {
         $options = (new ChromeOptions)->addArguments([
+            // '--remote-debugging-port=9222',
             '--disable-gpu',
-            '--headless'
+            // '--headless'
         ]);
 
         return RemoteWebDriver::create(
             'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
+            // 'http://localhost:9123', DesiredCapabilities::chrome()->setCapability(
                 ChromeOptions::CAPABILITY, $options
             )
         );

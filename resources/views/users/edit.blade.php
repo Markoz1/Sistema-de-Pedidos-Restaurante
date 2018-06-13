@@ -51,18 +51,18 @@
                         <div class="invalid-feedback">{{ $errors->first('ci') }}</div>
                     </div>
                 </div>
-                {{-- <div class="form-group row">
+                <div class="form-group row">
                     {!! Form::label('foto', 'Foto', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
                         {!! Form::file('foto', ['class' => 'form-control boxed '.($errors->has('foto')?'is-invalid':''), 'accept' => 'image/*']) !!}
                         <div class="invalid-feedback">{{ $errors->first('foto') }}</div>
                     </div>
-                </div> --}}
+                </div>
                 <div class="form-group row">
-                    {!! Form::label('role_id', 'Roles', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('role_id', 'Rol', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
                         {!! Form::select('role_id',$roles, null, ['class' => 'form-control boxed '.($errors->has('role_id')?'is-invalid':''),
-                        'placeholder' => (count($roles) === 0)?'Ninguna categoria añadida':'Selecciona una Categoria']) !!}
+                        'placeholder' => (count($roles) === 0)?'Ninguna categoria añadida':'Selecciona un Rol']) !!}
                         <div class="invalid-feedback">{{ $errors->first('role_id') }}</div>
                     </div>
                 </div>  
@@ -70,13 +70,16 @@
                     {!! Form::label('estado', 'Estado', ['class' => 'col-md-2 form-control-label text-xs-right']) !!}
                     <div class="col-md-10">
                         <label>
-                            {!! Form::radio('estado',1, true,['class' => 'radio squared']) !!}
+                            {{-- {!! Form::radio('estado',1, true,['class' => 'radio squared']) !!} --}}
+                            <input class="radio squared" {{ $user->estado==1 ? 'checked='.'"'.'checked'.'"' : '' }} name="estado" type="radio" value="1" id="estado">
                             <span>Activo</span>
                         </label>
                         <label>
-                            {!! Form::radio('estado',0, false,['class' => 'radio squared']) !!}
+                            {{-- {!! Form::radio('estado',0, false,['class' => 'radio squared']) !!} --}}
+                            <input class="radio squared" {{ $user->estado==0 ? 'checked='.'"'.'checked'.'"' : '' }} name="estado" type="radio" value="0" id="estado">
                             <span>Inactivo</span>
                         </label>
+                        <div class="invalid-feedback">{{ $errors->first('estado') }}</div>
                     </div>
                 </div>
                 <div class="form-group row mt-4">
