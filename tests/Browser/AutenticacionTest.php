@@ -22,7 +22,7 @@ class AutenticacionTest extends DuskTestCase
         $this->browse(function ($browser) use ($user) {
             $browser->visit('/login')
                     ->type('username', $user->username)
-                    ->type('password', 'secret')
+                    ->type('password', '123456')
                     ->press('ingresar')
                     ->assertPathIs('/')
                     ->logout();
