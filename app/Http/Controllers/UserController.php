@@ -68,8 +68,9 @@ class UserController extends Controller
     public function create()
     {
         // $roles = Role::get();
+        $user = User::all();
         $roles = Role::pluck('nombre', 'id');
-        return view('users.create',compact('roles'));
+        return view('users.create',compact('user', 'roles'));
     }
 
     /**
@@ -87,12 +88,13 @@ class UserController extends Controller
         $user->direccion = $data['direccion'];
         $user->username = $data['username'];
         $user->ci = $data['ci'];
+        $user->estado=$data['estado'];
         if($request->hasFile('foto')){
     		$foto = $request->file('foto');
     		$filename = time() . '.' . $foto->getClientOriginalExtension();
     		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
 
-    		$user = Auth::user()->nombre;
+    		// $user = Auth::user()->nombre;
     		$user->foto = '/uploads/avatars/' . $filename;
     	}
         $user->estado = $data['estado'];
@@ -113,24 +115,28 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = request()->all();
-        // $estado = 0;
+        $estado = 0;
         $user = new User;
+        if($request->hasFile('foto')){
+    		$foto = $request->file('foto');
+    		$filename = time() . '.' . $foto->getClientOriginalExtension();
+    		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+
+    		
+    		$user->foto = '/uploads/avatars/' . $filename;
+    		// $user->save();
+        }
+        
             $user->nombre =$data['nombre'];
    			$user->phone=$data['phone'];
    			$user->direccion=$data['direccion'];
             $user->username=$data['username'];
             $user->ci=$data['ci'];
             // $user->foto=$path_foto;
-            $user->password=$data['ci'];
+            $user->password=bcrypt($data['ci']);
             $user->estado=$data['estado'];
             $user->role_id=$data['role_id'];
-            if($request->hasFile('foto')){
             
-    		$foto = $request->file('foto');
-    		$filename = time() . '.' . $foto->getClientOriginalExtension();
-    		Image::make($foto)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
-    		$user->foto = $filename;
-    	}
         // ]); 
         $user->save();
 

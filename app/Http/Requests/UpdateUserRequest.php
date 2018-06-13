@@ -27,10 +27,11 @@ class UpdateUserRequest extends FormRequest
     {
         $roles = Role::pluck('id')->toArray();
         return [
-            'nombre' => 'required|min:3|max:50|regex:/^[\pL\s]+$/u',            
+            // 'nombre' => 'required|min:3|max:50|regex:/^[\pL\s]+$/u',            
+            'nombre' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9\s.]+$/',
             'phone' => 'nullable|digits:8',            
-            'direccion' => 'nullable|min:0|max:70',
-            'username' => 'required|alpha_dash|min:3',
+            'direccion' => 'nullable|string|min:0|max:70',
+            'username' => 'required|regex:/^[0-9A-Za-z.\-_]+$/|min:3|max:20',
             'ci' => 'required|numeric|digits_between:7,8',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
             'estado' => 'required',
@@ -40,7 +41,7 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombre.regex' => 'El campo nombre sólo puede contener letras y espacios.',
+            'nombre.regex' => 'El campo nombre sólo puede contener letras, números, espacios y puntos.',
         ];
     }
 }
