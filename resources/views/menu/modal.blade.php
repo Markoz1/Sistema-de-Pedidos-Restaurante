@@ -52,7 +52,7 @@
                     </a>
                   </div>
                   <div class="col-md-4">
-                    {!! Form::number('cantidad', 1, ['class' => 'form-control boxed text-center input-menu-cantidad px-1', 'min' => '1', 'max' => '10']) !!}
+                    {!! Form::text('cantidad', 1, ['class' => 'form-control-plaintext boxed text-center input-menu-cantidad px-1','readonly']) !!}
                   </div>
                   <div class="col-md-4">
                     <a class="btn btn-primary btn-menu-cantidad d-flex align-items-center justify-content-center" href="#" onclick="aumentar_cantidad()">
