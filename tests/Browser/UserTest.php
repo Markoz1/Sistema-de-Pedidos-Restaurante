@@ -36,7 +36,7 @@ class UserTest extends DuskTestCase
                 ->assertSee('Se creó un nuevo usuario')
                 ->assertPathIs('/users')
                 ->pause(3000);
-                $browser->visit('/users?page=5');
+                $browser->visit('/users?page=2');
                 $browser->pause(7000);
         });
     }
@@ -67,7 +67,7 @@ class UserTest extends DuskTestCase
                 ->assertSee('Se creó un nuevo usuario')
                 ->assertPathIs('/users')
                 ->pause(3000);
-                $browser->visit('/users?page=6');
+                $browser->visit('/users?page=4');
                 $browser->pause(7000);
         });
     }
