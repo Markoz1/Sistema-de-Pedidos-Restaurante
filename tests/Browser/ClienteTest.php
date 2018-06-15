@@ -14,7 +14,7 @@ class CLienteTest extends DuskTestCase
     /**
      * A Dusk test example.
      *
-     * @group clientes
+     * @group clientescreate
      * @return void
      */
      public function testCreateCliente()
@@ -33,6 +33,12 @@ class CLienteTest extends DuskTestCase
                      ->logout();                    
          });
      }
+     /**
+     * A Dusk test example.
+     *
+     * @group clientesupadate
+     *
+     */
      public function testUpdateCliente()
     {
         //$cliente = cliente::find(1);

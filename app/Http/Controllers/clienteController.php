@@ -23,7 +23,7 @@ class clienteController extends Controller
   function store(Request $request){
     $data = request()-> validate([
    			'nombre' =>'required|min:3|max:50|unique:cliente,nombre',
-            'nit'=>'nullable|numeric',
+            'nit'=>'nullable|numeric|unique:cliente,nit',
             'telefono'=>'nullable|numeric',
    			'direccion'=>'nullable|min:3|max:80',
         ]);
@@ -46,7 +46,7 @@ class clienteController extends Controller
     {
         $data = request()-> validate([
             'nombre' =>'required|min:3|max:50|unique:Cliente,nombre,'.$cliente->cliente_id . ",cliente_id",
-            'nit'=>'nullable|numeric|',
+            'nit'=>'nullable|numeric|unique:Cliente,nit,'.$cliente->cliente_id . ",cliente_id",
             'telefono'=>'nullable|numeric',
             'direccion'=>'nullable|min:3|max:80',
      ]);
