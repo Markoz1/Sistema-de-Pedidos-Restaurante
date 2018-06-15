@@ -13,11 +13,11 @@
     {!! Form::label('estado', 'Estado', ['class' => 'col-md-4 form-control-label text-xs-right']) !!}
     <div class="col-md-8">
         <label>
-            {!! Form::radio('estado',1, true,['class' => 'radio squared']) !!}
+            {!! Form::radio('estado',1, true,['class' => 'radio squared estado1']) !!}
             <span>Activo</span>
         </label>
         <label>
-            {!! Form::radio('estado',0, false,['class' => 'radio squared']) !!}
+            {!! Form::radio('estado',0, false,['class' => 'radio squared estado0']) !!}
             <span>Inactivo</span>
         </label>
     </div>

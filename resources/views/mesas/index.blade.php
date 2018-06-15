@@ -59,9 +59,9 @@
                                 </tbody>
                             </table>                            
                         </section>
-                        {!! $mesas->appends($_GET)->links('pagination') !!}
                     </div>                    
                 </div>
+                {!! $mesas->appends($_GET)->links('pagination') !!}
             </div>
         </div>
     </section>
