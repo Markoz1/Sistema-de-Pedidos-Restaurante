@@ -22,10 +22,10 @@ class clienteController extends Controller
 
   function store(Request $request){
     $data = request()-> validate([
-   			'nombre' =>'required|min:3|max:50',
-            'nit'=>'required|numeric|unique:Cliente,nit',
-            'telefono'=>'required|numeric',
-   			'direccion'=>'required|min:3|max:80',
+   			'nombre' =>'required|min:3|max:50|unique:cliente,nombre',
+            'nit'=>'nullable|numeric',
+            'telefono'=>'nullable|numeric',
+   			'direccion'=>'nullable|min:3|max:80',
         ]);
         
         Cliente::create([
@@ -45,12 +45,11 @@ class clienteController extends Controller
     public function update(Cliente $cliente)
     {
         $data = request()-> validate([
-            'nombre' =>'required|min:3|max:50',
-            'nit'=>'required|numeric|unique:Cliente,nit,'.$cliente->cliente_id . ",cliente_id",
-            'telefono'=>'required|numeric',
-            'direccion'=>'required|min:3|max:80',
+            'nombre' =>'required|min:3|max:50|unique:Cliente,nombre,'.$cliente->cliente_id . ",cliente_id",
+            'nit'=>'nullable|numeric|',
+            'telefono'=>'nullable|numeric',
+            'direccion'=>'nullable|min:3|max:80',
      ]);
-        $data = request()->all();
         $cliente->Update($data);
         return redirect()->route('clientes.index')->with('mensaje','La Lista de Clientes ha sido Actualizada');
     }
