@@ -12,7 +12,7 @@ class MesaTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
-     *
+     * @group mesas
      * @return void
      */
     public function testCreateMesa()
@@ -28,6 +28,11 @@ class MesaTest extends DuskTestCase
                     ->assertSee('Se creo una nueva Mesa');
         });
     }
+    /**
+     * A Dusk test example.
+     * @group mesas
+     * @return void
+     */
     public function testUpdateMesa()
     {
         $faker = Faker::create();
