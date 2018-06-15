@@ -12,7 +12,7 @@ class MesaTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
-     *
+     * @group mesas
      * @return void
      */
     public function testCreateMesa()
@@ -28,16 +28,23 @@ class MesaTest extends DuskTestCase
                     ->assertSee('Se creo una nueva Mesa');
         });
     }
+    /**
+     * A Dusk test example.
+     * @group mesas
+     * @return void
+     */
     public function testUpdateMesa()
     {
         $faker = Faker::create();
-        $mesas = User::where('role_id', 5)->pluck('id');
-        $id_aleatorio = $faker->randomElement($mesas->toArray());
-        $mesa = User::find($id_aleatorio);
-        $this->browse(function ($browser) use ($faker, $mesa) {
+        $password = $faker->password;
+        $this->browse(function ($browser) use ($faker, $password) {
             $browser->visit('/mesas')
-                    ->click('#edit'.$mesa->id)
-                    ->assertSee('Editar Mesa');
+                    ->click('#edit4')
+                    ->type('username',$faker->regexify('/^[a-zA-Z0-9_-]*$/'))
+                    ->type('password',$password)
+                    ->type('password_confirmation',$password)
+                    ->press('actualizar')
+                    ->assertSee('La Mesa se ha modificado');
         });
     }
 }
