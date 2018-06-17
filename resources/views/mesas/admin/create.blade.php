@@ -12,7 +12,7 @@
                         <div class="container">
                             @if (!isset($mesa_edit))
                             {!! Form::open(['route' => 'mesas.store']) !!}
-                                @include('mesas.form')
+                                @include('mesas.admin.form')
                             <div class="form-group row mt-4">
                                 <div class="col-sm-10 col-sm-offset-2">
                                     <button type="submit" class="btn btn-primary" name="crear"> Crear </button>

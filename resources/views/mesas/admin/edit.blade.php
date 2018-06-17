@@ -14,7 +14,7 @@
                             {!! Form::Model($mesa_edit, ['route' => ['mesas.update', $mesa_edit->id],'method' => 'put']) !!}
                             {{ Form::hidden('mesa_id', $mesa_edit->id) }}
                             @endisset
-                                @include('mesas.form')                            
+                                @include('mesas.admin.form')                            
                             <div class="form-group row">
                                 {!! Form::label('username', 'Nombre de usuario', ['class' => 'col-sm-4 form-control-label text-xs-right']) !!}
                                 <div class="col-sm-6">

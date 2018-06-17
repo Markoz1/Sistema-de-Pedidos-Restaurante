@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Role;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMesaRequest;
 use App\Http\Requests\UpdateMesaRequest;
 
@@ -13,7 +14,8 @@ class MesasController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
-        $this->middleware('administrador');
+        $this->middleware('cajero', ['only' => ['index']]);
+        $this->middleware('administrador', ['except' => ['index']]);
     }
     /**
      * Display a listing of the resource.
@@ -22,9 +24,14 @@ class MesasController extends Controller
      */
     public function index()
     {
-        $mesa_id = Role::where('nombre', 'Mesa')->first()->id;
-        $mesas = User::where('role_id', $mesa_id)->paginate(5);
-        return view('mesas.index', compact('mesas'));
+        if(Auth::user()->esAdministrador()){
+            $mesa_id = Role::where('nombre', 'Mesa')->first()->id;
+            $mesas = User::where('role_id', $mesa_id)->paginate(5);
+            return view('mesas.admin.index', compact('mesas'));
+        }   
+        if(Auth::user()->esCajero()){
+            return view('mesas.caja.index');
+        }     
     }
 
     /**
@@ -82,7 +89,7 @@ class MesasController extends Controller
         $mesas = User::where('role_id', $mesa_id)->paginate(5);
         $mesa_edit = User::findOrFail($id);
         $mesa_edit->numero = substr($mesa_edit->nombre, 5);
-        return view('mesas.index', compact('mesas', 'mesa_edit'));
+        return view('mesas.admin.index', compact('mesas', 'mesa_edit'));
     }
 
     /**

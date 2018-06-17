@@ -8,8 +8,8 @@
             @endif
         </h3>
     </div>
-    @include('mesas.create')
-    @include('mesas.edit')
+    @include('mesas.admin.create')
+    @include('mesas.admin.edit')
     <div class="subtitle-block">
         <h3 class="subtitle"> Listado de mesas </h3>
     </div>

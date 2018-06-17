@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Role;
+use App\Model\Cuenta;
 use App\Model\Pedido;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,9 +25,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    public function pedidos()
+    public function cuentas()
     {
-        return $this->hasMany(Pedido::class,'users_id');
+        return $this->hasMany(Cuenta::class,'users_id');
     }
     public function esAdministrador()
     {

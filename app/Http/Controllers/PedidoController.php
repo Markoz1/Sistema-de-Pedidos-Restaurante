@@ -45,13 +45,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('menu.index');
-        $pedido = new Pedido(['mesa' => 'mesa 1', 'total' => '122.00']);
-        $pedido->save();
-        $productos = Producto::all();         
-        foreach ($productos as $producto) {
-            $pedido->productos()->attach($producto->producto_id, ['pedido_id' => $pedido->pedido_id ,'cantidad' => '1', 'subtotal' => $producto->precio]);
-        }
+
     }
 
     /**
@@ -67,7 +61,7 @@ class PedidoController extends Controller
             $total = $request->pedido['total'];        
             $estado_pedido = -1;
             $cuenta_id = 1;//solo para probar se agregaran pedidos a la cuenta id=1
-            $pedido = new Pedido(['users_id' => $mesa_id, 'total' => $total,'estado_pedido' => $estado_pedido,'cuenta_id' => $cuenta_id]);
+            $pedido = new Pedido(['total' => $total,'estado_pedido' => $estado_pedido,'cuenta_id' => $cuenta_id]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {
@@ -112,7 +106,6 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {   
-        $a=$pedido->cuentas();
         if($request->ajax()){
             if($pedido->estado_pedido == -1){
                 DB::update('update pedido set estado_pedido = 0 where pedido_id ='.$pedido->pedido_id);
@@ -123,8 +116,7 @@ class PedidoController extends Controller
             //se tiene que agregar el valor a la cuenta actual por que se entrego el pedido
 
             return response()->json([
-                'pedido' => $pedido,
-                'cuentas' => $a        
+                'pedido' => $pedido      
             ]);
         }
     }
@@ -138,26 +130,5 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function existePedido($mesa){
-        $pedidos = Pedido::all()->where('mesa',$mesa);
-        $cuentas = Cuenta::all();
-        $res=['existe' => false];
-        $encontrado = false;
-        
-        foreach($pedidos as $pedido){
-            if($encontrado==false){
-                foreach($cuentas as $cuenta){
-                    if($pedido->pedido_id == $cuenta->pedido_id && $cuenta->estado_pago==false){
-                        $encontrado=true;
-                        $res =['existe'=>true, 'pedido_id' => $pedido->pedido_id];
-                        break;
-                    }
-                }
-            }else{
-                break;
-            }   
-        }
-        return response()->json($res);
     }
 }

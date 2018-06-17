@@ -12,10 +12,11 @@ class CuentaSeeder extends Seeder
      */
     public function run()
     {
-        //seeder de prueba, creando una cuenta para el cliente de id=1
+        //seeder de prueba, creando una cuenta para el cliente de id=1 y la mesa 1
         Cuenta::create([
             'estado' => '0',
             'cliente_id' => '1',
+            'users_id' => '4'
         ]);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserToPedido extends Migration
+class AddUserToCuenta extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUserToPedido extends Migration
      */
     public function up()
     {
-        Schema::table('pedido', function (Blueprint $table) {
-            $table->unsignedInteger('users_id')->after('total');;
+        Schema::table('cuenta', function (Blueprint $table) {
+            $table->unsignedInteger('users_id')->after('cliente_id');;
             $table->foreign('users_id')->references('id')->on('users'); 
         });
     }
@@ -26,7 +26,7 @@ class AddUserToPedido extends Migration
      */
     public function down()
     {
-        Schema::table('pedido', function (Blueprint $table) {
+        Schema::table('cuenta', function (Blueprint $table) {
             $table->dropForeign(['users_id']);
             $table->dropColumn('users_id');
         });

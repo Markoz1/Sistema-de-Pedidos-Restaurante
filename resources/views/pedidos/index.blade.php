@@ -36,7 +36,7 @@
                                         @if ($pedido->estado_pedido == -1)
                                            <tr id="fila{{ $pedido->pedido_id }}">
                                                 <th scope="row" id="pedido{{ $pedido->pedido_id }}"></th>
-                                                <td>{{ $pedido->mesa->nombre }}</td>
+                                                <td>{{ $pedido->cuenta->mesa->nombre }}</td>
                                                 <td>
                                                     <form method="POST" role="form" id="formulario1" action="{{ url("pedidos/") }}">
                                                         <input type="hidden" name="_method" id="met1" value="PUT">
@@ -52,7 +52,7 @@
                                             @if($pedido->estado_pedido == 0)
                                                 <tr id="fila{{ $pedido->pedido_id }}" class="bg-warning">
                                                     <th scope="row" id="pedido{{ $pedido->pedido_id }}"></th>
-                                                    <td>{{ $pedido->mesa->nombre }}</td>
+                                                    <td>{{ $pedido->cuenta->mesa->nombre }}</td>
                                                     <td><button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning badge badge-success" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})" disabled="true">Preparando</button></td>
                                                     <td>
                                                         <a href="#" class="btn btn-secondary"  onclick="mostrarProductos({{ $pedido->pedido_id }},{{$pedido->productos}},{{$datos_pivot}}[{{$pedido->pedido_id}}])">({{ count($pedido->productos) }}) Productos</a>
