@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Cuenta;
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
@@ -10,6 +11,11 @@ class Cliente extends Model
     protected $primaryKey = 'cliente_id';
 
     public $fillable = [
-        'cliente_id','nombre','nit', 'telefono', 'direccion'
+        'nombre','nit', 'telefono', 'direccion'
     ];
+    
+    public function cuentas()
+    {
+        return $this->hasMany(Cuenta::class, 'cliente_id');
+    }
 }

@@ -13,7 +13,7 @@ class Pedido extends Model
     protected $primaryKey = 'pedido_id';
 
     public $fillable = [
-        'total', 'users_id','estado_pedido'
+        'total', 'users_id','estado_pedido','cuenta_id'
     ];
 
     public function productos()
@@ -28,12 +28,11 @@ class Pedido extends Model
         return $this->belongsTo(User::class,'users_id');
     }
 
-    public function cuentas()
+    public function cuenta()
     {
-        return $this->belongsToMany(Cuenta::class, 'cuenta_pedido', 'pedido_id', 'cuenta_id')
-            ->withPivot('total_pedido')
-            ->withTimestamps();
+        return $this->belongsTo(Cuenta::class, 'cuenta_id');
     }
+
     public function productosSeed($semilla){
         return $this->belongsToMany(Producto::class, 'pedido_producto', $semilla->pedidp_id, $semilla->producto_id)
             ->withPivot($semilla->cantidad, $semilla->subtotal)

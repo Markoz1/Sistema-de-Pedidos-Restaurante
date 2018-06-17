@@ -14,8 +14,7 @@ class CuentaController extends Controller
      */
     public function index()
     {
-        $cuentas = Cuenta::all();
-        return view('cuentas.index', ['cuentas' => $cuentas]);
+
     }
 
     /**
@@ -25,7 +24,7 @@ class CuentaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,23 +35,6 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     { 
-        if ($request->ajax()) {
-            $cuenta = $this->existeCuentaActiva($request->pedido_id);
-            if($cuenta == false){
-                Cuenta::create([
-                    'estado_pago' => false,
-                    'total' => $request->monto_total,
-                    'pedido_id' => $request->pedido_id,
-                    'cliente_id' => 1
-                ]);
-                $cuentaNueva = $this->existeCuentaActiva($request->pedido_id);
-                
-                $res = ["cuenta_id" => $cuentaNueva->cuenta_id, 'mensaje'=> 'ya cre mi cuenta nueva'];
-            }else{
-                $res = ["cuenta_id" => $cuenta->cuenta_id, 'mensaje'=> 'actualice los datos del pedido de esta cuenta'];
-            }
-            return response()->json($res);
-        }
 
     }
 
@@ -100,17 +82,4 @@ class CuentaController extends Controller
     {
         //
     }
-
-    public function existeCuentaActiva($pedido_id){
-        $res=false;
-        $datas=Cuenta::all();
-        foreach($datas as $data){
-            if($data->estado_pago==false && $data->pedido_id==$pedido_id){
-                $res = $data;
-                break;
-            }
-        }
-        return $res;
-    }
-
 }

@@ -2,26 +2,26 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Model\Pedido;
+use App\Model\Cliente;
+use Illuminate\Database\Eloquent\Model;
 
 class Cuenta extends Model
 {
     protected $table = 'cuenta';
-    protected $primaryKey = 'cuenta_id';
+    protected $primaryKey = 'id';
 
     public $fillable = [
-        'cuenta_id','estado_pago','total', 'pedido_id','cliente_id'
+        'estado','total','recibido','cambio','cliente_id'
     ];
-    /*
+
     public function pedidos()
     {
-        return $this->belongsToMany(Pedido::class,'cuenta_pedido','cuenta_id', 'pedido_id')
-            ->withPivot('total_pedido')
-            ->withTimestamps();
+        return $this->hasMany(Pedido::class, 'cuenta_id');
+    }
 
-    }*/
-    public function pedido(){
-        return $this->belongsTo(Pedido::class,'pedido_id');
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 }

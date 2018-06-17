@@ -63,23 +63,19 @@ class PedidoController extends Controller
     public function store(Request $request)
     {       
         if ($request->ajax()) {
-            //$cuenta_id=$request->pedido['cuenta_id'];
             $mesa_id = $request->pedido['mesa_id'];
-            $total = $request->pedido['total'];
-        
+            $total = $request->pedido['total'];        
             $estado_pedido = -1;
-            $pedido = new Pedido(['users_id' => $mesa_id, 'total' => $total,'estado_pedido' => $estado_pedido]);
+            $cuenta_id = 1;//solo para probar se agregaran pedidos a la cuenta id=1
+            $pedido = new Pedido(['users_id' => $mesa_id, 'total' => $total,'estado_pedido' => $estado_pedido,'cuenta_id' => $cuenta_id]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
             foreach ($productos as $producto) {
                 $pedido->productos()->attach($producto['id'], ['pedido_id' => $pedido->pedido_id ,'cantidad' => $producto['cantidad'], 'subtotal' => $producto['subtotal']]);
-            }
-            //$pedido->cuentas()->attach($cuenta_id,['pedido_id' => $pedido->pedido_id,'total_pedido' => $total]);     
+            }  
             return response()->json([
                 "mensaje1" => "Realizando orden…",
-                "mensaje2" => "Orden Completa Gracias.",
-                "pedido_id" => $pedido->pedido_id,
-                "monto_total" => $pedido->total
+                "mensaje2" => "Orden Completa Gracias."
             ]);
             
         }
