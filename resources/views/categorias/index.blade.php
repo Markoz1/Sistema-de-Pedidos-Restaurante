@@ -106,9 +106,9 @@
     </article>
 @endsection
 @section('script')
-    @if($errors->has('nombre'))
+    @if($errors->has('nombreCategoria'))
     <script>
-        $('#create_mesa').collapse('show');
+        $('#create_categoria').collapse('show');
     </script>        
     @endif
     <script>

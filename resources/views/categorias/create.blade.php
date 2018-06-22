@@ -19,6 +19,19 @@
                             </span>							
                         @endif             
                     </div>
+                    <div class="form-group row">
+                        <label for="estado" class="col-md-4 form-control-label text-xs-right">Estado</label>
+                        <div class="col-md-8">
+                            <label>
+                                <input class="radio squared estado1" checked="checked" name="estado" type="radio" value="1" id="estado">
+                                <span>Activo</span>
+                            </label>
+                            <label>
+                                <input class="radio squared estado0" name="estado" type="radio" value="0" id="estado">
+                                <span>Inactivo</span>
+                            </label>
+                        </div>
+                    </div>
                     <div class="form-group row mt-4">
                         <div class="col-sm-10 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary"> Crear</button>

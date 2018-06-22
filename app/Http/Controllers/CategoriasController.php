@@ -47,7 +47,7 @@ class CategoriasController extends Controller
         $data = request()->all();
         Categoria::create([
             'nombre' => $data['nombreCategoria'],
-            'estado' => true
+            'estado' => $data['estado']
         ]);
         return redirect()->route('categorias.index')->with('mensaje','La categoria se creo correctamente');
     }
