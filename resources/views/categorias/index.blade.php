@@ -3,7 +3,9 @@
 
     <article class="content items-list-page">
         <div class="title-block">
-                <h1 class="title"> Categorias </h1>
+                <h1 class="title"> Categorias 
+                    <a href="#" class="btn btn-primary btn-sm rounded-s" onclick="crear_categoria()" id="nueva_categoria" name="nueva_categoria"> Nueva Categoria </a>
+                </h1>
                 <p class="title-description"> Lista de categorias </p>
         </div>
         @if(session('mensaje'))
@@ -12,31 +14,7 @@
                 {{ session('mensaje') }}
             </div>
         @endif
-        <section class="section">
-            <div class="card card-block sameheight-item">
-                <div class="title-block">
-                    <h3 class="title"> Ingrese los datos de la nueva categoria </h3>
-                </div>
-                <form method="POST" role="form" action="{{url('categorias')}}" >
-                    {{ csrf_field() }} 
-                    <div class="form-group has-error">
-                        <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombreCategoria" value="{{ old('nombreCategoria')}}">
-                        @if( $errors->has('nombreCategoria') )
-                            <span class="has-error">
-                            {{ $errors->first('nombreCategoria') }}
-                            </span>							
-                        @endif             
-                    </div>
-                    <div class="form-group row mt-4">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <button type="submit" class="btn btn-primary"> Crear</button>
-            
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
+        @include('categorias.create')
         <div class="card items">
             <ul class="item-list striped">
                 <li class="item item-list-header">
@@ -126,4 +104,16 @@
             </ul>
         </div>
     </article>
+@endsection
+@section('script')
+    @if($errors->has('nombre'))
+    <script>
+        $('#create_mesa').collapse('show');
+    </script>        
+    @endif
+    <script>
+        function crear_categoria() {
+            $('#create_categoria').collapse('toggle');
+        };        
+    </script>
 @endsection
