@@ -103,8 +103,12 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //cambiar estado a oculto para siempre
+    public function destroy(Categoria $categoria){
+        //cambiar estado a oculto para siempre para el eliminar
+    }
+    public function eliminar(Categoria $categoria){
+        $categoria->estado_eliminado = true;
+        $categoria->update();
+        return redirect()->route('categorias.index')->with('mensaje','La categoria a sido eliminada correctamente');
     }
 }

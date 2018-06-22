@@ -43,47 +43,49 @@
                     </div>
                 </li>
                 @foreach ($categorias as $categoria)
-                <li class="item">
-                    <div class="item-row">
-                        <div class="item-col fixed item-col-img md">
-                            <div class="item-heading"># Id</div>
-                            <div class="no-overflow"> {{ $categoria->categoria_id}} </div>
-                        </div>
-                        <div class="item-col fixed pull-left item-col-title">
-                            <div class="item-heading">Nombre</div>
-                            <div>
-                                <div class="no-overflow"> {{ $categoria->nombre }} </div>
-                            </div>
-                        </div>
-                        <div class="item-col item-col-sales">
-                            <div class="item-heading">Estado</div>
-                            @if ($categoria->estado == 1)
-                                <div class="no-overflow">
-                                    <span class="badge badge-success">{{ "Activo" }}</span>
+                    @if($categoria->estado_eliminado == false)
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-img md">
+                                    <div class="item-heading"># Id</div>
+                                    <div class="no-overflow"> {{ $categoria->categoria_id}} </div>
                                 </div>
-                            @else
-                                <div class="no-overflow">
-                                    <span class="badge badge-danger">{{ "Inactivo" }}</span>
+                                <div class="item-col fixed pull-left item-col-title">
+                                    <div class="item-heading">Nombre</div>
+                                    <div>
+                                        <div class="no-overflow"> {{ $categoria->nombre }} </div>
+                                    </div>
                                 </div>
-                                
-                            @endif
-                        
-                        </div>
-                        <div class="item-col item-col-date">
-                            <div class="item-heading">Acciones</div>
-                        </div>
-                        <div class="item-col fixed item-col-actions-dropdown">
-                            <div class="item-actions-dropdown">
-                                <a class="remove" href="#" data-toggle="modal" data-target="#confirm-modal">
-                                    <i class="fa fa-trash-o "></i>
-                                </a>
-                                <a class="edit" href="{{ route('categorias.edit',[$categoria->categoria_id]) }}">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
+                                <div class="item-col item-col-sales">
+                                    <div class="item-heading">Estado</div>
+                                    @if ($categoria->estado == 1)
+                                        <div class="no-overflow">
+                                            <span class="badge badge-success">{{ "Activo" }}</span>
+                                        </div>
+                                    @else
+                                        <div class="no-overflow">
+                                            <span class="badge badge-danger">{{ "Inactivo" }}</span>
+                                        </div>
+                                        
+                                    @endif
+                                </div>
+                                <div class="item-col item-col-date">
+                                    <div class="item-heading">Acciones</div>
+                                </div>
+                                <div class="item-col fixed item-col-actions-dropdown">
+                                    <div class="item-actions-dropdown">
+                                        {{ csrf_field() }}                                   
+                                        <a class="edit" type="button" href="{{ route('categorias.eliminar',$categoria) }}">
+                                            <i class="fa fa-trash-o "></i>
+                                        </a>
+                                        <a class="edit" href="{{ route('categorias.destroy',$categoria) }}">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
         </div>
