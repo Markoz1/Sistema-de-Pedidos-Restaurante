@@ -78,7 +78,7 @@
                                         <a class="edit" href="{{ route('categorias.eliminar',$categoria) }}">
                                             <i class="fa fa-trash-o "></i>
                                         </a>
-                                        <a class="edit" href="{{ route('categorias.destroy',$categoria) }}">
+                                        <a class="edit" href="{{ route('categorias.edit',$categoria) }}">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </div>
