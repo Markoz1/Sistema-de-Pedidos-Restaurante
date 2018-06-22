@@ -14,19 +14,23 @@ class CategoriaSeeder extends Seeder
     {
         Categoria::create([
             'nombre' => 'Plato Principal',
-            'estado' => true
+            'estado' => true,
+            'estado_eliminado' => false
         ]);
         Categoria::create([
             'nombre' => 'Postre',
-            'estado' => true
+            'estado' => true,
+            'estado_eliminado' => false
         ]);
         Categoria::create([
             'nombre' => 'Bebida',
-            'estado' => true
+            'estado' => true,
+            'estado_eliminado' => false
         ]);
         Categoria::create([
             'nombre' => 'Combos',
-            'estado' => false
+            'estado' => false,
+            'estado_eliminado' => false
         ]);
     }
 }
