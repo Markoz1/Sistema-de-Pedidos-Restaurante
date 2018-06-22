@@ -75,7 +75,7 @@
                                 <div class="item-col fixed item-col-actions-dropdown">
                                     <div class="item-actions-dropdown">
                                         {{ csrf_field() }}                                   
-                                        <a class="edit" type="button" href="{{ route('categorias.eliminar',$categoria) }}">
+                                        <a class="edit" href="{{ route('categorias.eliminar',$categoria) }}">
                                             <i class="fa fa-trash-o "></i>
                                         </a>
                                         <a class="edit" href="{{ route('categorias.destroy',$categoria) }}">
