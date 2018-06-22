@@ -57,7 +57,8 @@ class CuentaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cuenta = Cuenta::findOrFail($id);
+        return view('cuentas.facturacion',compact('cuenta'));
     }
 
     /**
