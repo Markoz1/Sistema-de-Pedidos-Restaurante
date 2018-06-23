@@ -79,9 +79,11 @@ class ProductoController extends Controller
      * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
-    {
-        //
+    public function edit($id)
+    {   
+        $producto = Producto::findOrFail($id);
+        $categorias = Categoria::all();
+        return view('productos.edit', compact('producto','categorias'));
     }
 
     /**
@@ -93,7 +95,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        dd($producto);
     }
 
     /**

@@ -160,7 +160,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="edit" href="#">
+                                            <a class="edit" href="{{ route('productos.edit',$producto) }}">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                         </li>
