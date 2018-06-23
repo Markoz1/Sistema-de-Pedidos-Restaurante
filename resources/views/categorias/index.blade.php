@@ -15,6 +15,7 @@
             </div>
         @endif
         @include('categorias.create')
+        @include('categorias.edit')
         <div class="card items">
             <ul class="item-list striped">
                 <li class="item item-list-header">
@@ -78,7 +79,7 @@
                                         <a class="edit" href="{{ route('categorias.eliminar',$categoria) }}">
                                             <i class="fa fa-trash-o "></i>
                                         </a>
-                                        <a class="edit" href="{{ route('categorias.edit',$categoria) }}">
+                                        <a class="edit" href="{{ route('categorias.edit',$categoria) }}" onclick="edit_categoria()">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </div>
@@ -101,5 +102,11 @@
         function crear_categoria() {
             $('#create_categoria').collapse('toggle');
         };        
+    </script>
+    <script>
+        $('#edit_categoria').collapse('show');             
+        $('#cerrar').click(function() {
+            window.location.replace('{{route('categorias.index')}}');
+        });
     </script>
 @endsection

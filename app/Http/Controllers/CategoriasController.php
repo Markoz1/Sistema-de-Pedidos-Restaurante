@@ -35,8 +35,8 @@ class CategoriasController extends Controller
     {
         return view('categorias/create');
     }
-
     /**
+
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -71,10 +71,12 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
-    {   
+    public function edit($id)
+    {   //buscar el dato
+        $categoria_edit =Categoria::findOrFail($id);
         //['categoria' => $categoria]
-        return view('categorias.edit', compact('categoria'));
+        $categorias = Categoria::all();
+        return view('categorias.index', compact('categoria_edit','categorias'));
     }
 
     /**
