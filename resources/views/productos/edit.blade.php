@@ -1,15 +1,14 @@
 @extends('layout.main')
 @section('content')
     <article class="content item-editor-page">
-        <form method="POST" action={{ url("productos/{$producto->producto_id}") }} accept-charset="UTF-8" enctype="multipart/form-data">
+        <form method="POST" role="form" action="{{ url("productos/{$producto->producto_id}") }}" accept-charset="UTF-8" enctype="multipart/form-data">
             {{ method_field('PUT') }}
             {{ csrf_field() }} 
             <div class="card card-block">
                 <div class="form-group row">
                     <label for="nombre" class="col-sm-2 form-control-label text-xs-right">Nombre</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nombre" value="{{$producto->nombre}}">
-                        <input type="hidden" name="estado_id" value="1">
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{$producto->nombre}}">
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
@@ -30,7 +29,7 @@
                                 <option selected="selected">Selecciona una Categoria</option>
                                 @foreach ($categorias as $categoria)
                                     @if ($categoria->categoria_id == $producto->categoria_id)
-                                        <option selected value="{{ $categoria->categoria_id }}" >{{ $categoria->nombre }}</option>    
+                                        <option value="{{ $categoria->categoria_id }}" selected>{{ $categoria->nombre }}</option>    
                                     @else
                                         <option value="{{ $categoria->categoria_id }}">{{ $categoria->nombre }}</option>
                                     @endif
@@ -49,15 +48,14 @@
                 <div class="form-group row">
                     <label for="foto" class="col-sm-2 form-control-label text-xs-right">Foto</label>
                     <div class="col-sm-10">
-                        <input class="form-control boxed " accept="image/*" name="foto" type="file" id="foto">
+                        <input class="form-control" name="foto" type="file" id="foto">
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
-                
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary"> Atualizar </button>
-                        <button type="submit" class="btn btn-secundary"> Cancelar </button>
+                       
                     </div>
                 </div>
             </div>

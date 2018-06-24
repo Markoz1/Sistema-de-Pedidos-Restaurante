@@ -6,6 +6,7 @@ use App\Model\Producto;
 use App\Model\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductoRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -95,7 +96,19 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        dd($producto);
+        $dato = request()->all();
+        $producto->nombre = $dato['nombre']; 
+        $producto->precio = $dato['precio'];
+        $producto->categoria_id = $dato['categoria_id'];
+        $producto->descripcion = $dato['descripcion'];
+        if($request->foto != null){
+            Storage::delete($producto->foto);
+            $path_foto = 'storage/'.$request->foto->store('fotos', 'public');
+            $producto->foto = $path_foto;
+        }
+        $producto->update();
+        return redirect()->route('productos.index')->with('mensaje','El producto se actualizo correctamente');
+    
     }
 
     /**
