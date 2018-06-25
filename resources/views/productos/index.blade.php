@@ -144,28 +144,12 @@
                         </div>
                         <div class="item-col fixed item-col-actions-dropdown">
                             <div class="item-actions-dropdown">
-                                <a class="item-actions-toggle-btn">
-                                    <span class="inactive">
-                                        <i class="fa fa-cog"></i>
-                                    </span>
-                                    <span class="active">
-                                        <i class="fa fa-chevron-circle-right"></i>
-                                    </span>
+                                <a class="remove" href="#" data-toggle="modal" data-target="#confirm-modal">
+                                    <i class="fa fa-trash-o "></i>
                                 </a>
-                                <div class="item-actions-block">
-                                    <ul class="item-actions-list">
-                                        <li>
-                                            <a class="remove" href="#" data-toggle="modal" data-target="#confirm-modal">
-                                                <i class="fa fa-trash-o "></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="edit" href="{{ route('productos.edit',$producto) }}">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a class="edit" href="{{ route('productos.edit',$producto) }}">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
