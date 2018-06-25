@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Producto;
 use App\Model\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateProductoRequest;
 use App\Http\Requests\StoreProductoRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -94,7 +95,7 @@ class ProductoController extends Controller
      * @param  \App\Model\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(UpdateProductoRequest $request, Producto $producto)
     {
         $dato = request()->all();
         $producto->nombre = $dato['nombre']; 

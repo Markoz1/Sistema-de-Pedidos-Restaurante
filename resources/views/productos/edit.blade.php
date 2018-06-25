@@ -6,23 +6,24 @@
             {{ csrf_field() }} 
             <div class="card card-block">
                 <div class="form-group row">
-                    <label for="nombre" class="col-sm-2 form-control-label text-xs-right">Nombre</label>
+                    {!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{$producto->nombre}}">
-                        <div class="invalid-feedback"></div>
+                        {!! Form::text('nombre',$producto->nombre, ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':'')]) !!}
+                        <input type="hidden" name="estado_id" value="1">
+                        <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="precio" class="col-sm-2 form-control-label text-xs-right">Precio</label>
+                    {!! Form::label('precio', 'Precio', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
                     <div class="input-group col-sm-10">                        
-                        <input class="form-control boxed " min="0" step="0.01" name="precio" type="number" id="precio" value="{{ $producto->precio }}">
+                        {!! Form::number('precio', $producto->precio, ['class' => 'form-control boxed '.($errors->has('precio')?'is-invalid':''), 'min' => '0', 'step' => '0.01']) !!}
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="precio">BOB</span>
                         </div>
-                        <div class="invalid-feedback"></div>
+                        <div class="invalid-feedback">{{ $errors->first('precio') }}</div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group has-error row">
                         <label for="categoria_id" class="col-sm-2 form-control-label text-xs-right">Categoría</label>
                         <div class="col-sm-10">
                             <select class="form-control boxed " id="categoria_id" name="categoria_id">
@@ -36,22 +37,28 @@
                                 @endforeach()
                             </select>
                             <div class="invalid-feedback"></div>
+                            @if( $errors->has('categoria_id') )
+                            <span class="has-error">
+                            {{ $errors->first('categoria_id') }}
+                            </span>							
+                            @endif
                         </div>
                     </div>
-                <div class="form-group row">
-                    <label for="descripcion" class="col-sm-2 form-control-label text-xs-right">Descripción</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control boxed " placeholder="Escribe una breve descripción..." rows="3" name="descripcion" cols="50" id="descripcion">{{$producto->descripcion}}</textarea>
-                        <div class="invalid-feedback"></div>
+                    <div class="form-group row">
+                        {!! Form::label('descripcion', 'Descripción', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::textarea('descripcion', $producto->descripcion, 
+                            ['class' => 'form-control boxed '.($errors->has('descripcion')?'is-invalid':''), 'placeholder' => 'Escribe una breve descripción...', 'rows' => '3']) !!}
+                            <div class="invalid-feedback">{{ $errors->first('descripcion') }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="foto" class="col-sm-2 form-control-label text-xs-right">Foto</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" name="foto" type="file" id="foto">
-                        <div class="invalid-feedback"></div>
+                    <div class="form-group row">
+                        {!! Form::label('foto', 'Foto', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::file('foto', ['class' => 'form-control boxed '.($errors->has('foto')?'is-invalid':''), 'accept' => 'image/*']) !!}
+                            <div class="invalid-feedback">{{ $errors->first('foto') }}</div>
+                        </div>
                     </div>
-                </div>
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary"> Atualizar </button>

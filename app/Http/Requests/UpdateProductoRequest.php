@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Model\Categoria;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProductoRequest extends FormRequest
 {
@@ -28,7 +30,7 @@ class UpdateProductoRequest extends FormRequest
             'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
             'precio' => 'required|numeric|min:0.1|max:9999.00',
             'descripcion' => 'required|min:4|max:255',
-            'foto' => 'required|image|max:5120',
+            'foto' => 'image|max:5120',
             'categoria_id' => ['required',Rule::in($categorias)],
         ];
     }
