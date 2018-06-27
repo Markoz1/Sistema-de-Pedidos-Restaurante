@@ -48,6 +48,7 @@
                             <div class="card-block">
                                 <section class="example">
                                     <table style="margin: auto">
+                                        
                                         <thead>
                                             <tr>
                                                 <th>Cantidad</th>
@@ -57,19 +58,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            
+                                            @foreach ( $cuenta->pedidos as $pedido )
+                                                @foreach ($pedido->productos as $producto )
+                                                    <tr>
+                                                        <td> {{ $producto->pivot->cantidad }}</td>
+                                                        <td>{{ $producto->nombre }}</td>
+                                                        <td>{{ $producto->precio }}</td>
+                                                        <td>{{ $producto->pivot->subtotal }}</td>
+                                                    </tr>
+                            
+                                                @endforeach
+                                            @endforeach
                                             <tr>
-                                                <th>3</th>
-                                                <td>pique</td>
-                                                <td>30</td>
-                                                <td>90</td>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td>Total a pagar</td>
+                                                <td>{{ $cuenta->total }}</td>
                                             </tr>
-                                            <!-- aca entra el foreach de lps pedidos y productos para mostrar -->
-                                            <tr>
-                                                    <th scope="row"></th>
-                                                    <td></td>
-                                                    <td>Total a pagar</td>
-                                                    <td>{{ $cuenta->total }}</td>
-                                                </tr>
                                         </tbody>
                                     </table>
                                 </section>
