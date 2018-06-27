@@ -23,6 +23,9 @@ Route::get('logout', 'LoginController@logout')->name('logout');
 Route::resource('mesas', 'MesasController');
 Route::resource('clientes', 'clienteController');
 Route::resource('cuentas','CuentaController');
+Route::get('cuentas/{cuenta}/factura/','CuentaController@pdf')
+		->name('cuentas.facturaPDF');
+//Route::get('cuentas/pdf/{cuenta}/factura',)
 Route::get('/pedidos/{pedido}','PedidoController@existePedido')
 		->name('pedidos.existe');
 Route::resource('users', 'UserController');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Cuenta;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CuentaController extends Controller
 {
@@ -14,7 +15,8 @@ class CuentaController extends Controller
      */
     public function index()
     {
-
+        $cuentas = Cuenta::all();
+        return view('cuentas.index', ['cuentas' => $cuentas]);
     }
 
     /**
@@ -81,5 +83,18 @@ class CuentaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function pdf(Cuenta $cuenta){
+        $id_cliente = $cuenta->cliente_id;
+        $id_usuario = $cuenta->users_id;
+        $fecha = $this->calcularFecha($cuenta->updated_at);
+        $cuenta->updated_at=$fecha;
+        $pdf = PDF::loadView('cuentas.pdf.factura', compact('cuenta','fecha'));
+        return $pdf->download('factura.pdf');
+        //return view('cuentas.pdf.factura',compact('cuenta','fecha'));
+    }
+    private function calcularFecha($fecha){
+        $res= explode(' ',$fecha)[0];
+        return $res;
     }
 }

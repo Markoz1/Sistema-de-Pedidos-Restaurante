@@ -28,12 +28,19 @@
                                     <tbody>
                                         @foreach ($cuentas as $cuenta)
                                             <tr>
-                                                <th scope="row">{{$cuenta->mesa}}</th>
-                                                <td>{{$cuenta->precio_total}}</td>
-                                                <td>Boton detalle</td>
+                                                <th scope="row">{{$cuenta->mesa->id}}</th>
+                                                <td>{{$cuenta->total}}</td>
+                                                <td>
+                                                    <div class="item-actions-block">
+                                                        <ul class="item-actions-list">
+                                                            <a class="btn btn-primary" href="{{ route('cuentas.facturaPDF',[$cuenta->id]) }}" id="edit5" type="button">
+                                                                <span> Imprimir factura </span>
+                                                            </a>
+                                                        </ul>
+                                                    </div>
+                                                </td>
                                             </tr>    
                                         @endforeach
-                                        
                                     </tbody>
                                 </table>
                             </section>
