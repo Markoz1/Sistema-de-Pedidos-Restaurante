@@ -2,7 +2,7 @@
 @section('content')
     <article class="content">
         <div class="title-block">
-            <h3 class="title"> Información de la Factura
+            <h3 class="title"> Facturación
             </h3>
         </div>
         {{-- <div class="subtitle-block">
@@ -10,23 +10,76 @@
         </div> --}}
         <section class="section">
             <div class="card card-block">
-                {!! Form::Model($cuenta, ['route' => ['mesas.update', $cuenta->id],'method' => 'put']) !!}
-                <h4 class="tittle">Cliente</h4>
-                <div class="form-group row">
-                    {!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
-                    <div class="col-sm-10">
-                        {!! Form::text('nombre', $cuenta->cliente->nombre, ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':'')]) !!}
-                        <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
+                <div class="row">
+                    <div class="col-md-6 px-5">
+                        {!! Form::Model($cuenta, ['route' => ['mesas.update', $cuenta->id],'method' => 'put']) !!}
+                        <div class="title-block">
+                            <h3 class="title">Cliente 
+                                <a href="#" class="btn-sm"><i class="fa fa-plus"></i> Agregar Cliente</a>
+                            </h3>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('nombre', 'Nombre', ['class' => 'control-label']) !!}
+                            {!! Form::text('nombre', $cuenta->cliente->nombre, ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':''),'readonly'])!!}
+                            <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('nit', 'Nit', ['class' => 'control-label']) !!} 
+                            {!! Form::text('nit', $cuenta->cliente->nit,['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':''),'readonly'])!!}
+                            <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
+                        </div>
+                        <div class="title-block">
+                            <h3 class="title">Información Factura</h3>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('fecha', 'Fecha', ['class' => 'control-label']) !!}
+                            {!! Form::date('fecha', $cuenta->created_at, ['class' => 'form-control boxed '.($errors->has('fecha')?'is-invalid':''),'readonly'])!!}
+                            <div class="invalid-feedback">{{ $errors->first('fecha') }}</div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('total', 'Total (Bs.)', ['class' => 'control-label']) !!}
+                            {!! Form::number('total', null, ['class' => 'form-control boxed '.($errors->has('total')?'is-invalid':''),'readonly'])!!}
+                            <div class="invalid-feedback">{{ $errors->first('total') }}</div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('recibido', 'Recibido (Bs.)', ['class' => 'control-label']) !!}
+                            {!! Form::number('recibido', null, ['class' => 'form-control boxed '.($errors->has('recibido')?'is-invalid':'')])!!}
+                            <div class="invalid-feedback">{{ $errors->first('recibido') }}</div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('cambio', 'Cambio (Bs.)', ['class' => 'control-label']) !!}
+                            {!! Form::number('cambio', null, ['class' => 'form-control boxed '.($errors->has('cambio')?'is-invalid':''),'readonly'])!!}
+                            <div class="invalid-feedback">{{ $errors->first('cambio') }}</div>
+                        </div>
+                        <div class="form-group row mt-4">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary"> Crear </button>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="col-md-6 px-4">
+                        <div class="title-block">
+                            <h3 class="title">Productos</h3>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Cantidad</th>
+                                    <th>Nombre</th>
+                                    <th class="text-center">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Pique</td>
+                                    <td class="text-center">14.56</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="form-group row">
-                    {!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
-                    <div class="col-sm-10">
-                        {!! Form::text('Nit', $cuenta->cliente->nit, ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':'')]) !!}
-                        <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
-                    </div>
-                </div>
-                {!! Form::close() !!}
             </div>
         </section>
     </article>
