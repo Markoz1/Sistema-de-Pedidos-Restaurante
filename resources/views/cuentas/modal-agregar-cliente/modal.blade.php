@@ -24,7 +24,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">crear</button>
+                <button type="button" class="btn btn-primary" style="display:none">Crear</button>
+                <button type="button" class="btn btn-primary" onclick="agregar_cliente()" id="boton-agregar"disabled>Agregar</button>
             </div>
         </div>
     </div>

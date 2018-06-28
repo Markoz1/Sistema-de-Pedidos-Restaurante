@@ -87,6 +87,7 @@
 @endsection
 @section('script')
     <script>
+        var cliente_agregado;
         $(document).ready(function () {
             $('#cliente-encontrado').hide();
         });
@@ -113,6 +114,8 @@
                     $('td#nit').html(cliente.nit);
                     $('td#telefono').html(cliente.telefono);
                     $('td#direccion').html(cliente.direccion);
+                    cliente_agregado = cliente;
+                    $('#boton-agregar').prop('disabled', false);
                 },
                 error: function(mensaje){
                     console.log('error');
@@ -123,5 +126,18 @@
                 }
             });
         };
+        function agregar_cliente() {
+            console.log('agregar');
+            $('#modal-agregar-cliente').modal('hide');
+            $('input#nombre').val(cliente_agregado.nombre);
+            $('input#nit').val(cliente_agregado.nit);
+            limpiar_modal();
+        };
+        function limpiar_modal(){
+            $('#nit-buscar').val("");
+            $('#mensaje-success').fadeOut();
+            $('#boton-agregar').prop('disabled', true);
+            $('#cliente-encontrado').hide();
+        }
     </script>
 @endsection
