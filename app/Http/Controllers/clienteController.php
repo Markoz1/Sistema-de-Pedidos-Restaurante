@@ -53,4 +53,17 @@ class clienteController extends Controller
         $cliente->Update($data);
         return redirect()->route('clientes.index')->with('mensaje','La Lista de Clientes ha sido Actualizada');
     }
+    public function buscarNit(Request $request)
+    {
+        if ($request->ajax()) {
+            $datos = request()->validate([
+                'nit'=> 'required|numeric|exists:cliente,nit'
+            ]);
+            $nit = $datos['nit'];
+            $cliente = Cliente::ofNit($nit);
+            return response()->json(
+                $cliente->toArray()
+            );
+        }        
+    }
 }

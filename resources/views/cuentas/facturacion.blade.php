@@ -15,7 +15,7 @@
                         {!! Form::Model($cuenta, ['route' => ['mesas.update', $cuenta->id],'method' => 'put']) !!}
                         <div class="title-block">
                             <h3 class="title">Cliente 
-                                <a href="#" class="btn-sm"><i class="fa fa-plus"></i> Agregar Cliente</a>
+                                <a href="#" class="btn-sm" data-toggle="modal" data-target="#modal-agregar-cliente"><i class="fa fa-plus"></i> Agregar Cliente</a>
                             </h3>
                         </div>
                         <div class="form-group">
@@ -83,4 +83,45 @@
             </div>
         </section>
     </article>
+    @include('cuentas.modal-agregar-cliente.modal')
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $('#cliente-encontrado').hide();
+        });
+        function agregar(producto_id) {
+            $('#modal_informacion').modal('hide');
+        };
+        function buscar_nit(btn) {
+            var form = $(btn).parents('form');
+            var ruta = form.attr('action');
+            var nit = $('#nit').val(); 
+
+            $.ajax({
+                type: "POST",
+                url: ruta,
+                data: form.serialize(),
+                dataType: "json",
+                success: function (cliente) {
+                    console.log(cliente);
+                    $('#nit-buscar').attr('class','form-control boxed rounded-s');
+                    $('#mensaje-success-text').text('Se encontró el cliente');
+                    $('#mensaje-success').fadeIn();
+                    $('#cliente-encontrado').show();
+                    $('td#nombre').html(cliente.nombre);
+                    $('td#nit').html(cliente.nit);
+                    $('td#telefono').html(cliente.telefono);
+                    $('td#direccion').html(cliente.direccion);
+                },
+                error: function(mensaje){
+                    console.log('error');
+                    $('#mensaje-success').fadeOut();
+                    $('#cliente-encontrado').hide();
+                    $('#nit-buscar').attr('class','form-control boxed rounded-s is-invalid');
+                    $('#error-nit-buscar').html(mensaje.responseJSON.errors.nit);
+                }
+            });
+        };
+    </script>
 @endsection

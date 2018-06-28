@@ -26,5 +26,6 @@ Route::resource('cuentas','CuentaController');
 Route::get('/pedidos/{pedido}','PedidoController@existePedido')
 		->name('pedidos.existe');
 Route::resource('users', 'UserController');
+Route::post('clientes/buscar', 'clienteController@buscarNit')->name('clientes.buscar');
 // Route::post('users/{id}', 'UserController@update');
 
