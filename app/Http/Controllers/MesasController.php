@@ -56,7 +56,7 @@ class MesasController extends Controller
         $nombre = $request->nombre." ".$request->numero;
         $username = $request->nombre.$request->numero;
         $mesa->nombre = $nombre;
-        $mesa->estado = $request->estado;
+        $mesa->estado = 1;
         $mesa->username = $username;
         $mesa->password = bcrypt($username);
         $mesa->role_id = 5;
@@ -104,7 +104,6 @@ class MesasController extends Controller
         $mesa = User::findOrFail($id);
         $nombre = $request->nombre." ".$request->numero;
         $mesa->nombre = $nombre;
-        $mesa->estado = $request->estado;
         $mesa->username = $request->username;
         if( $request->filled('password') ){
             $mesa->password = bcrypt($request->password);

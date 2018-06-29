@@ -27,7 +27,6 @@ class UpdateMesaRequest extends FormRequest
         return [
             'nombre' => 'required',
             'numero' => ['required', 'numeric', 'min:1', 'max:50',new RuleExists($this->request->get('nombre'),'users','nombre',$this->request->get('mesa_id'))],
-            'estado' => 'required',
             'username' => 'required|alpha_dash|unique:users,username,'.$this->request->get('mesa_id').',id',
             'password' => 'nullable|min:4|max:20|confirmed',
         ];

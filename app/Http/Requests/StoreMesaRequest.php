@@ -27,7 +27,6 @@ class StoreMesaRequest extends FormRequest
         return [
             'nombre' => 'required',
             'numero' => ['required', 'numeric', 'min:1', 'max:50',new RuleExists($this->request->get('nombre'),'users','nombre',null)],
-            'estado' => 'required'
         ];
     }
 }
