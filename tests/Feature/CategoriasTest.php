@@ -90,6 +90,48 @@ class CategoriasTest extends TestCase
             ]);
     }
     /**
+     * @test 
+     * */
+    public function validaciones_crear_min3_test(){
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/categorias')
+                ->post('/categorias',[
+                    'nombreCategoria' => 'as',
+                    'estado' => true])
+                ->assertRedirect('/categorias')
+                ->assertSessionHasErrors(['nombreCategoria']);
+            
+            $this->assertDatabaseMissing('categoria',[
+                'nombre' => 'as',
+                'estado' => true
+            ]);
+    }
+    /**
+     * @test 
+     * */
+    public function validaciones_crear_max50_test(){
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/categorias')
+                ->post('/categorias',[
+                    'nombreCategoria' => 'lugar donde se muestran los productos del restaurante',
+                    'estado' => true])
+                ->assertRedirect('/categorias')
+                ->assertSessionHasErrors(['nombreCategoria']);
+            
+            $this->assertDatabaseMissing('categoria',[
+                'nombre' => 'lugar donde se muestran los productos del restaurante',
+                'estado' => true
+            ]);
+    }
+    /**
      * @test
      */
 
@@ -111,4 +153,90 @@ class CategoriasTest extends TestCase
             'estado' => true
         ]);
     }
+<<<<<<< HEAD
+    /**
+     * @test
+     */
+
+    public function Actualizar_categoria_nombre_null(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => '',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => '',
+            'estado' => true
+        ]);
+    }
+
+    public function Actualizar_categoria_nombre_simbolos(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => '[][][][]',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => '[][][][]',
+            'estado' => true
+        ]);
+    }
+
+    public function Actualizar_categoria_nombre_min3(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => 'ws',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => 'ws',
+            'estado' => true
+        ]);
+    }
+
+    public function Actualizar_categoria_nombre_max50(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => 'lugar donde se muestran los productos del restaurante',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => 'lugar donde se muestran los productos del restaurante',
+            'estado' => true
+        ]);
+    }
+=======
+>>>>>>> 9819167750f280b8ee01c00f3ed3269570bb90f9
 }
