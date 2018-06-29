@@ -18,4 +18,8 @@ class Cliente extends Model
     {
         return $this->hasMany(Cuenta::class, 'cliente_id');
     }
+    public function scopeOfNit($query, $nit)
+    {
+        return $query->where('nit', $nit)->first();
+    }
 }

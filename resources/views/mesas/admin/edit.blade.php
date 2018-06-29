@@ -16,7 +16,7 @@
                             @endisset
                                 @include('mesas.admin.form')                            
                             <div class="form-group row">
-                                {!! Form::label('username', 'Nombre de usuario', ['class' => 'col-sm-4 form-control-label text-xs-right']) !!}
+                                {!! Form::label('username', 'Nombre de usuario', ['class' => 'col-sm-4 form-control-label text-xs-right required']) !!}
                                 <div class="col-sm-6">
                                     {!! Form::text('username', null, ['class' => 'form-control boxed '.($errors->has('username')?'is-invalid':'')]) !!}
                                     <div class="invalid-feedback">{{ $errors->first('username') }}</div>
@@ -36,6 +36,7 @@
                                     <div class="invalid-feedback">{{ $errors->first('password_confirmation') }}</div>
                                 </div>
                             </div>
+                            <small class="required">Campo obligatorio</small>
                             <div class="form-group row mt-4">
                                 <div class="col-sm-10 col-sm-offset-2">
                                     <button type="button" class="btn btn-secondary" id="cerrar"> Cerrar </button>

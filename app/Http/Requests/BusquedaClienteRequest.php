@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\RuleExists;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMesaRequest extends FormRequest
+class BusquedaClienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,13 @@ class StoreMesaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required',
-            'numero' => ['required', 'numeric', 'min:1', 'max:50',new RuleExists($this->request->get('nombre'),'users','nombre',null)],
+            'nit'=> 'required|numeric|exists:cliente,nit'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'nit.exists' => 'El Nit ingresado no existe, puede registrar un nuevo cliente presionado el boton Registrar.'
         ];
     }
 }

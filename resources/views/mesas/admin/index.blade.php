@@ -42,9 +42,9 @@
                                         <td class="text-center">{{ $mesa->username }}</td>                                        
                                         <td class="text-center">
                                             @if ($mesa->estado)
-                                                <span class="badge badge-success">Activo</span>
+                                                <span class="badge badge-success">Libre</span>
                                             @else
-                                                <span class="badge badge-danger">Inactivo</span>
+                                                <span class="badge badge-danger">Ocupado</span>
                                             @endif
                                         </td>                                        
                                         <td class="text-center">

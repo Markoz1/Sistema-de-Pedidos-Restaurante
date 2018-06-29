@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Cuenta;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Model\Pedido;
+use App\Model\Cliente;
+use App\Model\Producto;
+use App\Model\Role;
+use App\Model\User;
 
 class CuentaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('cajero');  
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
+        $cuentas = Cuenta::where('estado', 1)->orderBy('id', 'desc')->paginate(5);
+        return view('cuentas.index', compact('cuentas'));
     }
 
     /**
@@ -24,7 +36,7 @@ class CuentaController extends Controller
      */
     public function create()
     {
-
+      
     }
 
     /**
@@ -35,7 +47,18 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     { 
-
+        $data = request();
+        //dd($data);
+       Cuenta::create([
+              'estado' =>0,
+              'cliente_id'=>$data['cliente_id'],
+              'users_id'=>$data['mesa_id'],
+       ]);
+        $mesa = User::findOrFail($data['mesa_id']);
+        $mesa->estado = 0;
+        $mesa->save();
+       return redirect()
+            ->route('mesas.index');
     }
 
     /**
@@ -46,7 +69,29 @@ class CuentaController extends Controller
      */
     public function show($id)
     {
-        //
+        $cuenta = Cuenta::findOrFail($id);
+        $cliente_id = $cuenta->cliente_id;
+        $cliente = Cliente::findOrFail($cliente_id);
+        $pedidos = $cuenta->pedidos->where('estado_pedido', "<>", 2);
+        return view('cuentas.show',compact('cuenta', 'cliente', 'pedidos'));
+    }
+
+    /**
+     * Get a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function detalleProductos(Request $request)
+    {       
+        $pedido = Pedido::find( $request->id );
+        $producto_id = $pedido->producto_id;
+        $productos = Pedido::all();
+        // return response ()->json ( $producto );
+        // $data = Pedido::all();
+    return view( 'cuentas.modal-detalle-productos' )->with( 'productos',$productos );
+            
+        // }
     }
 
     /**
@@ -57,7 +102,8 @@ class CuentaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cuenta = Cuenta::findOrFail($id);
+        return view('cuentas.facturacion',compact('cuenta'));
     }
 
     /**
@@ -69,7 +115,20 @@ class CuentaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cuenta = Cuenta::findOrFail($id);
+        $cuenta->fill($request->all());
+        $cuenta->estado = 1;//cuenta cerrada
+        $cuenta->save();
+        foreach ($cuenta->pedidos as $pedido) {
+            $pedido->estado_pedido = 2;//pedido cerrado
+            $pedido->save();
+        }
+        $mesa = $cuenta->mesa;
+        $mesa->estado = 1;//mesa libra
+        $mesa->save();
+        return redirect()
+            ->route('cuentas.index')
+            ->with('mensaje', 'La cuenta '.$cuenta->id.' se cerro correctamente');
     }
 
     /**
@@ -81,5 +140,18 @@ class CuentaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function pdf(Cuenta $cuenta){
+        $id_cliente = $cuenta->cliente_id;
+        $id_usuario = $cuenta->users_id;
+        $fecha = $this->calcularFecha($cuenta->updated_at);
+        $cuenta->updated_at=$fecha;
+        //$pdf = PDF::loadView('cuentas.pdf.factura', compact('cuenta','fecha'));
+        //return $pdf->download('factura.pdf');
+        return view('cuentas.pdf.factura',compact('cuenta','fecha'));
+    }
+    private function calcularFecha($fecha){
+        $res= explode(' ',$fecha)[0];
+        return $res;
     }
 }
