@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Model\Cliente;
 use Illuminate\Http\Request;
+use App\Http\Requests\BusquedaClienteRequest;
 
 class clienteController extends Controller
 {
@@ -21,21 +22,26 @@ class clienteController extends Controller
     }
 
   function store(Request $request){
-    $data = request()-> validate([
-   			'nombre' =>'required|min:3|max:50|unique:cliente,nombre',
-            'nit'=>'nullable|numeric|unique:cliente,nit',
+        $data = request()-> validate([
+   			'nombre' =>'nullable|min:3|max:50|unique:cliente,nombre',
+            'nit'=>'required|numeric|unique:cliente,nit',
             'telefono'=>'nullable|numeric',
    			'direccion'=>'nullable|min:3|max:80',
         ]);
-        
-        Cliente::create([
-            'nombre' =>$data['nombre'],
-   			'nit'=>$data['nit'],
-   			'telefono'=>$data['telefono'],
-            'direccion'=>$data['direccion'],
-        ]);               
-     
-        return redirect()->route('clientes.index')->with('mensaje','Nuevo Cliente Registrado');
+        $cliente = new Cliente;
+        $cliente->fill($request->all());
+        if(!$request->filled('nombre')){
+            $cliente->nombre = "SIN NOMBRE";
+        }
+        $cliente->save();              
+        if($request->ajax()){
+            return response()->json(
+                $cliente->toArray()
+            );
+        }
+        else{
+            return redirect()->route('clientes.index')->with('mensaje','Nuevo Cliente Registrado');
+        }
     }
     public function edit(Cliente $cliente)
     {   
@@ -45,21 +51,18 @@ class clienteController extends Controller
     public function update(Cliente $cliente)
     {
         $data = request()-> validate([
-            'nombre' =>'required|min:3|max:50|unique:Cliente,nombre,'.$cliente->cliente_id . ",cliente_id",
-            'nit'=>'nullable|numeric|unique:Cliente,nit,'.$cliente->cliente_id . ",cliente_id",
+            'nombre' =>'nullable|min:3|max:50|unique:Cliente,nombre,'.$cliente->cliente_id . ",cliente_id",
+            'nit'=>'required|numeric|unique:Cliente,nit,'.$cliente->cliente_id . ",cliente_id",
             'telefono'=>'nullable|numeric',
             'direccion'=>'nullable|min:3|max:80',
      ]);
         $cliente->Update($data);
         return redirect()->route('clientes.index')->with('mensaje','La Lista de Clientes ha sido Actualizada');
     }
-    public function buscarNit(Request $request)
+    public function buscarNit(BusquedaClienteRequest $request)
     {
         if ($request->ajax()) {
-            $datos = request()->validate([
-                'nit'=> 'required|numeric|exists:cliente,nit'
-            ]);
-            $nit = $datos['nit'];
+            $nit = $request->input('nit');
             $cliente = Cliente::ofNit($nit);
             return response()->json(
                 $cliente->toArray()
