@@ -11,12 +11,11 @@ class CuentaController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $cuentas = Cuenta::all();
-        return view('cuentas.index', ['cuentas' => $cuentas]);
+        
     }
 
     /**
