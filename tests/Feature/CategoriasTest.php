@@ -153,6 +153,27 @@ class CategoriasTest extends TestCase
             'estado' => true
         ]);
     }
+    /**
+     * @test
+     */
 
-
+    public function Actualizar_categoria_nombre_null(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => '',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => '',
+            'estado' => true
+        ]);
+    }
 }
