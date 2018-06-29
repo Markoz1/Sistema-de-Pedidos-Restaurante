@@ -153,7 +153,6 @@ class CategoriasTest extends TestCase
             'estado' => true
         ]);
     }
-<<<<<<< HEAD
     /**
      * @test
      */
@@ -237,6 +236,4 @@ class CategoriasTest extends TestCase
             'estado' => true
         ]);
     }
-=======
->>>>>>> 9819167750f280b8ee01c00f3ed3269570bb90f9
 }
