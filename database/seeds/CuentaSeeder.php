@@ -12,6 +12,8 @@ class CuentaSeeder extends Seeder
      */
     public function run()
     {
+        //id	estado	total	recibido	cambio	cliente_id	users_id	created_at	updated_at
+
         //seeder de prueba, creando una cuenta para el cliente de id=1 y la mesa 1
         Cuenta::create([
             'estado' => '0',

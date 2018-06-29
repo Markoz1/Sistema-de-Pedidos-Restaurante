@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Cuenta;
-
+use App\Model\Role;
+use App\Model\User;
 class CuentaController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class CuentaController extends Controller
      */
     public function create()
     {
-
+      
     }
 
     /**
@@ -35,7 +36,15 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     { 
-
+        $data = request();
+        //dd($data);
+       Cuenta::create([
+              'estado' =>0,
+              'cliente_id'=>$data['cliente_id'],
+              'users_id'=>$data['mesa_id'],
+       ]);
+       return redirect()
+            ->route('mesas.index');
     }
 
     /**
