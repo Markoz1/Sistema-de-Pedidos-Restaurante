@@ -37,8 +37,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="col-6">
-                                                    <div class="col-6">
-                                                        <input type="submit" name="enviar" role="button" value="Asignar" class="btn btn-info btn-lg rounded-s {{$bloqueado_asignar}}"> 
+                                                    <div class="col-6">                                                           
+                                                        <input type="submit" name="enviar" role="button" value="Asignar" class="btn btn-info btn-lg rounded-s " {{$bloqueado_asignar}}>
+                                                        
                                                     </div>
                                                 </td>
                                             </tr>
