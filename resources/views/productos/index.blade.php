@@ -122,18 +122,16 @@
                         <div class="item-col item-col-category no-overflow text-center">
                                 <div class="item-heading">Estado</div>
                                 <div class="no-overflow">
-                                    @php 
-                                    if ($producto->estado_id == 1){
-                                        $color="blue";
-                                        $valor="Activo";
-                                    }else{
-                                        dd($producto->estado_id);
-                                        $color="red";
-                                        $valor="Inactivo";
-                                    }
-                                    //dd($producto->estado_id);
-                                    @endphp
-                                    <font color={{$color}}>{{ $valor }}</font>
+                                    @if ($producto->estado_id == 1)
+                                        <div class="no-overflow">
+                                            <span class="badge badge-success">{{ "Activo" }}</span>
+                                        </div>
+                                    @else
+                                        <div class="no-overflow">
+                                            <span class="badge badge-danger">{{ "Inactivo" }}</span>
+                                        </div>
+                                        
+                                    @endif
                                 </div>
                             </div>
                         <div class="item-col item-col-category no-overflow text-center">
