@@ -97,6 +97,7 @@ class ProductoController extends Controller
      */
     public function update(UpdateProductoRequest $request, Producto $producto)
     {
+        
         $dato = request()->all();
         $producto->nombre = $dato['nombre']; 
         $producto->precio = $dato['precio'];
