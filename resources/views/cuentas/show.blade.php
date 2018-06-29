@@ -28,6 +28,11 @@
                                         @php
                                             $habilitar_boton_cerrar_cuenta = 1;
                                         @endphp
+                                        @if (count($pedidos) === 0)
+                                            @php
+                                                $habilitar_boton_cerrar_cuenta = 0;
+                                            @endphp
+                                        @endif
                                         @foreach ($pedidos as $pedido)
                                             <tr>
                                                 <th >{{$pedido->pedido_id}}</th>
