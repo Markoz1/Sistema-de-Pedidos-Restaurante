@@ -18,3 +18,20 @@
     background-color: #dc3545;
     border-color: #dc3545;
 }
+label.required:after {
+    color: #cc0000;
+    content: "*";
+    margin-left: 5px;
+}
+small.required {
+    color: #cc0000;
+}
+small.required:before {
+    color: #cc0000;
+    content: "*";
+    font-weight: bold;
+}
+#table-limiter {
+max-height: 650px;
+overflow: scroll;
+}
