@@ -132,7 +132,7 @@ function agregar_array_productos_a_pedido() {
     pedido.total = total;
 };
 function enviar_con_ajax() {
-    var ruta = $('form').attr('action');
+    var ruta = $('#form_pedido').attr('action');
 
     $.ajax({
         type: "POST",
@@ -160,6 +160,3 @@ function cerraModal() {
     $('#modal-mensaje').modal('hide');
     eliminarProductos();
 };
-$('#modal-mensaje').on('hide.bs.modal	', function (e) {
-    eliminarProductos();
-});

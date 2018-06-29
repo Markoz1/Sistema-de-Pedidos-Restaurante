@@ -14,8 +14,9 @@ class MesasController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
+        $this->middleware('mesa', ['only' => ['show']]);
         $this->middleware('cajero', ['only' => ['index']]);
-        $this->middleware('administrador', ['except' => ['index']]);
+        $this->middleware('administrador', ['except' => ['index','show']]);
     }
     /**
      * Display a listing of the resource.
@@ -74,7 +75,10 @@ class MesasController extends Controller
      */
     public function show($id)
     {
-        //
+        $mesa = User::findOrFail($id);
+        return response()->json(
+            $mesa->toArray()
+        );
     }
 
     /**
