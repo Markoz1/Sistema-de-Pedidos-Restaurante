@@ -133,7 +133,7 @@ class ProductosTest extends TestCase
      * @test
      */
 
-    public function crear_producto_validacion_nombre_max50(){
+    public function crear_producto_validacion_nombre_max80(){
         
         //$this->withoutExceptionHandling();
 
@@ -159,5 +159,34 @@ class ProductosTest extends TestCase
                 'descripcion' => 'Riquisima para comer'
             ]);
     }
-    
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_precio_null(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => null,
+                    'categoria_id' => 1,
+                    'descripcion' => 'Riquisima para comer',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['precio']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => null,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima para comer'
+            ]);
+    }
 }
