@@ -160,3 +160,6 @@ function cerraModal() {
     $('#modal-mensaje').modal('hide');
     eliminarProductos();
 };
+$('#modal-mensaje').on('hide.bs.modal	', function (e) {
+    eliminarProductos();
+});
