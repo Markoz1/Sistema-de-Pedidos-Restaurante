@@ -46,6 +46,49 @@ class CategoriasTest extends TestCase
                 'estado' => true
             ]);
     }
+
+    /**
+     * @test 
+     * */
+    public function validaciones_crear_con_simbolo_test(){
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/categorias')
+                ->post('/categorias',[
+                    'nombreCategoria' => 'en_salada',
+                    'estado' => true])
+                ->assertRedirect('/categorias')
+                ->assertSessionHasErrors(['nombreCategoria']);
+            
+            $this->assertDatabaseMissing('categoria',[
+                'nombre' => 'en_salada',
+                'estado' => true
+            ]);
+    }
+    /**
+     * @test 
+     * */
+    public function validaciones_crear_null_test(){
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/categorias')
+                ->post('/categorias',[
+                    'nombreCategoria' => '',
+                    'estado' => true])
+                ->assertRedirect('/categorias')
+                ->assertSessionHasErrors(['nombreCategoria']);
+            
+            $this->assertDatabaseMissing('categoria',[
+                'nombre' => '',
+                'estado' => true
+            ]);
+    }
     /**
      * @test
      */
