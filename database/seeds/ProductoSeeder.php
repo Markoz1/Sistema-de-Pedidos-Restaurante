@@ -143,7 +143,7 @@ class ProductoSeeder extends Seeder
            //bebidas
            Producto::create([
             'estado_id'=>"1",
-            'nombre'=> "Coca-Cola/vaso",
+            'nombre'=> "CocaCola en vaso",
             'Precio'=> "3",
             'descripcion'=> "Refrescos Siempre Lleno refrescante Coca-Cola",
             'categoria_id'=> 3,
@@ -151,7 +151,7 @@ class ProductoSeeder extends Seeder
            ]);
            Producto::create([
             'estado_id'=>"1",
-            'nombre'=> "Fanta(Mandarina)/vaso",
+            'nombre'=> "Fanta Mandarina en vaso",
             'Precio'=> "3",
             'descripcion'=> "Refrescos Siempre Lleno refrescante Fanta-madarina",
             'categoria_id'=> 3,
@@ -159,7 +159,7 @@ class ProductoSeeder extends Seeder
            ]);
            Producto::create([
             'estado_id'=>"1",
-            'nombre'=> "Sprite/vaso",
+            'nombre'=> "Sprite en vaso",
             'Precio'=> "3",
             'descripcion'=> "Refrescos Siempre Lleno refrescante Sprite",
             'categoria_id'=> 3,
@@ -167,7 +167,7 @@ class ProductoSeeder extends Seeder
            ]);
            Producto::create([
             'estado_id'=>"1",
-            'nombre'=> "Zumo de Limon/vaso",
+            'nombre'=> "Zumo de Limon en vaso",
             'Precio'=> "4",
             'descripcion'=> "Zumo natural de limon",
             'categoria_id'=> 3,
