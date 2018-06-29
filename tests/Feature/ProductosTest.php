@@ -310,6 +310,163 @@ class ProductosTest extends TestCase
                 'descripcion' => 'Riquisima para comer'
             ]);
     }
+    /**
+     * @test
+     */
 
+    public function crear_producto_validacion_Descripcion_valor_null(){
+        
+        //$this->withoutExceptionHandling();
 
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => 1,
+                    'descripcion' => null,
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['descripcion']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => 1,
+                'descripcion' => null
+            ]);
+    }
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_Descripcion_valor_min4(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => 1,
+                    'descripcion' => 'Ric',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['descripcion']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Ric'
+            ]);
+    }
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_Descripcion_valor_max255(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => 1,
+                    'descripcion' => 'estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                    estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                    estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                    estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                    estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['descripcion']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => 1,
+                'descripcion' => 'estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres
+                estamos provando la descripcion en si su tamano de letras que deberia tener que no tiene que exeder de los 255 caracteres'
+            ]);
+    }
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_id_categoria_null(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => null,
+                    'descripcion' => 'Riquisima',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['categoria_id']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => null,
+                'descripcion' => 'Riquisima'
+            ]);
+    }
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_id_categoria_valor_exedido(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => 10000,
+                    'descripcion' => 'Riquisima',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['categoria_id']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => 10000,
+                'descripcion' => 'Riquisima'
+            ]);
+    }
+    
 }
