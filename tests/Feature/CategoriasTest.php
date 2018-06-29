@@ -90,6 +90,48 @@ class CategoriasTest extends TestCase
             ]);
     }
     /**
+     * @test 
+     * */
+    public function validaciones_crear_min3_test(){
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/categorias')
+                ->post('/categorias',[
+                    'nombreCategoria' => 'as',
+                    'estado' => true])
+                ->assertRedirect('/categorias')
+                ->assertSessionHasErrors(['nombreCategoria']);
+            
+            $this->assertDatabaseMissing('categoria',[
+                'nombre' => 'as',
+                'estado' => true
+            ]);
+    }
+    /**
+     * @test 
+     * */
+    public function validaciones_crear_max50_test(){
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/categorias')
+                ->post('/categorias',[
+                    'nombreCategoria' => 'lugar donde se muestran los productos del restaurante',
+                    'estado' => true])
+                ->assertRedirect('/categorias')
+                ->assertSessionHasErrors(['nombreCategoria']);
+            
+            $this->assertDatabaseMissing('categoria',[
+                'nombre' => 'lugar donde se muestran los productos del restaurante',
+                'estado' => true
+            ]);
+    }
+    /**
      * @test
      */
 
