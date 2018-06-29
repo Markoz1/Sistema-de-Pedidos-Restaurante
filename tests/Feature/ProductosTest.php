@@ -189,4 +189,66 @@ class ProductosTest extends TestCase
                 'descripcion' => 'Riquisima para comer'
             ]);
     }
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_precio_negativo(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => -12.0,
+                    'categoria_id' => 1,
+                    'descripcion' => 'Riquisima para comer',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['precio']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => -12.0,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima para comer'
+            ]);
+    }
+
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_precio_valor_cero(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 0,
+                    'categoria_id' => 1,
+                    'descripcion' => 'Riquisima para comer',
+                    'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['precio']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 0,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima para comer'
+            ]);
+    }
+    
 }
