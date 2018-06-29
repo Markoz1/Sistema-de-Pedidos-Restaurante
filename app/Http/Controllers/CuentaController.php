@@ -14,7 +14,8 @@ class CuentaController extends Controller
      */
     public function index()
     {
-
+        $cuentas = Cuenta::where('estado', 1)->paginate(5);
+        return view('cuentas.index', compact('cuentas'));
     }
 
     /**
@@ -70,7 +71,20 @@ class CuentaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cuenta = Cuenta::findOrFail($id);
+        $cuenta->fill($request->all());
+        $cuenta->estado = 1;//cuenta cerrada
+        $cuenta->save();
+        foreach ($cuenta->pedidos as $pedido) {
+            $pedido->estado_pedido = 2;//pedido cerrado
+            $pedido->save();
+        }
+        $mesa = $cuenta->mesa;
+        $mesa->estado = 1;//mesa libra
+        $mesa->save();
+        return redirect()
+            ->route('cuentas.index')
+            ->with('mensaje', 'La cuenta '.$cuenta->id.' se cerro correctamente');
     }
 
     /**

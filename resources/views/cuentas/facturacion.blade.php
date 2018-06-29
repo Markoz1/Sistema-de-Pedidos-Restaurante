@@ -16,21 +16,20 @@
             <div class="card card-block">
                 <div class="row">
                     <div class="col-md-6 px-5">
-                        {!! Form::Model($cuenta, ['route' => ['mesas.update', $cuenta->id],'method' => 'put', 'id' => 'form-cuenta']) !!}
+                        {!! Form::Model($cuenta, ['route' => ['cuentas.update', $cuenta->id],'method' => 'put', 'id' => 'form-cuenta']) !!}
                         <div class="title-block">
                             <h3 class="title">Cliente 
                                 <a href="#" class="btn-sm" onclick="open_modal_agregar_cliente()"><i class="fa fa-plus"></i> Agregar Cliente</a>
                             </h3>
                         </div>
+                        {{ Form::hidden('cliente_id', null, ['id' => 'cliente_id']) }}
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre', ['class' => 'control-label']) !!}
-                            {!! Form::text('nombre', $cuenta->cliente->nombre, ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':''),'readonly'])!!}
-                            <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
+                            {!! Form::text('nombre', $cuenta->cliente->nombre, ['class' => 'form-control boxed','readonly'])!!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('nit', 'Nit', ['class' => 'control-label']) !!} 
-                            {!! Form::text('nit', $cuenta->cliente->nit,['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':''),'readonly'])!!}
-                            <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
+                            {!! Form::text('nit', $cuenta->cliente->nit,['class' => 'form-control boxed','readonly'])!!}
                         </div>
                         <div class="title-block">
                             <h3 class="title">Información Factura</h3>
@@ -38,17 +37,14 @@
                         <div class="form-group">
                             {!! Form::label('id', 'Nro', ['class' => 'control-label']) !!}
                             {!! Form::text('id', $cuenta->id, ['class' => 'form-control boxed','readonly'])!!}
-                            <div class="invalid-feedback">{{ $errors->first('fecha') }}</div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('fecha', 'Fecha', ['class' => 'control-label']) !!}
-                            {!! Form::date('fecha', $cuenta->created_at, ['class' => 'form-control boxed '.($errors->has('fecha')?'is-invalid':''),'readonly'])!!}
-                            <div class="invalid-feedback">{{ $errors->first('fecha') }}</div>
+                            {!! Form::date('fecha', $cuenta->created_at, ['class' => 'form-control boxed','readonly'])!!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('total', 'Total (Bs.)', ['class' => 'control-label']) !!}
-                            {!! Form::number('total', null, ['class' => 'form-control boxed '.($errors->has('total')?'is-invalid':''),'readonly'])!!}
-                            <div class="invalid-feedback">{{ $errors->first('total') }}</div>
+                            {!! Form::number('total', null, ['class' => 'form-control boxed','readonly'])!!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('recibido', 'Recibido (Bs.)', ['class' => 'control-label']) !!}
@@ -57,12 +53,11 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('cambio', 'Cambio (Bs.)', ['class' => 'control-label']) !!}
-                            {!! Form::number('cambio', null, ['class' => 'form-control boxed '.($errors->has('cambio')?'is-invalid':''),'readonly'])!!}
-                            <div class="invalid-feedback">{{ $errors->first('cambio') }}</div>
+                            {!! Form::number('cambio', null, ['class' => 'form-control boxed','readonly'])!!}
                         </div>
                         <div class="form-group row mt-4">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <button type="submit" class="btn btn-primary"> Crear </button>
+                                <button type="submit" class="btn btn-primary" id="crear_factura"disabled> Cerrar cuenta </button>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -125,6 +120,19 @@
             $('#mensaje-success-facturacion').fadeOut();
             $('#modal-agregar-cliente').modal('show');
         };
+        $('#form-cuenta').find('input#recibido').keyup(function (e) {
+            var form = $('#form-cuenta');
+            var total = form.find('input#total').val();
+            var recibido = form.find('input#recibido').val();
+            var cambio = parseFloat(recibido - total).toFixed(2);
+            form.find('input#cambio').val(cambio);
+            if(cambio >= 0){
+                form.find('#crear_factura').prop('disabled', false);
+            }
+            else{
+                form.find('#crear_factura').prop('disabled', true);
+            }
+        });
         //busqueda cuando se presiona "enter"
         $("#nit-buscar" ).keypress(function( event ) {
             if ( event.which == 13 ) {
@@ -170,6 +178,7 @@
         function agregar_cliente() {
             var form = $('#form-cuenta');
             $('#modal-agregar-cliente').modal('hide');
+            form.find('input#cliente_id').val(cliente_encontrado.cliente_id);
             form.find('input#nombre').val(cliente_encontrado.nombre);
             form.find('input#nit').val(cliente_encontrado.nit);
             $('#mensaje-success-facturacion').fadeIn();
