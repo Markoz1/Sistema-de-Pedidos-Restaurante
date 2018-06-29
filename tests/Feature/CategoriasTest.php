@@ -176,4 +176,64 @@ class CategoriasTest extends TestCase
             'estado' => true
         ]);
     }
+
+    public function Actualizar_categoria_nombre_simbolos(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => '[][][][]',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => '[][][][]',
+            'estado' => true
+        ]);
+    }
+
+    public function Actualizar_categoria_nombre_min3(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => 'ws',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => 'ws',
+            'estado' => true
+        ]);
+    }
+
+    public function Actualizar_categoria_nombre_max50(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from('/categorias')
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => 'lugar donde se muestran los productos del restaurante',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseMissing('categoria',[
+            'nombre' => 'lugar donde se muestran los productos del restaurante',
+            'estado' => true
+        ]);
+    }
 }
