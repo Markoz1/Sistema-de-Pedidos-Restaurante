@@ -16,7 +16,7 @@
             <div class="card card-block">
                 <div class="row">
                     <div class="col-md-6 px-5">
-                        {!! Form::Model($cuenta, ['route' => ['mesas.update', $cuenta->id],'method' => 'put']) !!}
+                        {!! Form::Model($cuenta, ['route' => ['mesas.update', $cuenta->id],'method' => 'put', 'id' => 'form-cuenta']) !!}
                         <div class="title-block">
                             <h3 class="title">Cliente 
                                 <a href="#" class="btn-sm" onclick="open_modal_agregar_cliente()"><i class="fa fa-plus"></i> Agregar Cliente</a>
@@ -34,6 +34,11 @@
                         </div>
                         <div class="title-block">
                             <h3 class="title">Información Factura</h3>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('id', 'Nro', ['class' => 'control-label']) !!}
+                            {!! Form::text('id', $cuenta->id, ['class' => 'form-control boxed','readonly'])!!}
+                            <div class="invalid-feedback">{{ $errors->first('fecha') }}</div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('fecha', 'Fecha', ['class' => 'control-label']) !!}
@@ -64,24 +69,43 @@
                     </div>
                     <div class="col-md-6 px-4">
                         <div class="title-block">
-                            <h3 class="title">Productos</h3>
+                            <h3 class="title">Pedidos entregados</h3>
                         </div>
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Cantidad</th>
-                                    <th>Nombre</th>
-                                    <th class="text-center">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Pique</td>
-                                    <td class="text-center">14.56</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive" id="table-limiter">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Pedido</th>
+                                        <th class="text-center">Cantidad</th>
+                                        <th>Nombre</th>
+                                        <th class="text-center">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $total = 0;
+                                    @endphp
+                                    @foreach ($cuenta->pedidos as $pedido)
+                                        @php
+                                            $total = $total + $pedido->total;
+                                        @endphp 
+                                        @foreach ($pedido->productos as $producto)
+                                            @if ($pedido->estado_pedido === 1 )
+                                                <tr>
+                                                    @if ($loop->first)
+                                                    <th rowspan='{{ $loop->count }}' class="text-center align-middle">{{ $pedido->pedido_id }}</th>
+                                                    @endif
+                                                    <td class="text-center">{{ $producto->pivot->cantidad }}</td>
+                                                    <td>{{ $producto->nombre }}</td>
+                                                    <td class="text-center">{{ $producto->pivot->subtotal }}</td>
+                                                </tr>
+                                            @endif
+                                        @endforeach 
+                                    @endforeach
+                                    {{ Form::hidden('total_cuenta', $total, ['id' => 'total_cuenta']) }}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,6 +116,11 @@
 @section('script')
     <script>
         var cliente_encontrado;
+        $(document).ready(function () {
+            var total = parseFloat($('#total_cuenta').val()).toFixed(2);
+            var form = $('#form-cuenta');
+            form.find('input#total').val(total);
+        });
         function open_modal_agregar_cliente() {
             $('#mensaje-success-facturacion').fadeOut();
             $('#modal-agregar-cliente').modal('show');
@@ -139,10 +168,10 @@
             });
         };
         function agregar_cliente() {
-            console.log('agregar');
+            var form = $('#form-cuenta');
             $('#modal-agregar-cliente').modal('hide');
-            $('input#nombre').val(cliente_encontrado.nombre);
-            $('input#nit').val(cliente_encontrado.nit);
+            form.find('input#nombre').val(cliente_encontrado.nombre);
+            form.find('input#nit').val(cliente_encontrado.nit);
             $('#mensaje-success-facturacion').fadeIn();
             limpiar_modal();
             limpiar_form_nuevo_cliente();

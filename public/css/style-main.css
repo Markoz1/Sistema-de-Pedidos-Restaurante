@@ -31,3 +31,7 @@ small.required:before {
     content: "*";
     font-weight: bold;
 }
+#table-limiter {
+max-height: 650px;
+overflow: scroll;
+}
