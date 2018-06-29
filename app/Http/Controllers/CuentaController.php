@@ -54,6 +54,9 @@ class CuentaController extends Controller
               'cliente_id'=>$data['cliente_id'],
               'users_id'=>$data['mesa_id'],
        ]);
+        $mesa = User::findOrFail($data['mesa_id']);
+        $mesa->estado = 0;
+        $mesa->save();
        return redirect()
             ->route('mesas.index');
     }
