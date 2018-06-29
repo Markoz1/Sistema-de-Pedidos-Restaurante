@@ -37,9 +37,9 @@
                                         <td class="text-center">{{ $cuenta->cambio }}</td>
                                         <td class="text-center">
                                             <div class="item-actions-block">
-                                                <a class="edit" href="{{ route('mesas.edit', ['id' => $cuenta->id]) }}">
-                                                            <i class="fa fa-print"></i>
-                                                        </a>
+                                                <a target="_blank" href="{{ route('cuentas.index',[$cuenta->id]) }}">
+                                                    <i class="fa fa-print"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
