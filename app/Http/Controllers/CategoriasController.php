@@ -35,8 +35,8 @@ class CategoriasController extends Controller
     {
         return view('categorias/create');
     }
-
     /**
+
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,7 +47,8 @@ class CategoriasController extends Controller
         $data = request()->all();
         Categoria::create([
             'nombre' => $data['nombreCategoria'],
-            'estado' => true
+            'estado' => $data['estado'],
+            'estado_eliminado' => false
         ]);
         return redirect()->route('categorias.index')->with('mensaje','La categoria se creo correctamente');
     }
@@ -70,10 +71,12 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
-    {   
+    public function edit($id)
+    {   //buscar el dato
+        $categoria_edit =Categoria::findOrFail($id);
         //['categoria' => $categoria]
-        return view('categorias.edit', compact('categoria'));
+        $categorias = Categoria::all();
+        return view('categorias.index', compact('categoria_edit','categorias'));
     }
 
     /**
@@ -102,8 +105,12 @@ class CategoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //cambiar estado a oculto para siempre
+    public function destroy(Categoria $categoria){
+        //cambiar estado a oculto para siempre para el eliminar
+    }
+    public function eliminar(Categoria $categoria){
+        $categoria->estado_eliminado = true;
+        $categoria->update();
+        return redirect()->route('categorias.index')->with('mensaje','La categoria a sido eliminada correctamente');
     }
 }

@@ -14,6 +14,8 @@
 Route::get('/', 'HomeController@index')->name('inicio');
 Route::resource('productos', 'ProductoController');
 Route::resource('categorias', 'CategoriasController');
+Route::get('/categorias/{categoria}','CategoriasController@eliminar')
+		->name('categorias.eliminar');
 Route::get('menu', 'HomeController@menu')->name('menu');
 Route::resource('pedidos', 'PedidoController');
 // Auth::routes();

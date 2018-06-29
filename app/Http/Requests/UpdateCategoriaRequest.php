@@ -24,7 +24,7 @@ class UpdateCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombreCategoria' => 'required|unique:categoria,nombre|min:3|max:50|regex:/^[\pL\s]+$/u',
+            'nombreCategoria' => 'required|min:3|max:50|regex:/^[\pL\s]+$/u',
         ];
     }
     public function messages()
