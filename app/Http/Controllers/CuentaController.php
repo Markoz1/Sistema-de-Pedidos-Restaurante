@@ -7,6 +7,11 @@ use App\Model\Cuenta;
 
 class CuentaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('autenticado');
+        $this->middleware('cajero');  
+    }
     /**
      * Display a listing of the resource.
      *
