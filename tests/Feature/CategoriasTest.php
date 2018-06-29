@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Model\User;
-
+use App\Model\Categoria;
 
 class CategoriasTest extends TestCase
 {
@@ -45,6 +45,28 @@ class CategoriasTest extends TestCase
                 'nombre' => 'ensalada',
                 'estado' => true
             ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_categoria(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $categoria = Categoria::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->put("/categorias/{$categoria->categoria_id}",[
+                'nombreCategoria' => 'dulces',
+                'estado' => true
+            ])->assertRedirect('categorias');
+        
+        $this->assertDatabaseHas('categoria',[
+            'nombre' => 'dulces',
+            'estado' => true
+        ]);
     }
 
 
