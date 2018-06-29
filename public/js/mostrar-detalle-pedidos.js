@@ -1,6 +1,6 @@
 $(document).ready(function () {
   var habilitar = $('#habilitar_boton_cerrar_cuenta').val();
-  if (habilitar){
+  if (habilitar == 1){
     $('#boton_cerrar_cuenta').attr('class', 'btn btn-primary');
     $('#boton_cerrar_cuenta').attr('aria-disabled', 'false');
   }

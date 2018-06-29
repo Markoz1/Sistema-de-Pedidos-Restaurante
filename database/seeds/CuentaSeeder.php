@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\User;
 use App\Model\Cuenta;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +21,8 @@ class CuentaSeeder extends Seeder
             'cliente_id' => '1',
             'users_id' => '4'
         ]);
+        $mesa = User::find(4);
+        $mesa->estado = 0;
+        $mesa->save();
     }
 }

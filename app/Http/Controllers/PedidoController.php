@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\User;
+use App\Model\Cuenta;
 use App\Model\Pedido;
 use App\Model\Producto;
-use App\Model\Cuenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -58,9 +59,11 @@ class PedidoController extends Controller
     {       
         if ($request->ajax()) {
             $mesa_id = $request->pedido['mesa_id'];
+            $mesa = User::findOrFail($mesa_id);
+            $cuenta = $mesa->cuentas->last();
             $total = $request->pedido['total'];        
             $estado_pedido = -1;
-            $cuenta_id = 1;//solo para probar se agregaran pedidos a la cuenta id=1
+            $cuenta_id = $cuenta->id;
             $pedido = new Pedido(['total' => $total,'estado_pedido' => $estado_pedido,'cuenta_id' => $cuenta_id]);
             $pedido->save();
             $productos = $request->pedido['productos']; 
