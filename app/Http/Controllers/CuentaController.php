@@ -66,15 +66,11 @@ class CuentaController extends Controller
      */
     public function show($id)
     {
-        $pedidos = Pedido::findOrFail($id)
-            ->where('cuenta_id', $id)
-            ->where('estado_pedido', "<>", 2)->get();
         $cuenta = Cuenta::findOrFail($id);
         $cliente_id = $cuenta->cliente_id;
         $cliente = Cliente::findOrFail($cliente_id);
-        return view('cuentas.show')
-            ->with('pedidos', $pedidos)
-            ->with('cliente', $cliente);
+        $pedidos = $cuenta->pedidos->where('estado_pedido', "<>", 2);
+        return view('cuentas.show',compact('cuenta', 'cliente', 'pedidos'));
     }
 
     /**

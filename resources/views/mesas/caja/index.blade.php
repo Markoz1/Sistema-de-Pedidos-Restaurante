@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h3 class="title"> Reserva de Mesas</h3>
-                        <!-- <p class="title-description"> Seccion para ver el estado de reserva de las mesas</p> --!>
+                        <p class="title-description"> Seccion para ver el estado de reserva de las mesas</p>
                     </div>
                 </div>
             </div>

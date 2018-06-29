@@ -1,6 +1,10 @@
-
-
-
+$(document).ready(function () {
+  var habilitar = $('#habilitar_boton_cerrar_cuenta').val();
+  if (habilitar){
+    $('#boton_cerrar_cuenta').attr('class', 'btn btn-primary');
+    $('#boton_cerrar_cuenta').attr('aria-disabled', 'false');
+  }
+});
 $('.modal-footer').on('click', '.detalle-producto-modal', function () {
   $.ajax({
     type: 'get',
