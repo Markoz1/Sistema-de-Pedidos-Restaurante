@@ -14,8 +14,9 @@ class MesasController extends Controller
     public function __construct()
     {
         $this->middleware('autenticado');
+        $this->middleware('mesa', ['only' => ['show']]);
         $this->middleware('cajero', ['only' => ['index']]);
-        $this->middleware('administrador', ['except' => ['index']]);
+        $this->middleware('administrador', ['except' => ['index','show']]);
     }
     /**
      * Display a listing of the resource.
@@ -30,7 +31,10 @@ class MesasController extends Controller
             return view('mesas.admin.index', compact('mesas'));
         }   
         if(Auth::user()->esCajero()){
-            return view('mesas.caja.index');
+            $mesa_id = Role::where('nombre', 'Mesa')->first()->id;
+            $mesas = User::where('role_id', $mesa_id)->paginate(6);
+            //dd($mesas);
+            return view('mesas.caja.index', compact('mesas'));
         }     
     }
 
@@ -56,7 +60,7 @@ class MesasController extends Controller
         $nombre = $request->nombre." ".$request->numero;
         $username = $request->nombre.$request->numero;
         $mesa->nombre = $nombre;
-        $mesa->estado = $request->estado;
+        $mesa->estado = 1;
         $mesa->username = $username;
         $mesa->password = bcrypt($username);
         $mesa->role_id = 5;
@@ -74,7 +78,10 @@ class MesasController extends Controller
      */
     public function show($id)
     {
-        //
+        $mesa = User::findOrFail($id);
+        return response()->json(
+            $mesa->toArray()
+        );
     }
 
     /**
@@ -104,7 +111,6 @@ class MesasController extends Controller
         $mesa = User::findOrFail($id);
         $nombre = $request->nombre." ".$request->numero;
         $mesa->nombre = $nombre;
-        $mesa->estado = $request->estado;
         $mesa->username = $request->username;
         if( $request->filled('password') ){
             $mesa->password = bcrypt($request->password);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategoriaRequest extends FormRequest
+class BusquedaClienteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class UpdateCategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombreCategoria' => 'required|min:3|max:50|regex:/^[\pL\s]+$/u',
+            'nit'=> 'required|numeric|exists:cliente,nit'
         ];
     }
     public function messages()
     {
         return [
-            'nombreCategoria.regex' => 'El campo nombre sólo puede contener letras y espacios.',
+            'nit.exists' => 'El Nit ingresado no existe, puede registrar un nuevo cliente presionado el boton Registrar.'
         ];
     }
 }

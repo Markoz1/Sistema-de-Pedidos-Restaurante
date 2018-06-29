@@ -1,11 +1,8 @@
-(function ($) {
-"use strict";
-
-// manual carousel controls
-$('.next').click(function(){ $('.carousel').carousel('next');return false; });
-$('.prev').click(function(){ $('.carousel').carousel('prev');return false; });
-
-})(jQuery);  
+$(document).ready(function () {
+    $('.next').click(function () { $('.carousel').carousel('next'); return false; });
+    $('.prev').click(function () { $('.carousel').carousel('prev'); return false; });
+    
+});
 function mostrar_informacion_producto(ruta_producto) {
     $('#modal_informacion').modal('show');
     var ruta_inicio = $('#foto').attr('inicio');
@@ -36,4 +33,13 @@ function aumentar_cantidad() {
         cantidad++;
         $('.input-menu-cantidad').val(cantidad);
     } 
+};
+function recuperar_estado_mesa() {
+    var ruta = $('#ruta_estado_mesa').val();
+    $.get(ruta,
+        function (mesa) {
+            $('#prueba_id').text(mesa.estado);
+        },
+        "json"
+    );
 };

@@ -2,6 +2,9 @@
     <div class="card-header d-flex justify-content-center">
         <div class="header-block">
             <p class="title" id="mesa" value="{{ Auth::user()->id }}"> {{ Auth::user()->nombre }} </p>
+            {!! Form::hidden('ruta', route('mesas.show', ['id' => Auth::user()->id]), ['id' => 'ruta_estado_mesa']) !!}
+            {!! Form::hidden('estado', 'Mesa', ['id' => 'estado_mesa']) !!}
+            <p id="prueba_id"></p>
         </div>
     </div>
     <div class="card-block">
@@ -68,7 +71,7 @@
             </table>
         </section>
     </div>
-    {!! Form::open(['route' => 'pedidos.store', 'method' => 'post']) !!}
+    {!! Form::open(['route' => 'pedidos.store', 'method' => 'post', 'id' => 'form_pedido']) !!}
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <input type="hidden" name="_mesa_ruta" id="ruta" value="{{ url('cuentas') }}">
     <input type="hidden" name="_pedido_existe" id="_pedido_existe" value="{{ route('pedidos.existe',['mesa' => 'mesa 1']) }}">

@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('nit', 'NIT', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('nit', 'NIT', ['class' => 'col-sm-2 form-control-label text-xs-right required']) !!}
                     <div class="input-group col-sm-10">                        
                         {!! Form::number('nit', "$cliente->nit" , ['class' => 'form-control boxed '.($errors->has('nit')?'is-invalid':''), 'min' => '0']) !!}
                         <div class="input-group-prepend">
@@ -46,6 +46,7 @@
                         <div class="invalid-feedback">{{ $errors->first('direccion') }}</div>
                     </div>
                 </div>
+                <small class="required">Campo obligatorio</small>
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary" name="actualizar"> Actualizar </button>

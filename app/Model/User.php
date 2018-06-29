@@ -27,7 +27,11 @@ class User extends Authenticatable
     }
     public function cuentas()
     {
-        return $this->hasMany(Cuenta::class,'users_id');
+        return $this->HasMany(Cuenta::class,'users_id');
+    }
+    public function cuenta_activa()
+    {
+        return $this->hasOne(Cuenta::class,'users_id')->where('estado','0');
     }
     public function esAdministrador()
     {

@@ -13,6 +13,7 @@
                             @if (!isset($mesa_edit))
                             {!! Form::open(['route' => 'mesas.store']) !!}
                                 @include('mesas.admin.form')
+                                <small class="required">Campo obligatorio</small>
                             <div class="form-group row mt-4">
                                 <div class="col-sm-10 col-sm-offset-2">
                                     <button type="submit" class="btn btn-primary" name="crear"> Crear </button>
@@ -25,5 +26,6 @@
                 </div>
             </div>
         </div>
+        
     </section>
 </div>

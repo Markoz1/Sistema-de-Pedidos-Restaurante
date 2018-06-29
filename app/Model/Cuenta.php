@@ -19,8 +19,9 @@ class Cuenta extends Model
     public function pedidos()
     {
         return $this->hasMany(Pedido::class, 'cuenta_id');
-    }
 
+    }
+   
     public function mesa()
     {
         return $this->belongsTo(User::class,'users_id');

@@ -12,7 +12,8 @@ class Categoria extends Model
 
     public $fillable = [
         'nombre',
-        'estado'
+        'estado',
+        'estado_eliminado'
     ];
 
     public function productos()
