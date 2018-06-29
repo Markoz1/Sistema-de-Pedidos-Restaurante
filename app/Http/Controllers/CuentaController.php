@@ -14,7 +14,8 @@ class CuentaController extends Controller
      */
     public function index()
     {
-
+        $cuentas = Cuenta::where('estado', 1)->orderBy('id', 'desc')->paginate(5);
+        return view('cuentas.index', compact('cuentas'));
     }
 
     /**

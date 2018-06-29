@@ -70,6 +70,9 @@
                 <li class="{{ request()->segment(1) == 'mesas'? 'active open':'' }}">
                     <a href="{{ route('mesas.index') }}"><i class="fa fa-th-large"></i> Mesas </a>
                 </li>
+                <li class="{{ request()->segment(1) == 'cuentas'? 'active open':'' }}">
+                    <a href="{{ route('cuentas.index') }}"><i class="fa fa-th-large"></i> Cuentas </a>
+                </li>
                 <li class="">
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>
                 </li>
