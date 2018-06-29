@@ -498,6 +498,10 @@ class ProductosTest extends TestCase
                 'descripcion' => 'Riquisima'
             ]);
     }
+    /**
+     * @test
+     */
+
     public function crear_producto_validacion_foto_no_imagen(){
         
         //$this->withoutExceptionHandling();
