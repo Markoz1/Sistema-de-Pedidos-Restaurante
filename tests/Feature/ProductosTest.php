@@ -468,5 +468,60 @@ class ProductosTest extends TestCase
                 'descripcion' => 'Riquisima'
             ]);
     }
-    
+    /**
+     * @test
+     */
+
+    public function crear_producto_validacion_foto_null(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => 1,
+                    'descripcion' => 'Riquisima',
+                    'foto' => null
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['foto']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima'
+            ]);
+    }
+    public function crear_producto_validacion_foto_no_imagen(){
+        
+        //$this->withoutExceptionHandling();
+
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+                ->from('/productos/create')
+                ->post('/productos', [
+                    'nombre' => 'milanesa',
+                    'estado_id' => true,
+                    'precio' => 23.00,
+                    'categoria_id' => 1,
+                    'descripcion' => 'Riquisima',
+                    'foto' => UploadedFile::fake()->image('/storage/fotosTest/horarios.pdf')
+                    ])->assertRedirect('/productos/create')
+                    ->assertSessionHasErrors(['foto']);
+            
+            $this->assertDatabaseMissing('producto',[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 23.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima'
+            ]);
+    }
 }
