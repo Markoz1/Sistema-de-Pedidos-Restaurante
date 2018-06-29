@@ -17,6 +17,7 @@ class LoginController extends Controller
     {
         $this->middleware('invitado', ['only' => ['ShowLoginForm','login']]);
         $this->middleware('autenticado', ['only' => ['logout']]);
+        $this->middleware('mesa', ['only' => ['logoutMesa']]);
     }
     public function ShowLoginForm()
     {
@@ -38,7 +39,15 @@ class LoginController extends Controller
     }
     public function logout()
     {
-        Auth::logout();
+        Auth::logout();     
         return redirect()->route('inicio');
-    }   
+    }
+    public function logoutMesa(LoginRequest $request)
+    {
+        if(Auth::attempt($request->validated())){
+            return redirect()->route('logout');
+        }
+        return back()
+            ->withErrors(['password' => 'contraseña incorrecta']);
+    }    
 }

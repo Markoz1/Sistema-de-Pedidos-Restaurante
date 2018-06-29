@@ -22,6 +22,7 @@ Route::resource('pedidos', 'PedidoController');
 Route::get('login', 'LoginController@ShowLoginForm');
 Route::post('login','LoginController@login')->name('login');
 Route::get('logout', 'LoginController@logout')->name('logout');
+Route::post('logout/mesa','LoginController@logoutMesa')->name('logout.mesa');
 Route::resource('mesas', 'MesasController');
 Route::resource('clientes', 'clienteController');
 Route::resource('cuentas','CuentaController');
