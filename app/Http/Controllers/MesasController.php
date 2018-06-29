@@ -31,7 +31,10 @@ class MesasController extends Controller
             return view('mesas.admin.index', compact('mesas'));
         }   
         if(Auth::user()->esCajero()){
-            return view('mesas.caja.index');
+            $mesa_id = Role::where('nombre', 'Mesa')->first()->id;
+            $mesas = User::where('role_id', $mesa_id)->paginate(6);
+            //dd($mesas);
+            return view('mesas.caja.index', compact('mesas'));
         }     
     }
 
