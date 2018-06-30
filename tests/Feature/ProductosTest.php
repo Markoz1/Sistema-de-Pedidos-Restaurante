@@ -528,4 +528,58 @@ class ProductosTest extends TestCase
                 'descripcion' => 'Riquisima'
             ]);
     }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto(){
+        
+        $this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 50.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos");
+        
+        $this->assertDatabaseHas('producto',[
+            'nombre' => 'milanesa',
+            'estado_id' => true
+        ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_nombre_null(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => null,
+                'estado_id' => true,
+                'precio' => 50.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['nombre']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => null,
+            'estado_id' => true
+        ]);
+    }
 }
