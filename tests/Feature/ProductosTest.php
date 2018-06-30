@@ -582,4 +582,186 @@ class ProductosTest extends TestCase
             'estado_id' => true
         ]);
     }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_nombre_simbolo(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'milanesa][][',
+                'estado_id' => true,
+                'precio' => 50.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['nombre']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => 'milanesa][][',
+            'estado_id' => true
+        ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_nombre_min3(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'm',
+                'estado_id' => true,
+                'precio' => 50.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['nombre']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => 'm',
+            'estado_id' => true
+        ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_nombre_max80(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'prueba para controlar maximo 80 caracteres prueba para controlar maximo 80 caracteres prueba para controlar maximo 80 caracteres',
+                'estado_id' => true,
+                'precio' => 50.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Riquisima',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['nombre']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => 'prueba para controlar maximo 80 caracteres prueba para controlar maximo 80 caracteres prueba para controlar maximo 80 caracteres',
+            'estado_id' => true
+        ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_precio_descripcion(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => -50.00,
+                'categoria_id' => 1,
+                'descripcion' => 'prueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcion
+                prueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcion
+                prueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcion
+                prueba para controlar el maximo de caracteres en descripcion',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['precio','descripcion']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => 'milanesa',
+            'estado_id' => true,
+            'precio' => -50.00,
+            'descripcion' => 'prueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcion
+            prueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcion
+            prueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcionprueba para controlar el maximo de caracteres en descripcion
+            prueba para controlar el maximo de caracteres en descripcion'
+        ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_precioMax_descripcionMin(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 5050505050.00,
+                'categoria_id' => 1,
+                'descripcion' => 'Ri',
+                'foto' => UploadedFile::fake()->image('/storage/fotos/a.jpg')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['precio','descripcion']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => 'milanesa',
+            'estado_id' => true,
+            'precio' => 5050505050.00,
+            'categoria_id' => 1,
+            'descripcion' => 'Ri'
+        ]);
+    }
+    /**
+     * @test
+     */
+
+    public function Actualizar_producto_validacion_tipo_foto_categoria_null(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $producto = Producto::find(1);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->from("/productos/{$producto->producto_id}/edit")
+            ->put("/productos/{$producto->producto_id}",[
+                'nombre' => 'milanesa',
+                'estado_id' => true,
+                'precio' => 50.00,
+                'categoria_id' => null,
+                'descripcion' => 'Riquisima',
+                'foto' => UploadedFile::fake()->image('/storage/fotosTest/horarios.pdf')
+            ])->assertRedirect("/productos/{$producto->producto_id}/edit")
+            ->assertSessionHasErrors(['categoria_id','foto']);
+        
+        $this->assertDatabaseMissing('producto',[
+            'nombre' => 'milanesa',
+            'estado_id' => true,
+            'precio' => 50.00,
+            'categoria_id' => null,
+            'descripcion' => 'Riquisima'
+        ]);
+    }
 }
