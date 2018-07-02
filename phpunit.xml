@@ -27,6 +27,6 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="DB_DATABASE" value="restaurante_test"/>
+        <env name="DB_DATABASE" value="sistema_pedidos_test"/>
     </php>
 </phpunit>

@@ -11,7 +11,7 @@
                 <form method="POST" role="form" action="{{url('categorias')}}" >
                     {{ csrf_field() }} 
                     <div class="form-group has-error">
-                        <label class="control-label">Nombre</label>
+                        <label class="control-label required">Nombre</label><span> *</span>
                         <input type="text" class="form-control" name="nombreCategoria" value="{{ old('nombreCategoria')}}">
                         @if( $errors->has('nombreCategoria') )
                             <span class="has-error">
@@ -37,6 +37,7 @@
                             <button type="submit" class="btn btn-primary"> Crear</button>
                         </div>
                     </div>
+                    <small class="required">Campo obligatorio</small>
                 </form>
             </div>
         </div>
