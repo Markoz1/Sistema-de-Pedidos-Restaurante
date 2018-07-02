@@ -70,7 +70,7 @@
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td>Total a pagar</td>
-                                                <td>{{ $cuenta->total }}</td>
+                                                <td>{{ $cuenta->total }} (Bs.)</td>
                                             </tr>
                                         </tbody>
                                     </table>
