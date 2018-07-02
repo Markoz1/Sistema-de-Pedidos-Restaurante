@@ -41,7 +41,7 @@
                                                     <form method="POST" role="form" id="formulario1" action="{{ url("pedidos/") }}">
                                                         <input type="hidden" name="_method" id="met1" value="PUT">
                                                         <input type="hidden" name="_token" id="token1" value="{{ csrf_token() }}">        
-                                                        <button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning badge badge-success" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})" dusk="botonAtender">Sin Atender</button></td>
+                                                        <button id="boton{{ $pedido->pedido_id }}" type="button" class="btn btn-warning badge badge-success" onclick="cambiarEstadoAtencion({{ $pedido->pedido_id }})" dusk="botonAtender">Sin Asignar</button></td>
                                                     </form>
                                                 </td>
                                                 <td id="botonProductos">
