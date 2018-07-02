@@ -24,6 +24,9 @@ class ClienteTest extends TestCase
              ->assertStatus(200)
              ->assertSee('Clientes');          
     }
+     /**
+     * @test
+     */
     public function crear_nuevo_cliente(){
         
         $this->withoutExceptionHandling();
@@ -40,5 +43,27 @@ class ClienteTest extends TestCase
                 'nombre' => 'juan pablo',
                     'nit' => '212203'
             ]);
+    }
+     /**
+     * @test
+     */
+
+    public function Actualizar_cliente(){
+        
+        //$this->withoutExceptionHandling();
+        
+        $cliente = Cliente::find(5);
+        $user = User::find(1);
+        $response = $this->actingAs($user)
+            ->withSession(['User' => 'admin'])
+            ->put("/clientes/{$cliente->cliente_id}",[
+                'nombre' => 'juanito',
+                'nit' => '123456789'
+            ])->assertRedirect('clientes');
+        
+        $this->assertDatabaseHas('cliente',[
+            'nombre' => 'juanito',
+            'nit' => '123456789'
+        ]);
     }
 }
