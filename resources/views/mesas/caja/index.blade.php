@@ -17,7 +17,7 @@
                         <div class="card-block ">
                             <div class="row">                                
                                 @foreach ($mesas as $mesa)
-                                    @if (isset($mesa->cuenta_activa))
+                                    @if ($mesa->estado==0)
                                     @php $estado="danger";$bloqueado_cuenta="";$bloqueado_asignar="disabled";$id_cuenta=$mesa->cuenta_activa->id; @endphp  
                                     @else
                                     @php $estado="primary";$bloqueado_cuenta="disabled";$bloqueado_asignar="";$id_cuenta=0; @endphp
@@ -26,6 +26,7 @@
                                 <div class="card bg-light mb-3 border border-{{$estado}}" style="max-width: 20rem;margin:5px;">                                    
                                     {!! Form::hidden('cliente_id', "1") !!}
                                     {!! Form::hidden('mesa_id', $mesa->id)!!}
+                                    {!! Form::hidden('estado_id', $mesa->estado)!!}
                                         <div class="card-body">
                                           <h1 class="card-title text-center text-{{$estado}}"><b>{{ $mesa->username }}</b></h1>
                                         </div>
