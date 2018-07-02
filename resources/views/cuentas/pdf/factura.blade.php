@@ -6,21 +6,17 @@
 <body>
     <div style="text-align: center">
     
-        <p>Nombre restaurante</p>
-        <p>Direccion de la sucursal</p>
+        <p>Restaurante Panda</p>
+        <p>Av. alcachofas 339</p>
         <h4>FACTURA</h4>
         <span>----------------------------------------------------------------------</span>
         <table style="margin: auto">
             <tr>
                 <td>NIT:</td>
-                <td>valor</td>
+                <td>12345678900</td>
             </tr>
             <tr>
                 <td>FACTURA No.</td>
-                <td>{{$cuenta->id}}</td>
-            </tr>
-            <tr>
-                <td>AUTORIZACION No:</td>
                 <td>{{$cuenta->id}}</td>
             </tr>
         </table>
