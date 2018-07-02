@@ -10,7 +10,7 @@
         <form name="item">
             <div class="card card-block">
                 <div class="form-group row">
-                    {!! Form::label('nombre', 'Nombre Completo', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('nombre', 'Nombre Completo', ['class' => 'col-sm-2 form-control-label text-xs-right required']) !!}
                     <div class="col-sm-10">
                         {!! Form::text('nombre', "", ['class' => 'form-control boxed '.($errors->has('nombre')?'is-invalid':''), 'placeholder' => 'Ingresa el nombre']) !!}
                         <div class="invalid-feedback">{{ $errors->first('nombre') }}</div>
@@ -35,14 +35,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('username', 'Username', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('username', 'Username', ['class' => 'col-sm-2 form-control-label text-xs-right required']) !!}
                     <div class="col-sm-10">
                         {!! Form::text('username', "", ['class' => 'form-control boxed '.($errors->has('username')?'is-invalid':''), 'placeholder' => 'Ingresa username']) !!}
                         <div class="invalid-feedback">{{ $errors->first('username') }}</div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('ci', 'C.I.', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('ci', 'C.I.', ['class' => 'col-sm-2 form-control-label text-xs-right required']) !!}
                     <div class="col-sm-10">
                         {!! Form::number('ci', "ci", ['class' => 'form-control boxed '.($errors->has('ci')?'is-invalid':''), 'placeholder' => 'Ingresa CI']) !!}
                         <div class="invalid-feedback">{{ $errors->first('ci') }}</div>
@@ -56,9 +56,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('role_id', 'Rol', ['class' => 'col-sm-2 form-control-label text-xs-right']) !!}
+                    {!! Form::label('role_id', 'Rol', ['class' => 'col-sm-2 form-control-label text-xs-right required']) !!}
                     <div class="col-sm-10">
-                        {!! Form::select('role_id',$roles, null, ['class' => 'form-control boxed '.($errors->has('role_id')?'is-invalid':''),
+                        {!! Form::select('role_id',$roles, null, ['class' => 'form-control boxed'.($errors->has('role_id')?'is-invalid':''),
                         'placeholder' => (count($roles) === 0)?'Ninguna categoria añadida':'Selecciona un Rol']) !!}
                         <div class="invalid-feedback">{{ $errors->first('role_id') }}</div>
                     </div>
@@ -79,6 +79,7 @@
                         <div class="invalid-feedback">{{ $errors->first('estado') }}</div>
                     </div>
                 </div>
+                <small class="required">Campo obligatorio</small>
                 <div class="form-group row mt-4">
                     <div class="col-sm-10 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary"> Crear </button>
