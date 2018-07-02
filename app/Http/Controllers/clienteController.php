@@ -13,7 +13,7 @@ class clienteController extends Controller
     }
     public function index()
     {
-           $clientes = Cliente::paginate(5);
+           $clientes = Cliente::where('cliente_id','!=','1')->paginate(5);
            return view('cliente.index', ['clientes' => $clientes]);
     }
     public function create()
