@@ -27,7 +27,7 @@ class StoreProductoRequest extends FormRequest
     {
         $categorias = Categoria::pluck('categoria_id')->toArray();
         return [
-            'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
+            'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u|unique:producto,nombre',
             'precio' => 'required|numeric|min:0.1|max:9999.00',
             'descripcion' => 'required|min:4|max:255',
             'foto' => 'required|image|max:5120',

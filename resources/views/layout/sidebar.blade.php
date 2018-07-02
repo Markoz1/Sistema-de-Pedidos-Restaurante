@@ -28,9 +28,12 @@
                         </li>
                     </ul>
                 </li>
+                @if ( !Auth::user()->esCajero() )
                 <li class="{{ request()->routeIs('pedidos.index')? 'active':'' }}">
                     <a href="{{ route('pedidos.index') }}"><i class="fa fa-shopping-cart"></i> Pedidos </a>
-                </li>
+                </li>    
+                @endif
+                @if ( !Auth::user()->esCocinero() )
                 <li class="{{ request()->segment(1) == 'clientes'? 'active open':'' }}">
                     <a href="">
                                         <i class="fa fa-users"></i> Clientes
@@ -44,12 +47,14 @@
                             <a href="{{ route('clientes.create') }}"> Nuevo Cliente </a>
                         </li>
                     </ul>
-                </li>
+                </li>    
+                @endif              
+                @if ( Auth::user()->esAdministrador() )
                 <li class="{{ request()->segment(1) == 'users'? 'active open':'' }}">
                     <a href="">
-                        <i class="fa fa-users"></i> Usuarios
-                        <i class="fa arrow"></i>
-                    </a>
+                                        <i class="fa fa-users"></i> Usuarios
+                                        <i class="fa arrow"></i>
+                                    </a>
                     <ul class="sidebar-nav">
                         <li class="{{ request()->routeIs('users.index')? 'active':'' }}">
                             <a href="{{ route('users.index') }}"> Listado </a>
@@ -58,16 +63,19 @@
                             <a href="{{ route('users.create') }}"> Nuevo Usuario </a>
                         </li>
                     </ul>
-                </li>
+                </li>  
+                @endif
+                @if ( !Auth::user()->esCocinero() )
                 <li class="{{ request()->segment(1) == 'mesas'? 'active open':'' }}">
                     <a href="{{ route('mesas.index') }}"><i class="fa fa-th-large"></i> Mesas </a>
                 </li>
                 <li class="{{ request()->segment(1) == 'cuentas'? 'active open':'' }}">
                     <a href="{{ route('cuentas.index') }}"><i class="fa fa-th-large"></i> Cuentas </a>
-                </li>
-                <li class="">
+                </li> 
+                @endif             
+                {{-- <li class="">
                     <a href="#"><i class="fa fa-cog"></i> Configuración </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>
