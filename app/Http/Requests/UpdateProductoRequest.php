@@ -29,7 +29,7 @@ class UpdateProductoRequest extends FormRequest
         return [
             'nombre' => 'required|min:3|max:80|regex:/^[\pL\s]+$/u',
             'precio' => 'required|numeric|min:0.1|max:9999.00',
-            'descripcion' => 'required|min:4|max:255',
+            'descripcion' => 'required|regex:/^[a-zA-Z0-9\s]+$/u|max:255',
             'foto' => 'image|max:5120',
             'categoria_id' => ['required',Rule::in($categorias)],
         ];

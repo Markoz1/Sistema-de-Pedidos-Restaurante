@@ -84,6 +84,8 @@ class ProductoController extends Controller
     public function edit($id)
     {   
         $producto = Producto::findOrFail($id);
+        $cadenas = explode("/",$producto->foto);
+        $producto->foto = end($cadenas);
         $categorias = Categoria::all();
         return view('productos.edit', compact('producto','categorias'));
     }
@@ -109,7 +111,7 @@ class ProductoController extends Controller
             $producto->foto = $path_foto;
         }
         $producto->update();
-        return redirect()->route('productos.index')->with('mensaje','El producto se actualizo correctamente');
+        return redirect()->route('productos.index')->with('mensaje','Item editado correctamente');
     
     }
 

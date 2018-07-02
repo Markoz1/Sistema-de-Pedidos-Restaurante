@@ -146,9 +146,9 @@ class CuentaController extends Controller
         $id_usuario = $cuenta->users_id;
         $fecha = $this->calcularFecha($cuenta->updated_at);
         $cuenta->updated_at=$fecha;
-        $pdf = PDF::loadView('cuentas.pdf.factura', compact('cuenta','fecha'));
-        return $pdf->download('factura.pdf');
-        //return view('cuentas.pdf.factura',compact('cuenta','fecha'));
+        //$pdf = PDF::loadView('cuentas.pdf.factura', compact('cuenta','fecha'));
+        //return $pdf->download('factura.pdf');
+        return view('cuentas.pdf.factura',compact('cuenta','fecha'));
     }
     private function calcularFecha($fecha){
         $res= explode(' ',$fecha)[0];
